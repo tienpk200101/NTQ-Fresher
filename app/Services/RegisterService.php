@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterService 
 {
@@ -16,6 +18,20 @@ class RegisterService
     }
 
     public function postRegister(Request $request) {
-        dd($request->all());
+        $email = $request->get('email');
+        $user_name = $request->get('username');
+        $password = $request->get('password');
+
+        $user = User::create([
+            'name' => $user_name,
+            'email' => $email,
+            'password' => Hash::make($password)
+        ]);
+
+        if($user) {
+            return redirect(route('product-detail'));
+        } else {
+            return redirect(route('register'));
+        }
     }
 }

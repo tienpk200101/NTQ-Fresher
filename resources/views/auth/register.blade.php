@@ -13,17 +13,17 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
 
-    <!-- Layout config Js -->
-    <script src="assets/js/layout.js"></script>
-    <!-- Bootstrap Css -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <!-- Icons Css -->
-    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <!-- App Css-->
-    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
-    <!-- custom Css-->
-    <link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" />
-
+      <!-- Layout config Js -->
+      <script src="{{ asset('assets/js/layout.js') }}"></script>
+      <!-- Bootstrap Css -->
+      <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+      <!-- Icons Css -->
+      <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+      <!-- App Css-->
+      <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
+      <!-- custom Css-->
+      <link href="{{ asset('assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
+  
 </head>
 
 <body>
@@ -89,14 +89,14 @@
                                                 @csrf
                                                 <div class="mb-3">
                                                     <label for="useremail" class="form-label">Email <span class="text-danger">*</span></label>
-                                                    <input type="email" class="form-control" id="useremail" placeholder="Enter email address" required>
+                                                    <input type="email" class="form-control" id="useremail" name="email" placeholder="Enter email address" required>
                                                     <div class="invalid-feedback">
                                                         Please enter email
                                                     </div>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="username" placeholder="Enter username" required>
+                                                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
                                                     <div class="invalid-feedback">
                                                         Please enter username
                                                     </div>
@@ -105,7 +105,7 @@
                                                 <div class="mb-3">
                                                     <label class="form-label" for="password-input">Password</label>
                                                     <div class="position-relative auth-pass-inputgroup">
-                                                        <input type="password" class="form-control pe-5 password-input" onpaste="return false" placeholder="Enter password" id="password-input" aria-describedby="passwordInput" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                                                        <input type="password" class="form-control pe-5 password-input" onpaste="return false" name="password" placeholder="Enter password" id="password-input" aria-describedby="passwordInput" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
                                                         <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
                                                         <div class="invalid-feedback">
                                                             Please enter password
@@ -181,17 +181,18 @@
     <!-- end auth-page-wrapper -->
 
     <!-- JAVASCRIPT -->
-    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/libs/simplebar/simplebar.min.js"></script>
-    <script src="assets/libs/node-waves/waves.min.js"></script>
-    <script src="assets/libs/feather-icons/feather.min.js"></script>
-    <script src="assets/js/pages/plugins/lord-icon-2.1.0.js"></script>
-    <script src="assets/js/plugins.js"></script>
+    <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/feather-icons/feather.min.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins.js') }}"></script>
+
 
     <!-- validation init -->
-    <script src="assets/js/pages/form-validation.init.js"></script>
+    <script src="{{ asset('assets/js/pages/form-validation.init.js') }}"></script>
     <!-- password create init -->
-    <script src="assets/js/pages/passowrd-create.init.js"></script>
+    <script src="{{ asset('assets/js/pages/passowrd-create.init.js') }}"></script>
 </body>
 
 
