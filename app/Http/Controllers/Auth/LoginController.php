@@ -18,4 +18,12 @@ class LoginController extends Controller
     public function showLogin() {
         return $this->loginService->show();
     }
+
+    public function handleLogin(Request $request) {
+        return $this->loginService->handleLogin($request);
+    }
+
+    public function logout() {
+        return $this->loginService->logout();
+    }
 }
