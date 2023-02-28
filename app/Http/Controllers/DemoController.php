@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\DemoService;
 
-class DemoController extends Controller
+class DemoController extends Controller implements 
 {
 	protected $demoService;
 
