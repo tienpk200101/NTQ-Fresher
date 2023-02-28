@@ -3,10 +3,15 @@
 namespace App\Services;
 
 use App\Constants\UserConst;
+use App\Models\User;
 
 class DemoService
 {
+	protected $demoRepo;
 
+	public function __construct(User $user) {
+
+	}
 	/**
 	 * The function show() returns the view Main.php with the data 
 	 * 

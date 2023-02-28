@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DemoController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,3 +17,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [DemoController::class, 'show'])->name('demo.show');
+Route::get('/products', function() {
+    return view('admins.list-product');
+});
+Route::get('/product-detail', function() {
+    return view('admins.product-detail');
+})->name('product-detail');
+
+// Auth
+Route::get('login', [LoginController::class, 'showLogin'])->name('login');
+Route::get('register', [RegisterController::class, 'showRegister'])->name('register');
+Route::post('register', [RegisterController::class, 'postRegister'])->name('request.post');
