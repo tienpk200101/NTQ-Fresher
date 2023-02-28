@@ -18,8 +18,14 @@ class RegisterService
     }
 
     public function postRegister(Request $request) {
+        $request->validate([
+            'email' => 'required|email|unique:users|max:255',
+            'name' => 'required|max:255|unique:users',
+            'password' => 'required|max:255'
+        ]);
+
         $email = $request->get('email');
-        $user_name = $request->get('username');
+        $user_name = $request->get('name');
         $password = $request->get('password');
 
         $user = User::create([
@@ -29,7 +35,7 @@ class RegisterService
         ]);
 
         if($user) {
-            return redirect(route('product-detail'));
+            return redirect(route('home'));
         } else {
             return redirect(route('register'));
         }
