@@ -21,7 +21,7 @@ class RegisterController extends Controller
         return $this->registerService->show();
     }
 
-    public function postRegister(Request $request) {
-        return $this->registerService->postRegister($request);
+    public function handleRegister(Request $request) {
+        return $this->registerService->handleRegister($request);
     }
 }
