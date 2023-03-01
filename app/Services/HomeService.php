@@ -74,6 +74,6 @@ class HomeService
 
         ];
 
-        return view('clients.index', ['data_products' => $data_products]);
+        return view('admins.list-product', ['data_products' => $data_products]);
     }
 }
