@@ -21,6 +21,6 @@ class ProductDetailService
             'sizes' => ['S', 'M', 'L', 'XL']
         ];
 
-        return view('clients.product-detail', ['product' => $product]);
+        return view('admins.product-detail', ['product' => $product]);
     }
 }
