@@ -26,37 +26,45 @@
                                     <span class="zoom-icon"><i class="fi-rs-search"></i></span>
                                     <!-- MAIN SLIDES -->
                                     <div class="product-image-slider">
-                                        <figure class="border-radius-10">
-                                            <img src="assets/imgs/shop/product-16-2.jpg" alt="product image" />
-                                        </figure>
-                                        <figure class="border-radius-10">
-                                            <img src="assets/imgs/shop/product-16-1.jpg" alt="product image" />
-                                        </figure>
-                                        <figure class="border-radius-10">
-                                            <img src="assets/imgs/shop/product-16-3.jpg" alt="product image" />
-                                        </figure>
-                                        <figure class="border-radius-10">
-                                            <img src="assets/imgs/shop/product-16-4.jpg" alt="product image" />
-                                        </figure>
-                                        <figure class="border-radius-10">
-                                            <img src="assets/imgs/shop/product-16-5.jpg" alt="product image" />
-                                        </figure>
-                                        <figure class="border-radius-10">
-                                            <img src="assets/imgs/shop/product-16-6.jpg" alt="product image" />
-                                        </figure>
-                                        <figure class="border-radius-10">
-                                            <img src="assets/imgs/shop/product-16-7.jpg" alt="product image" />
-                                        </figure>
+                                        @foreach($product['images'] as $image)
+                                            <figure class="border-radius-10">
+                                                <img src="{{ $image }}" alt="product image" />
+                                            </figure>
+                                        @endforeach
+{{--                                        <figure class="border-radius-10">--}}
+{{--                                            <img src="assets/imgs/shop/product-16-2.jpg" alt="product image" />--}}
+{{--                                        </figure>--}}
+{{--                                        <figure class="border-radius-10">--}}
+{{--                                            <img src="assets/imgs/shop/product-16-1.jpg" alt="product image" />--}}
+{{--                                        </figure>--}}
+{{--                                        <figure class="border-radius-10">--}}
+{{--                                            <img src="assets/imgs/shop/product-16-3.jpg" alt="product image" />--}}
+{{--                                        </figure>--}}
+{{--                                        <figure class="border-radius-10">--}}
+{{--                                            <img src="assets/imgs/shop/product-16-4.jpg" alt="product image" />--}}
+{{--                                        </figure>--}}
+{{--                                        <figure class="border-radius-10">--}}
+{{--                                            <img src="assets/imgs/shop/product-16-5.jpg" alt="product image" />--}}
+{{--                                        </figure>--}}
+{{--                                        <figure class="border-radius-10">--}}
+{{--                                            <img src="assets/imgs/shop/product-16-6.jpg" alt="product image" />--}}
+{{--                                        </figure>--}}
+{{--                                        <figure class="border-radius-10">--}}
+{{--                                            <img src="assets/imgs/shop/product-16-7.jpg" alt="product image" />--}}
+{{--                                        </figure>--}}
                                     </div>
                                     <!-- THUMBNAILS -->
                                     <div class="slider-nav-thumbnails">
-                                        <div><img src="assets/imgs/shop/thumbnail-3.jpg" alt="product image" /></div>
-                                        <div><img src="assets/imgs/shop/thumbnail-4.jpg" alt="product image" /></div>
-                                        <div><img src="assets/imgs/shop/thumbnail-5.jpg" alt="product image" /></div>
-                                        <div><img src="assets/imgs/shop/thumbnail-6.jpg" alt="product image" /></div>
-                                        <div><img src="assets/imgs/shop/thumbnail-7.jpg" alt="product image" /></div>
-                                        <div><img src="assets/imgs/shop/thumbnail-8.jpg" alt="product image" /></div>
-                                        <div><img src="assets/imgs/shop/thumbnail-9.jpg" alt="product image" /></div>
+                                        @foreach($product['images'] as $image)
+                                            <div><img src="{{ $image }}" alt="product image" /></div>
+                                        @endforeach
+{{--                                        <div><img src="assets/imgs/shop/thumbnail-3.jpg" alt="product image" /></div>--}}
+{{--                                        <div><img src="assets/imgs/shop/thumbnail-4.jpg" alt="product image" /></div>--}}
+{{--                                        <div><img src="assets/imgs/shop/thumbnail-5.jpg" alt="product image" /></div>--}}
+{{--                                        <div><img src="assets/imgs/shop/thumbnail-6.jpg" alt="product image" /></div>--}}
+{{--                                        <div><img src="assets/imgs/shop/thumbnail-7.jpg" alt="product image" /></div>--}}
+{{--                                        <div><img src="assets/imgs/shop/thumbnail-8.jpg" alt="product image" /></div>--}}
+{{--                                        <div><img src="assets/imgs/shop/thumbnail-9.jpg" alt="product image" /></div>--}}
                                     </div>
                                 </div>
                                 <!-- End Gallery -->
@@ -64,7 +72,7 @@
                             <div class="col-md-6 col-sm-12 col-xs-12">
                                 <div class="detail-info pr-30 pl-30">
                                     <span class="stock-status out-stock"> Sale Off </span>
-                                    <h2 class="title-detail">Seeds of Change Organic Quinoa, Brown</h2>
+                                    <h2 class="title-detail">{{ $product['name'] }}</h2>
                                     <div class="product-detail-rating">
                                         <div class="product-rate-cover text-end">
                                             <div class="product-rate d-inline-block">
@@ -75,10 +83,10 @@
                                     </div>
                                     <div class="clearfix product-price-cover">
                                         <div class="product-price primary-color float-left">
-                                            <span class="current-price text-brand">$38</span>
+                                            <span class="current-price text-brand">VND {{ $product['price'] }}</span>
                                             <span>
-                                                <span class="save-price font-md color3 ml-15">26% Off</span>
-                                                <span class="old-price font-md ml-15">$52</span>
+                                                <span class="save-price font-md color3 ml-15">68% Off</span>
+                                                <span class="old-price font-md ml-15">VND {{ $product['old_price'] }}</span>
                                             </span>
                                         </div>
                                     </div>
@@ -90,11 +98,9 @@
                                     <div class="attr-detail attr-size mb-30">
                                         <strong class="mr-10">Size / Weight: </strong>
                                         <ul class="list-filter size-filter font-small">
-                                            <li><a href="#">50g</a></li>
-                                            <li class="active"><a href="#">60g</a></li>
-                                            <li><a href="#">80g</a></li>
-                                            <li><a href="#">100g</a></li>
-                                            <li><a href="#">150g</a></li>
+                                            @foreach($product['sizes'] as $size)
+                                                <li><a href="#">{{ $size }}</a></li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                     <div class="detail-extralink mb-50">

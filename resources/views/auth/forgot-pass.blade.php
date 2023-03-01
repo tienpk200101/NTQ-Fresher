@@ -6,12 +6,12 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Reset Password | Velzon - Admin & Dashboard Template</title>
+    <title>Reset Password | Nest</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" href="{{ asset('assets_2/imgs/theme/favicon.svg') }}">
 
    <!-- Layout config Js -->
    <script src="{{ asset('assets/js/layout.js') }}"></script>
@@ -43,8 +43,8 @@
                                         <div class="bg-overlay"></div>
                                         <div class="position-relative h-100 d-flex flex-column">
                                             <div class="mb-4">
-                                                <a href="index.html" class="d-block">
-                                                    <img src="assets/images/logo-light.png" alt="" height="18">
+                                                <a href="{{ route('home') }}" class="d-block">
+                                                    <img src="{{ asset('assets_2/imgs/theme/logo.svg') }}" alt="" height="40">
                                                 </a>
                                             </div>
                                             <div class="mt-auto">
@@ -80,7 +80,7 @@
                                 <div class="col-lg-6">
                                     <div class="p-lg-5 p-4">
                                         <h5 class="text-primary">Forgot Password?</h5>
-                                        <p class="text-muted">Reset password with velzon</p>
+                                        <p class="text-muted">Reset password with nest</p>
 
                                         <div class="mt-2 text-center">
                                             <lord-icon
@@ -92,10 +92,14 @@
                                             Enter your email and instructions will be sent to you!
                                         </div>
                                         <div class="p-2">
-                                            <form>
+                                            <form action="{{ route('forgotpass.post') }}" method="post">
+                                                @csrf
                                                 <div class="mb-4">
-                                                    <label class="form-label">Email</label>
-                                                    <input type="email" class="form-control" id="email" placeholder="Enter email address">
+                                                    <label for="email" class="form-label">Email</label>
+                                                    <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="Enter email address">
+                                                    @error('email')
+                                                        <span class="text text-danger">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
 
                                                 <div class="text-center mt-4">
@@ -131,7 +135,7 @@
                     <div class="col-lg-12">
                         <div class="text-center">
                             <p class="mb-0">&copy;
-                                <script>document.write(new Date().getFullYear())</script> Velzon. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand
+                                <script>document.write(new Date().getFullYear())</script> Nest. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand
                             </p>
                         </div>
                     </div>

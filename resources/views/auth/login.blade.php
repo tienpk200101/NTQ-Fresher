@@ -8,12 +8,12 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Sign In | Velzon - Admin & Dashboard Template</title>
+    <title>Sign In | Nest</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" href="{{ asset('assets_2/imgs/theme/favicon.svg') }}">
 
     <!-- Layout config Js -->
     <script src="{{ asset('assets/js/layout.js') }}"></script>
@@ -45,9 +45,8 @@
                                         <div class="bg-overlay"></div>
                                         <div class="position-relative h-100 d-flex flex-column">
                                             <div class="mb-4">
-                                                <a href="index.html" class="d-block">
-                                                    <img src="assets/images/logo-light.png" alt=""
-                                                        height="18">
+                                                <a href="{{ route('home') }}" class="d-block">
+                                                    <img src="{{ asset('assets_2/imgs/theme/logo.svg') }}" alt="" height="40">
                                                 </a>
                                             </div>
                                             <div class="mt-auto">
@@ -95,7 +94,7 @@
                                     <div class="p-lg-5 p-4">
                                         <div>
                                             <h5 class="text-primary">Welcome Back !</h5>
-                                            <p class="text-muted">Sign in to continue to Velzon.</p>
+                                            <p class="text-muted">Sign in to continue to Nest.</p>
                                         </div>
 
                                         <div class="mt-4">
@@ -112,8 +111,7 @@
 
                                                 <div class="mb-3">
                                                     <div class="float-end">
-                                                        <a href="{{ route('resetpass') }}" class="text-muted">Forgot
-                                                            password?</a>
+                                                        <a href="{{ route('forgotpass') }}" class="text-muted">Forgot password?</a>
                                                     </div>
                                                     <label class="form-label" for="password-input">Password</label>
                                                     <div class="position-relative auth-pass-inputgroup mb-3">
@@ -198,7 +196,7 @@
                             <p class="mb-0">&copy;
                                 <script>
                                     document.write(new Date().getFullYear())
-                                </script> Velzon. Crafted with <i
+                                </script> Nest. Crafted with <i
                                     class="mdi mdi-heart text-danger"></i> by Themesbrand
                             </p>
                         </div>

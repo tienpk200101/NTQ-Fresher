@@ -6,12 +6,12 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Sign Up | Velzon - Admin & Dashboard Template</title>
+    <title>Sign Up | Nest</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" href="{{ asset('assets_2/imgs/theme/favicon.svg') }}">
 
       <!-- Layout config Js -->
       <script src="{{ asset('assets/js/layout.js') }}"></script>
@@ -23,7 +23,7 @@
       <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
       <!-- custom Css-->
       <link href="{{ asset('assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
-  
+
 </head>
 
 <body>
@@ -43,8 +43,8 @@
                                         <div class="bg-overlay"></div>
                                         <div class="position-relative h-100 d-flex flex-column">
                                             <div class="mb-4">
-                                                <a href="index.html" class="d-block">
-                                                    <img src="assets/images/logo-light.png" alt="" height="18">
+                                                <a href="{{ route('home') }}" class="d-block">
+                                                    <img src="{{ asset('assets_2/imgs/theme/logo.svg') }}" alt="" height="40">
                                                 </a>
                                             </div>
                                             <div class="mt-auto">
@@ -81,7 +81,7 @@
                                     <div class="p-lg-5 p-4">
                                         <div>
                                             <h5 class="text-primary">Register Account</h5>
-                                            <p class="text-muted">Get your Free Velzon account now.</p>
+                                            <p class="text-muted">Get your Free Nest account now.</p>
                                         </div>
 
                                         <div class="mt-4">
@@ -114,7 +114,7 @@
                                                 </div>
 
                                                 <div class="mb-4">
-                                                    <p class="mb-0 fs-12 text-muted fst-italic">By registering you agree to the Velzon <a href="#" class="text-primary text-decoration-underline fst-normal fw-medium">Terms of Use</a></p>
+                                                    <p class="mb-0 fs-12 text-muted fst-italic">By registering you agree to the Nest <a href="#" class="text-primary text-decoration-underline fst-normal fw-medium">Terms of Use</a></p>
                                                 </div>
 
                                                 <div id="password-contain" class="p-3 bg-light mb-2 rounded">
