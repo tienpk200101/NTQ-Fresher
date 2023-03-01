@@ -89,14 +89,14 @@
                                                 @csrf
                                                 <div class="mb-3">
                                                     <label for="useremail" class="form-label">Email <span class="text-danger">*</span></label>
-                                                    <input type="email" class="form-control" id="useremail" name="email" placeholder="Enter email address" required>
+                                                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="useremail" name="email" placeholder="Enter email address" required>
                                                     <div class="invalid-feedback">
                                                         Please enter email
                                                     </div>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
+                                                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="username" name="name" placeholder="Enter username" required>
                                                     <div class="invalid-feedback">
                                                         Please enter username
                                                     </div>
@@ -105,7 +105,7 @@
                                                 <div class="mb-3">
                                                     <label class="form-label" for="password-input">Password</label>
                                                     <div class="position-relative auth-pass-inputgroup">
-                                                        <input type="password" class="form-control pe-5 password-input" onpaste="return false" name="password" placeholder="Enter password" id="password-input" aria-describedby="passwordInput" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                                                        <input type="password" class="form-control pe-5 password-input @error('password') is-invalid @enderror" onpaste="return false" name="password" placeholder="Enter password" id="password-input" aria-describedby="passwordInput" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
                                                         <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
                                                         <div class="invalid-feedback">
                                                             Please enter password
