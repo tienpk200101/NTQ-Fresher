@@ -297,7 +297,7 @@
                                         data-wow-delay=".1s">
                                         <div class="product-img-action-wrap">
                                             <div class="product-img product-img-zoom">
-                                                <a href="{{ route('') }}">
+                                                <a href="#">
                                                     <img class="default-img" src="{{ $product['image'] }}"
                                                         alt="" />
                                                     <img class="hover-img" src="{{ $product['image'] }}"
