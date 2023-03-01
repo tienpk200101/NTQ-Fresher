@@ -26,7 +26,7 @@ class LoginService
 
         $credentials = $request->only('name', 'password');
         if(Auth::attempt($credentials)) {
-            return redirect()->intended('a');
+            return redirect()->intended('/');
         }
 
         return redirect(route('login'));
@@ -36,6 +36,6 @@ class LoginService
         Session::flush();
         Auth::logout();
   
-        return Redirect('login');
+        return Redirect('/');
     }
 }

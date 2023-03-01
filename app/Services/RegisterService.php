@@ -17,7 +17,7 @@ class RegisterService
         return view('auth.register');
     }
 
-    public function postRegister(Request $request) {
+    public function handleRegister(Request $request) {
         $email = $request->get('email');
         $user_name = $request->get('username');
         $password = $request->get('password');
