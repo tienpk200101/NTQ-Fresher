@@ -27,9 +27,11 @@ Route::post('register', [RegisterController::class, 'handleRegister'])->name('re
 Route::get('forgot-password', [ForgotPasswordController::class, 'showForgotPassword'])->name('forgotpass');
 Route::post('forgot-password', [ForgotPasswordController::class, 'handleForgotPassword'])->name('forgotpass.post');
 
-
+// Home
 Route::get('/', [HomeController::class, 'showHome'])->name('home');
 Route::get('/product-detail', [ProductDetailController::class, 'showProductDetail'])->name('product-detail');
-
+Route::get('/change-pass', function(){
+    return view('auth.pass-change');
+});
 
 // Route::get('/', [DemoController::class, 'show'])->name('demo.show');

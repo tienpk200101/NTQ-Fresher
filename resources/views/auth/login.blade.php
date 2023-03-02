@@ -8,23 +8,23 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Sign In | Nest</title>
+    <title>Sign In | Velzon - Admin & Dashboard Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('assets_2/imgs/theme/favicon.svg') }}">
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
 
     <!-- Layout config Js -->
-    <script src="{{ asset('assets/js/layout.js') }}"></script>
+    <script src="assets/js/layout.js"></script>
     <!-- Bootstrap Css -->
-    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
-    <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <!-- App Css-->
-    <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
     <!-- custom Css-->
-    <link href="{{ asset('assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -46,7 +46,8 @@
                                         <div class="position-relative h-100 d-flex flex-column">
                                             <div class="mb-4">
                                                 <a href="{{ route('home') }}" class="d-block">
-                                                    <img src="{{ asset('assets_2/imgs/theme/logo.svg') }}" alt="" height="40">
+                                                    <img src="{{ asset('assets/images/logo-light.png') }}"
+                                                        alt="" height="24">
                                                 </a>
                                             </div>
                                             <div class="mt-auto">
@@ -102,8 +103,9 @@
                                                 @csrf
                                                 <div class="mb-3">
                                                     <label for="username" class="form-label">Username</label>
-                                                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
-                                                        id="username" placeholder="Enter username">
+                                                    <input type="text"
+                                                        class="form-control @error('name') is-invalid @enderror"
+                                                        name="name" id="username" placeholder="Enter username">
                                                     @error('name')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -111,13 +113,15 @@
 
                                                 <div class="mb-3">
                                                     <div class="float-end">
-                                                        <a href="{{ route('forgotpass') }}" class="text-muted">Forgot password?</a>
+                                                        <a href="{{ route('forgotpass') }}" class="text-muted">Forgot
+                                                            password?</a>
                                                     </div>
                                                     <label class="form-label" for="password-input">Password</label>
                                                     <div class="position-relative auth-pass-inputgroup mb-3">
                                                         <input type="password"
-                                                            class="form-control pe-5 password-input @error('password') is-invalid @enderror" name="password"
-                                                            placeholder="Enter password" id="password-input">
+                                                            class="form-control pe-5 password-input @error('password') is-invalid @enderror"
+                                                            name="password" placeholder="Enter password"
+                                                            id="password-input">
                                                         <button
                                                             class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon"
                                                             type="button" id="password-addon"><i
@@ -196,8 +200,8 @@
                             <p class="mb-0">&copy;
                                 <script>
                                     document.write(new Date().getFullYear())
-                                </script> Nest. Crafted with <i
-                                    class="mdi mdi-heart text-danger"></i> by Themesbrand
+                                </script> Nest. Crafted with <i class="mdi mdi-heart text-danger"></i>
+                                by Themesbrand
                             </p>
                         </div>
                     </div>
@@ -209,15 +213,15 @@
     <!-- end auth-page-wrapper -->
 
     <!-- JAVASCRIPT -->
-    <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/feather-icons/feather.min.js') }}"></script>
-    <script src="{{ asset('assets/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins.js') }}"></script>
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="assets/libs/node-waves/waves.min.js"></script>
+    <script src="assets/libs/feather-icons/feather.min.js"></script>
+    <script src="assets/js/pages/plugins/lord-icon-2.1.0.js"></script>
+    <script src="assets/js/plugins.js"></script>
 
     <!-- password-addon init -->
-    <script src="{{ asset('assets/js/pages/password-addon.init.js') }}"></script>
+    <script src="assets/js/pages/password-addon.init.js"></script>
 </body>
 
 
