@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 
 /*
@@ -35,4 +36,5 @@ Route::get('change-pass', function(){
 Route::get('/', [HomeController::class, 'showHome'])->name('home');
 Route::get('product-detail', [ProductDetailController::class, 'showProductDetail'])->name('product-detail');
 Route::get('checkout', [CheckoutController::class, 'showCheckout'])->name('checkout.show');
+Route::get('cart', [CartController::class, 'showCart'])->name('cart.show');
 
