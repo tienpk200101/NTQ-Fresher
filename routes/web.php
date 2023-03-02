@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,12 +27,12 @@ Route::get('register', [RegisterController::class, 'showRegister'])->name('regis
 Route::post('register', [RegisterController::class, 'handleRegister'])->name('register.post');
 Route::get('forgot-password', [ForgotPasswordController::class, 'showForgotPassword'])->name('forgotpass');
 Route::post('forgot-password', [ForgotPasswordController::class, 'handleForgotPassword'])->name('forgotpass.post');
-
-// Home
-Route::get('/', [HomeController::class, 'showHome'])->name('home');
-Route::get('/product-detail', [ProductDetailController::class, 'showProductDetail'])->name('product-detail');
-Route::get('/change-pass', function(){
+Route::get('change-pass', function(){
     return view('auth.pass-change');
 });
 
-// Route::get('/', [DemoController::class, 'show'])->name('demo.show');
+// Home
+Route::get('/', [HomeController::class, 'showHome'])->name('home');
+Route::get('product-detail', [ProductDetailController::class, 'showProductDetail'])->name('product-detail');
+Route::get('checkout', [CheckoutController::class, 'showCheckout'])->name('checkout.show');
+
