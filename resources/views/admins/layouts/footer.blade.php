@@ -21,10 +21,10 @@
     <script src="{{ asset('assets/js/app.js') }}"></script>
 
     <!--Swiper slider js-->
-    <script src="assets/libs/swiper/swiper-bundle.min.js"></script>
+    <script src="{{ asset('assets/libs/swiper/swiper-bundle.min.js') }}"></script>
 
     <!-- ecommerce product details init -->
-    <script src="assets/js/pages/ecommerce-product-details.init.js"></script>
+    <script src="{{ asset('assets/js/pages/ecommerce-product-details.init.js') }}"></script>
 
     <!-- App js -->
 </body>
