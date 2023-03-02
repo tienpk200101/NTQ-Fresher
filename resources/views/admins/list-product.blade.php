@@ -1,5 +1,13 @@
 @extends('admins.layouts.layout')
 
+@section('css')
+    <!-- nouisliderribute css -->
+    <link rel="stylesheet" href="{{ asset('assets/libs/nouislider/nouislider.min.css') }}">
+
+    <!-- gridjs css -->
+    <link rel="stylesheet" href="{{ asset('assets/libs/gridjs/theme/mermaid.min.css') }}">
+@endsection
+
 @section('content')
     <div class="main-content">
 
@@ -397,14 +405,6 @@
             </div>
         </footer>
     </div>
-@endsection
-
-@section('head')
-    <!-- nouisliderribute css -->
-    <link rel="stylesheet" href="{{ asset('assets/libs/nouislider/nouislider.min.css') }}">
-
-    <!-- gridjs css -->
-    <link rel="stylesheet" href="{{ asset('assets/libs/gridjs/theme/mermaid.min.css') }}">
 @endsection
 
 @section('js')
