@@ -7,7 +7,7 @@
 <head>
 
     <meta charset="utf-8"/>
-    <title>{{ $title_head }} | Velzon</title>
+    <title>{{ $title_head ?? '' }} | Velzon</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description"/>
     <meta content="Themesbrand" name="author"/>
@@ -36,7 +36,7 @@
             <div class="d-flex">
                 <!-- LOGO -->
                 <div class="navbar-brand-box horizontal-logo">
-                    <a href="index.html" class="logo logo-dark">
+                    <a href="{{ route('home') }}" class="logo logo-dark">
                             <span class="logo-sm">
                                 <img src="assets/images/logo-sm.png" alt="" height="22">
                             </span>
@@ -45,7 +45,7 @@
                             </span>
                     </a>
 
-                    <a href="index.html" class="logo logo-light">
+                    <a href="{{ route('home') }}" class="logo logo-light">
                             <span class="logo-sm">
                                 <img src="assets/images/logo-sm.png" alt="" height="22">
                             </span>
@@ -81,9 +81,9 @@
                             </div>
 
                             <div class="dropdown-item bg-transparent text-wrap">
-                                <a href="index.html" class="btn btn-soft-primary btn-sm btn-rounded">how to setup <i
+                                <a href="{{ route('home') }}" class="btn btn-soft-primary btn-sm btn-rounded">how to setup <i
                                         class="mdi mdi-magnify ms-1"></i></a>
-                                <a href="index.html" class="btn btn-soft-primary btn-sm btn-rounded">buttons <i
+                                <a href="{{ route('home') }}" class="btn btn-soft-primary btn-sm btn-rounded">buttons <i
                                         class="mdi mdi-magnify ms-1"></i></a>
                             </div>
                             <!-- item-->
@@ -926,7 +926,7 @@
     <!-- LOGO -->
     <div class="navbar-brand-box">
         <!-- Dark Logo-->
-        <a href="index.html" class="logo logo-dark">
+        <a href="{{ route('home') }}" class="logo logo-dark">
                 <span class="logo-sm">
                     <img src="assets/images/logo-sm.png" alt="" height="22">
                 </span>
@@ -935,7 +935,7 @@
                 </span>
         </a>
         <!-- Light Logo-->
-        <a href="index.html" class="logo logo-light">
+        <a href="{{ route('home') }}" class="logo logo-light">
                 <span class="logo-sm">
                     <img src="assets/images/logo-sm.png" alt="" height="22">
                 </span>
@@ -971,7 +971,7 @@
                                 <a href="dashboard-crm.html" class="nav-link" data-key="t-crm"> CRM </a>
                             </li>
                             <li class="nav-item">
-                                <a href="index.html" class="nav-link" data-key="t-ecommerce"> Ecommerce </a>
+                                <a href="{{ route('home') }}" class="nav-link" data-key="t-ecommerce"> Ecommerce </a>
                             </li>
                             <li class="nav-item">
                                 <a href="dashboard-crypto.html" class="nav-link" data-key="t-crypto"> Crypto </a>
