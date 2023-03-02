@@ -5,6 +5,10 @@ namespace App\Services;
 class CheckoutService
 {
     public function showCheckout() {
-        return view('admins.checkout');
+        $title_page = 'Checkout';
+
+        return view('admins.checkout', [
+            'title_head' => $title_page
+        ]);
     }
 }

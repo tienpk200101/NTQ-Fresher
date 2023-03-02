@@ -7,7 +7,7 @@ class HomeService
     public function showHome() {
         $title = 'Home';
 
-       $data_products = [
+        $data_products = [
             [
                 'name' => 'Áo hoodie R Star unisex ullzang nỉ ngoại local brand MOUTEE - Áo khoác nỉ trơn unisex 7 màu có form rộng XL - MOUTEE.SG',
                 'image' => 'https://cf.shopee.vn/file/vn-11134201-23020-hqepqqxwbpnv30',
