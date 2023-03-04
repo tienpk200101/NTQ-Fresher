@@ -9,4 +9,10 @@ class ManageProductService
             'title_head' => 'Manage Product'
         ]);
     }
+
+    public function showAddProduct() {
+        return view('admins.products.add', [
+            'title_head' => 'Add Product'
+        ]);
+    }
 }

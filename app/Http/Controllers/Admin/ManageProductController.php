@@ -18,4 +18,8 @@ class ManageProductController extends Controller
     public function showManageProduct() {
         return $this->manageProductService->showManageProduct();
     }
+
+    public function showAddProduct() {
+        return $this->manageProductService->showAddProduct();
+    }
 }
