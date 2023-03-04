@@ -7,7 +7,7 @@ class CheckoutService
     public function showCheckout() {
         $title_page = 'Checkout';
 
-        return view('admins.checkout', [
+        return view('clients.checkout', [
             'title_head' => $title_page
         ]);
     }

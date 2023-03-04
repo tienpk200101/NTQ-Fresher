@@ -95,7 +95,7 @@
                                     <div class="p-lg-5 p-4">
                                         <div>
                                             <h5 class="text-primary">Welcome Back !</h5>
-                                            <p class="text-muted">Sign in to continue to Nest.</p>
+                                            <p class="text-muted">Sign in to continue to Velzon.</p>
                                         </div>
 
                                         <div class="mt-4">
@@ -200,7 +200,7 @@
                             <p class="mb-0">&copy;
                                 <script>
                                     document.write(new Date().getFullYear())
-                                </script> Nest. Crafted with <i class="mdi mdi-heart text-danger"></i>
+                                </script> Velzon. Crafted with <i class="mdi mdi-heart text-danger"></i>
                                 by Themesbrand
                             </p>
                         </div>
