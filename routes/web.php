@@ -47,4 +47,5 @@ Route::group(['prefix' => 'admin'], function(){
     
     // Order
     Route::get('manage-order', [OrderController::class, 'showManageOrder'])->name('order.show');
+    Route::get('order-detail', [OrderController::class, 'showOrderDetail'])->name('order_detail.show');
 });

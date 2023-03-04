@@ -18,4 +18,8 @@ class OrderController extends Controller
     public function showManageOrder(){
         return $this->orderService->showManageOrder();
     }
+
+    public function showOrderDetail(){
+        return $this->orderService->showOrderDetail();
+    }
 }
