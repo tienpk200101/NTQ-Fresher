@@ -13,18 +13,18 @@
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
 
     <!-- Layout config Js -->
-    <script src="assets/js/layout.js"></script>
+    <script src="{{ asset('assets/js/layout.js') }}"></script>
     <!-- Bootstrap Css -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
-    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
-    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- custom Css-->
-    <link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -61,19 +61,24 @@
                                 </div>
 
                                 <div class="p-2">
-                                    <form action="https://themesbrand.com/velzon/html/galaxy/auth-signin-basic.html">
+                                    <form action="{{ route('reset.password.post')}}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="token" value="{{ $token }}">
                                         <div class="mb-3">
                                             <label class="form-label" for="password-input">Password</label>
                                             <div class="position-relative auth-pass-inputgroup">
                                                 <input type="password" class="form-control pe-5 password-input"
                                                     onpaste="return false" placeholder="Enter password"
                                                     id="password-input" aria-describedby="passwordInput"
-                                                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                                                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="password" required>
                                                 <button
                                                     class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon"
                                                     type="button" id="password-addon"><i
                                                         class="ri-eye-fill align-middle"></i></button>
                                             </div>
+                                            @if ($errors->has('password'))
+                                                <span class="text-danger">{{ $errors->first('password') }}</span>
+                                            @endif
                                             <div id="passwordInput" class="form-text">Must be at least 8 characters.
                                             </div>
                                         </div>
@@ -85,12 +90,15 @@
                                                 <input type="password" class="form-control pe-5 password-input"
                                                     onpaste="return false" placeholder="Confirm password"
                                                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                                                    id="confirm-password-input" required>
+                                                    id="confirm-password-input" name="password-confirm" required>
                                                 <button
                                                     class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon"
                                                     type="button" id="confirm-password-input"><i
                                                         class="ri-eye-fill align-middle"></i></button>
                                             </div>
+                                            @if ($errors->has('password_confirm'))
+                                                <span class="text-danger">{{ $errors->first('password_confirm') }}</span>
+                                            @endif
                                         </div>
 
                                         <div id="password-contain" class="p-3 bg-light mb-2 rounded">
@@ -159,18 +167,18 @@
     <!-- end auth-page-wrapper -->
 
     <!-- JAVASCRIPT -->
-    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/libs/simplebar/simplebar.min.js"></script>
-    <script src="assets/libs/node-waves/waves.min.js"></script>
-    <script src="assets/libs/feather-icons/feather.min.js"></script>
-    <script src="assets/js/pages/plugins/lord-icon-2.1.0.js"></script>
-    <script src="assets/js/plugins.js"></script>
+    <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/feather-icons/feather.min.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins.js') }}"></script>
 
     <!-- particles js -->
-    <script src="assets/libs/particles.js/particles.js"></script>
+    <script src="{{ asset('assets/libs/particles.js/particles.js') }}"></script>
 
     <!-- particles app js -->
-    <script src="assets/js/pages/particles.app.js"></script>
+    <script src="{{ asset('assets/js/pages/particles.app.js') }}"></script>
 </body>
 
 

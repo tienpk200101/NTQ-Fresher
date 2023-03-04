@@ -107,6 +107,11 @@
                                             Enter your email and instructions will be sent to you!
                                         </div>
                                         <div class="p-2">
+                                            @if (Session::has('message'))
+                                                <div class="alert alert-success" role="alert">
+                                                    {{ Session::get('message') }}
+                                                </div>
+                                            @endif
                                             <form action="{{ route('forgotpass.post') }}" method="post">
                                                 @csrf
                                                 <div class="mb-4">

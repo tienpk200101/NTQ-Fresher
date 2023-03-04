@@ -97,7 +97,11 @@
                                             <h5 class="text-primary">Welcome Back !</h5>
                                             <p class="text-muted">Sign in to continue to Velzon.</p>
                                         </div>
-
+                                        @if (Session::has('message'))
+                                            <div class="alert alert-success" role="alert">
+                                                {{ Session::get('message') }}
+                                            </div>
+                                        @endif
                                         <div class="mt-4">
                                             <form action="{{ route('login.post') }}" method="POST">
                                                 @csrf

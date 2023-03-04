@@ -28,4 +28,13 @@ class ForgotPasswordController extends Controller
     public function handleForgotPassword(Request $request) {
         return $this->forgotPasswordService->handleForgotPassword($request);
     }
+
+    public function showResetPassword($token) {
+        return $this->forgotPasswordService->showResetPassword($token);
+    }
+
+
+    public function handleResetPassword(Request $request) {
+        return $this->forgotPasswordService->handleResetPassword($request);
+    }
 }
