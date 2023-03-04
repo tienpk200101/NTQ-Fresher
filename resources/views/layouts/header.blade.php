@@ -13,15 +13,6 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
 
-    <!-- nouisliderribute css -->
-    <link rel="stylesheet" href="assets/libs/nouislider/nouislider.min.css">
-
-    <!-- gridjs css -->
-    <link rel="stylesheet" href="assets/libs/gridjs/theme/mermaid.min.css">
-
-    <!-- swiper css -->
-    <link href="{{ asset('assets/libs/swiper/swiper-bundle.min.css') }}" rel="stylesheet" type="text/css" />
-
     <!-- Layout config Js -->
     <script src="{{ asset('assets/js/layout.js') }}"></script>
     <!-- Bootstrap Css -->
@@ -34,5 +25,3 @@
     <link href="{{ asset('assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
 
 </head>
-
-<body>

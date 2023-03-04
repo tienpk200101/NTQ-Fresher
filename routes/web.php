@@ -30,9 +30,8 @@ Route::get('register', [RegisterController::class, 'showRegister'])->name('regis
 Route::post('register', [RegisterController::class, 'handleRegister'])->name('register.post');
 Route::get('forgot-password', [ForgotPasswordController::class, 'showForgotPassword'])->name('forgotpass');
 Route::post('forgot-password', [ForgotPasswordController::class, 'handleForgotPassword'])->name('forgotpass.post');
-Route::get('change-pass', function(){
-    return view('auth.pass-change');
-});
+Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPassword'])->name('reset.password.show');
+Route::post('reset-password', [ForgotPasswordController::class, 'handleResetPassword'])->name('reset.password.post');
 
 // Home
 Route::get('/', [HomeController::class, 'showHome'])->name('home');
