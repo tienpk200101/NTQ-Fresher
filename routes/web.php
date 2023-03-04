@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\ManageProductController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
@@ -39,7 +38,3 @@ Route::get('product-detail', [ProductDetailController::class, 'showProductDetail
 Route::get('checkout', [CheckoutController::class, 'showCheckout'])->name('checkout.show');
 Route::get('cart', [CartController::class, 'showCart'])->name('cart.show');
 
-// Admin
-Route::prefix('admin')->group(function () {
-    Route::get('manage-product', [ManageProductController::class, 'showManageProduct']);
-});
