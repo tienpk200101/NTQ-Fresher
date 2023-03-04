@@ -37,6 +37,3 @@ Route::get('/', [HomeController::class, 'showHome'])->name('home');
 Route::get('product-detail', [ProductDetailController::class, 'showProductDetail'])->name('product-detail');
 Route::get('checkout', [CheckoutController::class, 'showCheckout'])->name('checkout.show');
 Route::get('cart', [CartController::class, 'showCart'])->name('cart.show');
-Route::get('/a', function() {
-    dd('a');
-});
