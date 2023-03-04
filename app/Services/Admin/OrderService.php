@@ -9,4 +9,10 @@ class OrderService
             'title_head' => 'Manage Order'
         ]);
     }
+
+    public function showOrderDetail() {
+        return view('admins.orders.order-detail', [
+            'title_head' => 'Order Detail'
+        ]);
+    }
 }
