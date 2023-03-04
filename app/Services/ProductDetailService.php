@@ -22,7 +22,7 @@ class ProductDetailService
             'sizes' => ['S', 'M', 'L', 'XL']
         ];
 
-        return view('admins.product-detail', [
+        return view('clients.product-detail', [
             'product' => $product,
             'title_head' => $title
         ]);

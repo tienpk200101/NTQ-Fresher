@@ -1,4 +1,4 @@
-@extends('admins.layouts.layout')
+@extends('layouts.layout')
 
 @section('css')
     <!-- nouisliderribute css -->

@@ -26,7 +26,7 @@ class HomeService
             ],
         ];
 
-        return view('admins.list-product', [
+        return view('clients.list-product', [
             'data_products' => $data_products,
             'title_head' => $title
         ]);
