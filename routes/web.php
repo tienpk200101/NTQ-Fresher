@@ -42,4 +42,5 @@ Route::get('cart', [CartController::class, 'showCart'])->name('cart.show');
 // Admin
 Route::group(['prefix' => 'admin'], function(){
     Route::get('manage-product', [ManageProductController::class, 'showManageProduct']);
+    Route::get('add-product', [ManageProductController::class, 'showAddProduct']);
 });
