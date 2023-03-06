@@ -257,11 +257,11 @@
                                             <tbody>
                                                 <tr>
                                                     <td>Sub Total :</td>
-                                                    <td class="text-end" id="cart-subtotal">$ 359.96</td>
+                                                    <td class="text-end" >$ <span id="cart-subtotal">359.96</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Discount <span class="text-muted">(VELZON15)</span> : </td>
-                                                    <td class="text-end" id="cart-discount">- $ 53.99</td>
+                                                    <td class="text-end">- $ <span id="cart-discount">53.99</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Shipping Charge :</td>
@@ -269,13 +269,13 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Estimated Tax (12.5%) : </td>
-                                                    <td class="text-end" id="cart-tax">$ 44.99</td>
+                                                    <td class="text-end">$ <span id="cart-tax">44.99</span></td>
                                                 </tr>
                                                 <tr class="table-active">
                                                     <th>Total (USD) :</th>
-                                                    <td class="text-end">
+                                                    <td class="text-end">$
                                                         <span class="fw-semibold" id="cart-total">
-                                                            $415.96
+                                                            415.96
                                                         </span>
                                                     </td>
                                                 </tr>
@@ -333,8 +333,9 @@
 
 @section('js')
      <!-- input step init -->
-     <script src="{{ asset('assets/js/pages/form-input-spin.init.js') }}"></script>
+     {{-- <script src="{{ asset('assets/js/pages/form-input-spin.init.js') }}"></script>
 
      <!-- ecommerce cart js -->
-     <script src="{{ asset('assets/js/pages/ecommerce-cart.init.js') }}"></script> 
+     <script src="{{ asset('assets/js/pages/ecommerce-cart.init.js') }}"></script>  --}}
+     <script src="{{ asset('assets/js/shopping-cart.js') }}"></script>
 @endsection
