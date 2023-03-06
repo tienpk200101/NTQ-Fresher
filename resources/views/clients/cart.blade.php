@@ -333,8 +333,9 @@
 
 @section('js')
      <!-- input step init -->
-     <script src="{{ asset('assets/js/pages/form-input-spin.init.js') }}"></script>
+     {{-- <script src="{{ asset('assets/js/pages/form-input-spin.init.js') }}"></script> --}}
 
      <!-- ecommerce cart js -->
-     <script src="{{ asset('assets/js/pages/ecommerce-cart.init.js') }}"></script> 
+     {{-- <script src="{{ asset('assets/js/pages/ecommerce-cart.init.js') }}"></script>  --}}
+     <script src="{{ asset('assets/js/shopping-cart.js') }}"></script>
 @endsection
