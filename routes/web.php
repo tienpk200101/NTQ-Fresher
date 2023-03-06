@@ -38,6 +38,7 @@ Route::get('/', [HomeController::class, 'showHome'])->name('home');
 Route::get('product-detail', [ProductDetailController::class, 'showProductDetail'])->name('product-detail');
 Route::get('checkout', [CheckoutController::class, 'showCheckout'])->name('checkout.show');
 Route::get('cart', [CartController::class, 'showCart'])->name('cart.show');
+Route::post('choose-var', [ProductDetailController::class, 'chooseProduct'])->name('choose.product');
 
 // Admin
 Route::group(['prefix' => 'admin'], function(){

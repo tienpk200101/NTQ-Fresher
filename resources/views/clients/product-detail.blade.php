@@ -3,6 +3,7 @@
 @section('css')
     <!--Swiper slider css-->
     <link href="{{ asset('assets/libs/swiper/swiper-bundle.min.css') }}" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 @endsection
 
 @section('content')
@@ -139,7 +140,7 @@
                                                             </div>
                                                             <div class="flex-grow-1">
                                                                 <p class="text-muted mb-1">Price :</p>
-                                                                <h5 class="mb-0">$120.40</h5>
+                                                                <h5 class="mb-0">$<span class="price-show">120.40</span></h5>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -156,7 +157,7 @@
                                                             </div>
                                                             <div class="flex-grow-1">
                                                                 <p class="text-muted mb-1">No. of Orders :</p>
-                                                                <h5 class="mb-0">2,234</h5>
+                                                                <h5 class="mb-0 order-show">2,234</h5>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -173,7 +174,7 @@
                                                             </div>
                                                             <div class="flex-grow-1">
                                                                 <p class="text-muted mb-1">Available Stocks :</p>
-                                                                <h5 class="mb-0">1,230</h5>
+                                                                <h5 class="mb-0 stock-show">1,230</h5>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -190,7 +191,7 @@
                                                             </div>
                                                             <div class="flex-grow-1">
                                                                 <p class="text-muted mb-1">Total Revenue :</p>
-                                                                <h5 class="mb-0">$60,645</h5>
+                                                                <h5 class="mb-0">$<span class="revenue-show">60,645</span></h5>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -202,39 +203,37 @@
                                                 <div class="col-xl-6">
                                                     <div class="mt-4">
                                                         <h5 class="fs-14">Sizes :</h5>
-                                                        <div class="d-flex flex-wrap gap-2">
+                                                        <div class="d-flex flex-wrap gap-2 choose-size">
                                                             <div data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                                data-bs-placement="top" title="Out of Stock">
+                                                                data-bs-placement="top" data-size="S" title="Out of Stock">
                                                                 <input type="radio" class="btn-check"
-                                                                    name="productsize-radio" id="productsize-radio1"
-                                                                    disabled>
+                                                                    name="productsize-radio" id="productsize-radio1" value="S">
                                                                 <label
                                                                     class="btn btn-soft-primary avatar-xs rounded-circle p-0 d-flex justify-content-center align-items-center"
                                                                     for="productsize-radio1">S</label>
                                                             </div>
 
                                                             <div data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                                data-bs-placement="top" title="04 Items Available">
+                                                                data-bs-placement="top" data-size="M" title="04 Items Available">
                                                                 <input type="radio" class="btn-check"
-                                                                    name="productsize-radio" id="productsize-radio2">
+                                                                    name="productsize-radio" id="productsize-radio2" value="M">
                                                                 <label
                                                                     class="btn btn-soft-primary avatar-xs rounded-circle p-0 d-flex justify-content-center align-items-center"
                                                                     for="productsize-radio2">M</label>
                                                             </div>
                                                             <div data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                                data-bs-placement="top" title="06 Items Available">
+                                                                data-bs-placement="top" data-size="L" title="06 Items Available">
                                                                 <input type="radio" class="btn-check"
-                                                                    name="productsize-radio" id="productsize-radio3">
+                                                                    name="productsize-radio" id="productsize-radio3" value="L">
                                                                 <label
                                                                     class="btn btn-soft-primary avatar-xs rounded-circle p-0 d-flex justify-content-center align-items-center"
                                                                     for="productsize-radio3">L</label>
                                                             </div>
 
                                                             <div data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                                data-bs-placement="top" title="Out of Stock">
+                                                                data-bs-placement="top" data-size="XL" title="Out of Stock">
                                                                 <input type="radio" class="btn-check"
-                                                                    name="productsize-radio" id="productsize-radio4"
-                                                                    disabled>
+                                                                    name="productsize-radio" id="productsize-radio4" value="XL">
                                                                 <label
                                                                     class="btn btn-soft-primary avatar-xs rounded-circle p-0 d-flex justify-content-center align-items-center"
                                                                     for="productsize-radio4">XL</label>
@@ -249,7 +248,7 @@
                                                         <h5 class="fs-14">Colors :</h5>
                                                         <div class="d-flex flex-wrap gap-2 choose-color">
                                                             <div data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                                data-bs-placement="top" title="Out of Stock">
+                                                                data-bs-placement="top" data-color="purple" title="Out of Stock">
                                                                 <button type="button"
                                                                     class="btn avatar-xs p-0 d-flex align-items-center justify-content-center border rounded-circle fs-20 text-primary"
                                                                     disabled>
@@ -257,20 +256,20 @@
                                                                 </button>
                                                             </div>
                                                             <div data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                                data-bs-placement="top" title="03 Items Available">
+                                                                data-bs-placement="top" data-color="blue" title="03 Items Available">
                                                                 <button type="button"
                                                                     class="btn avatar-xs p-0 d-flex align-items-center justify-content-center border rounded-circle fs-20 text-secondary">
                                                                     <i class="ri-checkbox-blank-circle-fill"></i>
                                                                 </button>
                                                             </div>
                                                             <div data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                                data-bs-placement="top" title="03 Items Available">
+                                                                data-bs-placement="top" data-color="green" title="03 Items Available">
                                                                 <button type="button"
                                                                     class="btn avatar-xs p-0 d-flex align-items-center justify-content-center border rounded-circle fs-20 text-success">
                                                                     <i class="ri-checkbox-blank-circle-fill"></i>
                                                                 </button>
                                                             </div>
-                                                            <div data-bs-toggle="tooltip" data-bs-trigger="hover"
+                                                            {{-- <div data-bs-toggle="tooltip" data-bs-trigger="hover"
                                                                 data-bs-placement="top" title="02 Items Available">
                                                                 <button type="button"
                                                                     class="btn avatar-xs p-0 d-flex align-items-center justify-content-center border rounded-circle fs-20 text-info">
@@ -304,7 +303,7 @@
                                                                     class="btn avatar-xs p-0 d-flex align-items-center justify-content-center border rounded-circle fs-20 text-dark">
                                                                     <i class="ri-checkbox-blank-circle-fill"></i>
                                                                 </button>
-                                                            </div>
+                                                            </div> --}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -798,4 +797,53 @@
 
     <!-- ecommerce product details init -->
     <script src="{{ asset('assets/js/pages/ecommerce-product-details.init.js') }}"></script>
+    <script async>
+        $(document).ready(function(){
+            let data_click = {
+                color: 'purple',
+                size: 's'
+            };
+
+            function chooseProduct(data) {
+                let data_input = {
+                    color: data.color,
+                    size: data.size,
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                };
+
+                $.ajax({
+                    type: "post",
+                    url: "/choose-var",
+                    data: data_input,
+                    success: function (response) {
+                        response = Object.assign({
+                                'price': 0,
+                                'order': 0,
+                                'revenue': 0,
+                                'images': [],
+                                'stock': 0
+                        }, response);
+
+                        $('.price-show').text(response.price);
+                        $('.order-show').text(response.order);
+                        $('.stock-show').text(response.stock);
+                        $('.revenue-show').text(response.revenue);
+                    }
+                });
+            }
+
+            // chooseProduct(data_click);
+
+            $('.btn-check').click(function(e){
+                data_click.size = $(this).val();
+                chooseProduct(data_click);
+            });
+
+            $('.choose-color > div').click(function () { 
+                data_click.color = $(this).data('color');
+                chooseProduct(data_click);
+            });
+
+        })
+    </script>
 @endsection
