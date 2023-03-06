@@ -36,17 +36,17 @@
                                 <div class="row gx-lg-5">
                                     <div class="col-xl-4 col-md-8 mx-auto">
                                         <div class="product-img-slider sticky-side-div">
-                                            <div class="swiper product-thumbnail-slider p-2 rounded bg-light">
+                                            <div class="swiper product-thumbnail-slider p-2 rounded bg-light mySwipper">
                                                 <div class="swiper-wrapper">
-                                                    <div class="swiper-slide">
+                                                    <div class="swiper-slide" data-id="0">
                                                         <img src="assets/images/products/img-8.png" alt=""
                                                             class="img-fluid d-block" />
                                                     </div>
-                                                    <div class="swiper-slide">
+                                                    <div class="swiper-slide" data-id="1">
                                                         <img src="assets/images/products/img-6.png" alt=""
                                                             class="img-fluid d-block" />
                                                     </div>
-                                                    <div class="swiper-slide">
+                                                    <div class="swiper-slide" data-id="2">
                                                         <img src="assets/images/products/img-1.png" alt=""
                                                             class="img-fluid d-block" />
                                                     </div>
@@ -59,7 +59,8 @@
                                                 <div class="swiper-button-prev"></div>
                                             </div>
                                             <!-- end swiper thumbnail slide -->
-                                            <div class="swiper product-nav-slider mt-2">
+                                            {{-- <div class="swiper product-nav-slider mt-2">
+                                                <div class="swipper-pagination"></div>
                                                 <div class="swiper-wrapper">
                                                     <div class="swiper-slide">
                                                         <div class="nav-slide-item">
@@ -85,8 +86,8 @@
                                                                 class="img-fluid d-block" />
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
+                                                </div> 
+                                            </div> --}}
                                             <!-- end swiper nav slide -->
                                         </div>
                                     </div>
@@ -797,53 +798,5 @@
 
     <!-- ecommerce product details init -->
     <script src="{{ asset('assets/js/pages/ecommerce-product-details.init.js') }}"></script>
-    <script async>
-        $(document).ready(function(){
-            let data_click = {
-                color: 'purple',
-                size: 's'
-            };
-
-            function chooseProduct(data) {
-                let data_input = {
-                    color: data.color,
-                    size: data.size,
-                    _token: $('meta[name="csrf-token"]').attr('content')
-                };
-
-                $.ajax({
-                    type: "post",
-                    url: "/choose-var",
-                    data: data_input,
-                    success: function (response) {
-                        response = Object.assign({
-                                'price': 0,
-                                'order': 0,
-                                'revenue': 0,
-                                'images': [],
-                                'stock': 0
-                        }, response);
-
-                        $('.price-show').text(response.price);
-                        $('.order-show').text(response.order);
-                        $('.stock-show').text(response.stock);
-                        $('.revenue-show').text(response.revenue);
-                    }
-                });
-            }
-
-            // chooseProduct(data_click);
-
-            $('.btn-check').click(function(e){
-                data_click.size = $(this).val();
-                chooseProduct(data_click);
-            });
-
-            $('.choose-color > div').click(function () { 
-                data_click.color = $(this).data('color');
-                chooseProduct(data_click);
-            });
-
-        })
-    </script>
+    <script src="{{ asset('assets/js/product-detail.js')}}"></script>
 @endsection

@@ -39,6 +39,7 @@ class ProductDetailService
                 'images' => [
                     'assets/images/products/img-8.png'
                 ],
+                'image_index' => 0,
                 'size' => [
                     's' => [
                         'price' => 111,
@@ -61,6 +62,7 @@ class ProductDetailService
                 'images' => [
                     'assets/images/products/img-6.png'
                 ],
+                'image_index' => 1,
                 'size' => [
                     's' => [
                         'price' => 144,
@@ -83,6 +85,7 @@ class ProductDetailService
                 'images' => [
                     'assets/images/products/img-1.png'
                 ],
+                'image_index' => 2,
                 'size' => [
                     's' => [
                         'price' => 124,
