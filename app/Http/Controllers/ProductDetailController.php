@@ -17,4 +17,8 @@ class ProductDetailController extends Controller
     public function showProductDetail() {
         return $this->productDetailService->showProductDetail();
     }
+
+    public function chooseProduct(Request $request) {
+        return $this->productDetailService->chooseProduct($request);
+    }
 }
