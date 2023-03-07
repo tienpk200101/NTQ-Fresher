@@ -34,7 +34,6 @@ $(document).ready(function(){
                 }, response);
 
                 let index = response.image_index;
-                console.log(index);
                 if(index >= 0 && index < $('.swiper-wrapper').children().length){
                     swiper.autoplay.stop();
                     swiper.slideTo(index);
