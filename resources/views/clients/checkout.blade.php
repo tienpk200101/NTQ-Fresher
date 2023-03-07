@@ -88,8 +88,9 @@
                                                             <label for="billinginfo-firstName" class="form-label">First
                                                                 Name</label>
                                                             <input type="text" class="form-control"
-                                                                id="billinginfo-firstName" placeholder="Enter first name"
-                                                                value="">
+                                                                id="billinginfo-firstName" name="firstName"
+                                                                placeholder="Enter first name" value="">
+                                                            <span class="text text-danger firstName-err"></span>
                                                         </div>
                                                     </div>
 
@@ -98,8 +99,9 @@
                                                             <label for="billinginfo-lastName" class="form-label">Last
                                                                 Name</label>
                                                             <input type="text" class="form-control"
-                                                                id="billinginfo-lastName" placeholder="Enter last name"
-                                                                value="">
+                                                                id="billinginfo-lastName" name="lastName"
+                                                                placeholder="Enter last name" value="">
+                                                            <span class="text text-danger lastName-err"></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -110,7 +112,9 @@
                                                             <label for="billinginfo-email" class="form-label">Email <span
                                                                     class="text-muted">(Optional)</span></label>
                                                             <input type="email" class="form-control"
-                                                                id="billinginfo-email" placeholder="Enter email">
+                                                                id="billinginfo-email" name="email"
+                                                                placeholder="Enter email">
+                                                            <span class="text text-danger email-err"></span>
                                                         </div>
                                                     </div>
 
@@ -119,21 +123,24 @@
                                                             <label for="billinginfo-phone"
                                                                 class="form-label">Phone</label>
                                                             <input type="text" class="form-control"
-                                                                id="billinginfo-phone" placeholder="Enter phone no.">
+                                                                id="billinginfo-phone" name="phone"
+                                                                placeholder="Enter phone no.">
+                                                            <span class="text text-danger phone-err"></span>
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="mb-3">
                                                     <label for="billinginfo-address" class="form-label">Address</label>
-                                                    <textarea class="form-control" id="billinginfo-address" placeholder="Enter address" rows="3"></textarea>
+                                                    <textarea class="form-control" id="billinginfo-address" name="address" placeholder="Enter address" rows="3"></textarea>
+                                                    <span class="text text-danger address-err"></span>
                                                 </div>
 
                                                 <div class="row">
                                                     <div class="col-md-4">
                                                         <div class="mb-3">
                                                             <label for="country" class="form-label">Country</label>
-                                                            <select class="form-select" id="country"
+                                                            <select class="form-select" name="country" id="country"
                                                                 data-plugin="choices">
                                                                 <option value="">Select Country...</option>
                                                                 <option selected>United States</option>
@@ -145,7 +152,7 @@
                                                         <div class="mb-3">
                                                             <label for="state" class="form-label">State</label>
                                                             <select class="form-select" id="state"
-                                                                data-plugin="choices">
+                                                                data-plugin="choices" name="state">
                                                                 <option value="">Select State...</option>
                                                                 <option value="Alabama">Alabama</option>
                                                                 <option value="Alaska">Alaska</option>
@@ -173,15 +180,16 @@
                                                     <div class="col-md-4">
                                                         <div class="mb-3">
                                                             <label for="zip" class="form-label">Zip Code</label>
-                                                            <input type="text" class="form-control" id="zip"
-                                                                placeholder="Enter zip code">
+                                                            <input type="text" class="form-control" name="zipCode"
+                                                                id="zip" placeholder="Enter zip code">
+                                                            <span class="text text-danger zipCode-err"></span>
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="d-flex align-items-start gap-3 mt-3">
                                                     <button type="button"
-                                                        class="btn btn-primary btn-label right ms-auto nexttab"
+                                                        class="btn btn-primary btn-label right ms-auto nexttab btn-submit"
                                                         data-nexttab="pills-bill-address-tab">
                                                         <i
                                                             class="ri-truck-line label-icon align-middle fs-16 ms-2"></i>Proceed
@@ -599,5 +607,39 @@
 @endsection
 
 @section('js')
-    <script src="{{ asset('assets/js/pages/ecommerce-product-checkout.init.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/pages/ecommerce-product-checkout.init.js') }}"></script> --}}
+    <script>
+        $(document).ready(function() {
+            $('.btn-submit').click(function() {
+                let data = {
+                    firstName: $('#billinginfo-firstName').val(),
+                    lastName: $('#billinginfo-lastName').val(),
+                    email: $('#billinginfo-email').val(),
+                    phone: $('#billinginfo-phone').val(),
+                    address: $('#billinginfo-address').val(),
+                    country: $('#country').val(),
+                    state: $('#state').val(),
+                    zipCode: $('#zip').val(),
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/validate-checkout",
+                    data: data,
+                    success: function(response) {
+                        console.log(response);
+                    },
+                    error: function(response) {
+                        let errors = response.responseJSON;
+
+                        $.each(errors['errors'], function(index, value) {
+                            console.log(value[0], index);
+                            $(`.${index}-err`).text(value[0])
+                        });
+                    }
+                });
+            })
+        });
+    </script>
 @endsection

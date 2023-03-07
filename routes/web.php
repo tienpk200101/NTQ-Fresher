@@ -39,6 +39,7 @@ Route::get('product-detail', [ProductDetailController::class, 'showProductDetail
 Route::get('checkout', [CheckoutController::class, 'showCheckout'])->name('checkout.show');
 Route::get('cart', [CartController::class, 'showCart'])->name('cart.show');
 Route::post('choose-var', [ProductDetailController::class, 'chooseProduct'])->name('choose.product');
+Route::post('validate-checkout', [CheckoutController::class, 'checkout'])->name('checkout.validate.post');
 
 // Admin
 Route::group(['prefix' => 'admin'], function(){
