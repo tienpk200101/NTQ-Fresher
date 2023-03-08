@@ -151,31 +151,20 @@
                                                     <div class="col-md-4">
                                                         <div class="mb-3">
                                                             <label for="state" class="form-label">State</label>
-                                                            <select class="form-select" id="state"
-                                                                data-plugin="choices" name="state">
+                                                            <select class="form-select" id="state" data-plugin="choices" name="state">
                                                                 <option value="">Select State...</option>
-                                                                <option value="Alabama">Alabama</option>
-                                                                <option value="Alaska">Alaska</option>
-                                                                <option value="American Samoa">American Samoa</option>
-                                                                <option value="California" selected>California</option>
-                                                                <option value="Colorado">Colorado</option>
-                                                                <option value="District Of Columbia">District Of Columbia
-                                                                </option>
-                                                                <option value="Florida">Florida</option>
-                                                                <option value="Georgia">Georgia</option>
-                                                                <option value="Guam">Guam</option>
-                                                                <option value="Hawaii">Hawaii</option>
-                                                                <option value="Idaho">Idaho</option>
-                                                                <option value="Kansas">Kansas</option>
-                                                                <option value="Louisiana">Louisiana</option>
-                                                                <option value="Montana">Montana</option>
-                                                                <option value="Nevada">Nevada</option>
-                                                                <option value="New Jersey">New Jersey</option>
-                                                                <option value="New Mexico">New Mexico</option>
-                                                                <option value="New York">New York</option>
                                                             </select>
                                                         </div>
                                                     </div>
+
+                                                    {{-- <div class="col-md-4">
+                                                        <div class="mb-3">
+                                                            <label for="district" class="form-label">District</label>
+                                                            <select class="form-select" id="district" data-plugin="choices" name="district">
+                                                                <option value="">Select District...</option>
+                                                            </select>
+                                                        </div>
+                                                    </div> --}}
 
                                                     <div class="col-md-4">
                                                         <div class="mb-3">
@@ -607,8 +596,30 @@
 @endsection
 
 @section('js')
-    {{-- <script src="{{ asset('assets/js/pages/ecommerce-product-checkout.init.js') }}"></script> --}}
-    <script>
+    <script src="{{ asset('assets/js/pages/ecommerce-product-checkout.init.js') }}"></script>
+    <script src="{{ asset('assets/js/checkout.js') }}">
+        // $.getJSON("./tree.json", function(data) {
+        //     let htmls_state = '';
+            
+        //     $.each(data, function(index, value) {
+        //         htmls_state += `<option value="${value.code}" class="state-code">${value.name}</option>`;
+        //     });
+        //     $('#state').html(htmls_state);
+
+        //     $('#state').change(function(e) {
+        //         let htmls_district = '';
+        //         let districts = data[$(this).val()];
+
+        //         $.each(districts['quan-huyen'], function(index, value){
+        //             htmls_district += `<option value="${value.code}" class="district-code">${value.name}</option>`;
+        //         });
+
+        //         $('#district').html(htmls_district);
+        //     });
+        // });
+    </script>
+
+    {{-- <script>
         $(document).ready(function() {
             $('.btn-submit').click(function() {
                 let data = {
@@ -641,5 +652,5 @@
                 });
             })
         });
-    </script>
+    </script> --}}
 @endsection
