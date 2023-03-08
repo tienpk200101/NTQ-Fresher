@@ -40,6 +40,9 @@ Route::get('checkout', [CheckoutController::class, 'showCheckout'])->name('check
 Route::get('cart', [CartController::class, 'showCart'])->name('cart.show');
 Route::post('choose-var', [ProductDetailController::class, 'chooseProduct'])->name('choose.product');
 Route::post('validate-checkout', [CheckoutController::class, 'checkout'])->name('checkout.validate.post');
+Route::get('tree-json', function (){
+    return '';
+});
 
 // Admin
 Route::group(['prefix' => 'admin'], function(){
