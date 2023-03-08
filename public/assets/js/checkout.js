@@ -1,3 +1,5 @@
+start();
+
 function getState(data) { 
     let htmls_state = '';
     
@@ -27,6 +29,42 @@ function getDistrict(data, stateCode) {
     $('#district').html(htmls_district);
 }
 
+function checkoutValidate() {
+    $('.btn-submit').click(function() {
+        let data = {
+            firstName: $('#billinginfo-firstName').val(),
+            lastName: $('#billinginfo-lastName').val(),
+            email: $('#billinginfo-email').val(),
+            phone: $('#billinginfo-phone').val(),
+            address: $('#billinginfo-address').val(),
+            country: $('#country').val(),
+            state: $('#state').val(),
+            zipCode: $('#zip').val(),
+            _token: $('meta[name="csrf-token"]').attr('content')
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "/validate-checkout",
+            data: data,
+            beforeSend: function(){
+                $(document).find('span.text-err').html('');
+            },
+            success: function(response) {
+                // alert('Checkout Success!');
+                console.log(response.success);
+            },
+            error: function(response) {
+                let errors = response.responseJSON;
+
+                $.each(errors['errors'], function(index, value) {
+                    $(`.${index}-err`).text(value[0])
+                });
+            }
+        });
+    });
+}
+
 function start() {
     $.getJSON("./tree.json", function(data) {
         getState(data);
@@ -35,6 +73,6 @@ function start() {
         //     getDistrict(data, $(this).val());
         // });
     });
-}
 
-start()
+    checkoutValidate();
+}

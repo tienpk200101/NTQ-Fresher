@@ -27,7 +27,7 @@ class CheckoutRequest extends FormRequest
             'firstName' => 'required|min:3|max:255',
             'lastName' => 'required|min:3|max:255',
             'email' => 'required|email|min:6|max:255',
-            'phone' => 'required|numeric',
+            'phone' => 'required',
             'address' => 'required|min:6|max:255',
             'zipCode' => 'required|min:2'
         ];

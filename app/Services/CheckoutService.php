@@ -19,13 +19,17 @@ class CheckoutService
     public function validateCheckout($request)
     {
         if ($request->ajax()) {
-            $validated = $request->validated();
+            try {
+                return response()->json(['success' => 'Added new records.']);
+            } catch (\Throwable $th) {
+                return response()->json(['error' => $th->getMessage()], 204);
+            }
 
             // if ($validated->fails()) {
-            //     return response()->json(['error' => $validated->errors()->all(), 'status' => 0]);
+            //     return response()->json(['error' => $validated->errors()->all()], 204);
             // }
 
-            return response()->json(['success' => 'Added new records.', 'status' => 1]);
+            // return response()->json(['success' => 'Added new records.']);
         }
     }
 }
