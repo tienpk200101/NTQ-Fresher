@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Constants\UserConst;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -17,9 +18,13 @@ class CheckUserMiddleware
     public function handle(Request $request, Closure $next)
     {
         if(auth()->check()) {
-            return redirect(route('home'));
+            if(auth()->user()->role == UserConst::ADMIN) {
+                return redirect(route('admin.product.show'));
+            } elseif(auth()->user()->role == UserConst::CLIENT) {
+                return redirect(route('home'));
+            }
         }
 
-        return $next($request);
+        return redirect(route('login'));
     }
 }
