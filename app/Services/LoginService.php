@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
-class LoginService 
+class LoginService
 {
     public function __construct()
     {
-        
+
     }
 
     public function show() {
@@ -26,12 +26,14 @@ class LoginService
         ]);
 
         $credentials = $request->only('name', 'password');
-        if(Auth::attempt($credentials)) {
-            if (Gate::allows('isAdmin')) {
-                return redirect()->intended('/admin/manage-product');
-            } elseif(Gate::allows('isClient')) {
+        if(Auth::guard('web')->attempt($credentials)) {
+//            if (Gate::allows('isAdmin')) {
+//                return redirect()->intended('/admin/manage-product');
+//            } elseif(Gate::allows('isClient')) {
                 return redirect()->intended('/');
-            }
+//            }
+        } elseif (Auth::guard('admin')->attempt($credentials)){
+            return redirect()->intended('/admin/manage-product');
         }
 
         return redirect(route('login'));
@@ -40,7 +42,7 @@ class LoginService
     public function logout() {
         Session::flush();
         Auth::logout();
-  
+
         return Redirect('/');
     }
 }

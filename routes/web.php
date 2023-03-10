@@ -42,10 +42,11 @@ Route::post('choose-var', [ProductDetailController::class, 'chooseProduct'])->na
 Route::post('validate-checkout', [CheckoutController::class, 'checkout'])->name('checkout.validate.post');
 
 // Admin
-Route::group(['prefix' => 'admin', 'middleware' => ['can:isAdmin']], function(){
+//Route::group(['prefix' => 'admin', 'middleware' => ['can:isAdmin']], function(){
+Route::group(['prefix' => 'admin'], function(){
     Route::get('manage-product', [ManageProductController::class, 'showManageProduct'])->name('product.show');
     Route::get('add-product', [ManageProductController::class, 'showAddProduct'])->name('product_add.show');
-    
+
     // Order
     Route::get('manage-order', [OrderController::class, 'showManageOrder'])->name('order.show');
     Route::get('order-detail', [OrderController::class, 'showOrderDetail'])->name('order_detail.show');
