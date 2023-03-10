@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('tag', 255)->nullable();
             $table->integer('price')->nullable();
             $table->string('image', 255)->nullable();
-            $table->json('gallery')->nullable();
-            $table->json('color')->nullable();
+//            $table->json('gallery')->nullable();
+//            $table->json('color')->nullable();
             $table->integer('order')->nullable();
             $table->integer('stock')->nullable();
             $table->integer('discount')->nullable();
