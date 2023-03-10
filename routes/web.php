@@ -44,10 +44,10 @@ Route::post('validate-checkout', [CheckoutController::class, 'checkout'])->name(
 // Admin
 Route::group(['prefix' => 'admin', 'middleware' => ['can:isAdmin']], function(){
 //Route::group(['prefix' => 'admin'], function(){
-    Route::get('manage-product', [ManageProductController::class, 'showManageProduct'])->name('product.show');
-    Route::get('add-product', [ManageProductController::class, 'showAddProduct'])->name('product_add.show');
+    Route::get('manage-product', [ManageProductController::class, 'showManageProduct'])->name('admin.product.show');
+    Route::get('add-product', [ManageProductController::class, 'showAddProduct'])->name('admin.product_add.show');
 
     // Order
-    Route::get('manage-order', [OrderController::class, 'showManageOrder'])->name('order.show');
-    Route::get('order-detail', [OrderController::class, 'showOrderDetail'])->name('order_detail.show');
+    Route::get('manage-order', [OrderController::class, 'showManageOrder'])->name('admin.order.show');
+    Route::get('order-detail', [OrderController::class, 'showOrderDetail'])->name('admin.order_detail.show');
 });
