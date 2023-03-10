@@ -26,14 +26,12 @@ class LoginService
         ]);
 
         $credentials = $request->only('name', 'password');
-        if(Auth::guard('web')->attempt($credentials)) {
-//            if (Gate::allows('isAdmin')) {
-//                return redirect()->intended('/admin/manage-product');
-//            } elseif(Gate::allows('isClient')) {
+        if(Auth::attempt($credentials)) {
+            if (Gate::allows('isAdmin')) {
+                return redirect()->intended('/admin/manage-product');
+            } elseif (Gate::allows('isClient')) {
                 return redirect()->intended('/');
-//            }
-        } elseif (Auth::guard('admin')->attempt($credentials)){
-            return redirect()->intended('/admin/manage-product');
+            }
         }
 
         return redirect(route('login'));
