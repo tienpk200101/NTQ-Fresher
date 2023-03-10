@@ -421,7 +421,7 @@
                                             <img src="{{ asset('assets/images/products/img-1.png') }}" class="img-fluid d-block">
                                         </div>
                                         <div class="product-title">
-                                            <h3 class="">Full Sleeve Sweatshirt for Men (Pink)</h3>
+                                            <a href="{{ route('product-detail') }}"><h3 class="">Full Sleeve Sweatshirt for Men (Pink)</h3></a>
                                         </div>
                                         <div class="product-price">
                                             <h4 class="text-lg-end text-danger">$124.99</h4>
