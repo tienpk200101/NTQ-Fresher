@@ -90,7 +90,7 @@
                                                             <input type="text" class="form-control"
                                                                 id="billinginfo-firstName" name="firstName"
                                                                 placeholder="Enter first name" value="">
-                                                            <span class="text text-danger firstName-err"></span>
+                                                            <span class="text text-danger text-err firstName-err"></span>
                                                         </div>
                                                     </div>
 
@@ -101,7 +101,7 @@
                                                             <input type="text" class="form-control"
                                                                 id="billinginfo-lastName" name="lastName"
                                                                 placeholder="Enter last name" value="">
-                                                            <span class="text text-danger lastName-err"></span>
+                                                            <span class="text text-danger text-err lastName-err"></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -114,7 +114,7 @@
                                                             <input type="email" class="form-control"
                                                                 id="billinginfo-email" name="email"
                                                                 placeholder="Enter email">
-                                                            <span class="text text-danger email-err"></span>
+                                                            <span class="text text-danger text-err email-err"></span>
                                                         </div>
                                                     </div>
 
@@ -125,7 +125,7 @@
                                                             <input type="text" class="form-control"
                                                                 id="billinginfo-phone" name="phone"
                                                                 placeholder="Enter phone no.">
-                                                            <span class="text text-danger phone-err"></span>
+                                                            <span class="text text-danger text-err phone-err"></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -133,7 +133,7 @@
                                                 <div class="mb-3">
                                                     <label for="billinginfo-address" class="form-label">Address</label>
                                                     <textarea class="form-control" id="billinginfo-address" name="address" placeholder="Enter address" rows="3"></textarea>
-                                                    <span class="text text-danger address-err"></span>
+                                                    <span class="text text-danger text-err address-err"></span>
                                                 </div>
 
                                                 <div class="row">
@@ -171,7 +171,7 @@
                                                             <label for="zip" class="form-label">Zip Code</label>
                                                             <input type="text" class="form-control" name="zipCode"
                                                                 id="zip" placeholder="Enter zip code">
-                                                            <span class="text text-danger zipCode-err"></span>
+                                                            <span class="text text-danger text-err zipCode-err"></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -596,61 +596,6 @@
 @endsection
 
 @section('js')
-    <script src="{{ asset('assets/js/pages/ecommerce-product-checkout.init.js') }}"></script>
-    <script src="{{ asset('assets/js/checkout.js') }}">
-        // $.getJSON("./tree.json", function(data) {
-        //     let htmls_state = '';
-            
-        //     $.each(data, function(index, value) {
-        //         htmls_state += `<option value="${value.code}" class="state-code">${value.name}</option>`;
-        //     });
-        //     $('#state').html(htmls_state);
-
-        //     $('#state').change(function(e) {
-        //         let htmls_district = '';
-        //         let districts = data[$(this).val()];
-
-        //         $.each(districts['quan-huyen'], function(index, value){
-        //             htmls_district += `<option value="${value.code}" class="district-code">${value.name}</option>`;
-        //         });
-
-        //         $('#district').html(htmls_district);
-        //     });
-        // });
-    </script>
-
-    {{-- <script>
-        $(document).ready(function() {
-            $('.btn-submit').click(function() {
-                let data = {
-                    firstName: $('#billinginfo-firstName').val(),
-                    lastName: $('#billinginfo-lastName').val(),
-                    email: $('#billinginfo-email').val(),
-                    phone: $('#billinginfo-phone').val(),
-                    address: $('#billinginfo-address').val(),
-                    country: $('#country').val(),
-                    state: $('#state').val(),
-                    zipCode: $('#zip').val(),
-                    _token: $('meta[name="csrf-token"]').attr('content')
-                };
-
-                $.ajax({
-                    type: "POST",
-                    url: "/validate-checkout",
-                    data: data,
-                    success: function(response) {
-                        console.log(response);
-                    },
-                    error: function(response) {
-                        let errors = response.responseJSON;
-
-                        $.each(errors['errors'], function(index, value) {
-                            console.log(value[0], index);
-                            $(`.${index}-err`).text(value[0])
-                        });
-                    }
-                });
-            })
-        });
-    </script> --}}
+    {{-- <script src="{{ asset('assets/js/pages/ecommerce-product-checkout.init.js') }}"></script> --}}
+    <script src="{{ asset('assets/js/checkout.js') }}"></script>
 @endsection
