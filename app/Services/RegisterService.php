@@ -6,22 +6,23 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class RegisterService 
+class RegisterService
 {
     public function __construct()
     {
-        
+
     }
-    
+
     public function show() {
         return view('auth.register');
     }
 
-    public function postRegister(Request $request) {
+    public function handleRegister(Request $request) {
         $request->validate([
             'email' => 'required|email|unique:users|max:255',
             'name' => 'required|max:255|unique:users',
-            'password' => 'required|max:255'
+            'password' => 'required|max:255',
+            'confirm-password' => 'required|same:password'
         ]);
 
         $email = $request->get('email');
@@ -35,6 +36,7 @@ class RegisterService
         ]);
 
         if($user) {
+            auth()->login($user);
             return redirect(route('home'));
         } else {
             return redirect(route('register'));

@@ -13,18 +13,18 @@
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
 
     <!-- Layout config Js -->
-    <script src="assets/js/layout.js"></script>
+    <script src="{{ asset('assets/js/layout.js') }}"></script>
     <!-- Bootstrap Css -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
-    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
-    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- custom Css-->
-    <link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -145,6 +145,25 @@
                                                     </div>
                                                 </div>
 
+                                                <div class="mb-3">
+                                                    <label class="form-label" for="password-input">Confirm Password</label>
+                                                    <div class="position-relative auth-pass-inputgroup">
+                                                        <input type="password"
+                                                               class="form-control pe-5 password-input @error('confirm-password') is-invalid @enderror"
+                                                               onpaste="return false" name="confirm-password"
+                                                               placeholder="Enter confirm password" id="password-input"
+                                                               aria-describedby="passwordInput"
+                                                               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                                                        <button
+                                                            class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon"
+                                                            type="button" id="password-addon"><i
+                                                                class="ri-eye-fill align-middle"></i></button>
+                                                        <div class="invalid-feedback">
+                                                            Please enter confirm password
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                                 <div class="mb-4">
                                                     <p class="mb-0 fs-12 text-muted fst-italic">By registering you
                                                         agree to the Velzon <a href="#"
@@ -235,17 +254,17 @@
     <!-- end auth-page-wrapper -->
 
     <!-- JAVASCRIPT -->
-    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/libs/simplebar/simplebar.min.js"></script>
-    <script src="assets/libs/node-waves/waves.min.js"></script>
-    <script src="assets/libs/feather-icons/feather.min.js"></script>
-    <script src="assets/js/pages/plugins/lord-icon-2.1.0.js"></script>
-    <script src="assets/js/plugins.js"></script>
+    <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/feather-icons/feather.min.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins.js') }}"></script>
 
     <!-- validation init -->
-    <script src="assets/js/pages/form-validation.init.js"></script>
+    <script src="{{ asset('assets/js/pages/form-validation.init.js') }}"></script>
     <!-- password create init -->
-    <script src="assets/js/pages/passowrd-create.init.js"></script>
+    <script src="{{ asset('assets/js/pages/passowrd-create.init.js') }}"></script>
 </body>
 
 
