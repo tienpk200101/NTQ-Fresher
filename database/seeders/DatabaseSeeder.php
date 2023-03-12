@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Constants\UserConst;
+use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -20,6 +21,10 @@ class DatabaseSeeder extends Seeder
     {
         $user = UserConst::DEMO_ACCOUNT;
         $user['password'] = Hash::make($user['password']);
-        User::insert($user);
+        Admin::insert([
+            'name' => 'tienpkadmin',
+            'email' => 'tienpk@gmail.com',
+            'password' => Hash::make('12345678')
+        ]);
     }
 }

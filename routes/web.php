@@ -23,7 +23,7 @@ use App\Http\Controllers\CheckoutController;
 */
 
 // Auth
-Route::get('login', [LoginController::class, 'showLogin'])->name('login');
+Route::get('login', [LoginController::class, 'showLogin'])->name('login')->middleware('checkLogin');
 Route::post('login', [LoginController::class, 'handleLogin'])->name('login.post');
 Route::get('sign-out', [LoginController::class, 'logout'])->name('logout');
 Route::get('register', [RegisterController::class, 'showRegister'])->name('register');
@@ -40,16 +40,14 @@ Route::get('checkout', [CheckoutController::class, 'showCheckout'])->name('check
 Route::get('cart', [CartController::class, 'showCart'])->name('cart.show');
 Route::post('choose-var', [ProductDetailController::class, 'chooseProduct'])->name('choose.product');
 Route::post('validate-checkout', [CheckoutController::class, 'checkout'])->name('checkout.validate.post');
-Route::get('tree-json', function (){
-    return '';
-});
 
 // Admin
-Route::group(['prefix' => 'admin'], function(){
-    Route::get('manage-product', [ManageProductController::class, 'showManageProduct'])->name('product.show');
-    Route::get('add-product', [ManageProductController::class, 'showAddProduct'])->name('product_add.show');
-    
+Route::group(['prefix' => 'admin', 'middleware' => ['can:isAdmin']], function(){
+//Route::group(['prefix' => 'admin'], function(){
+    Route::get('manage-product', [ManageProductController::class, 'showManageProduct'])->name('admin.product.show');
+    Route::get('add-product', [ManageProductController::class, 'showAddProduct'])->name('admin.product_add.show');
+
     // Order
-    Route::get('manage-order', [OrderController::class, 'showManageOrder'])->name('order.show');
-    Route::get('order-detail', [OrderController::class, 'showOrderDetail'])->name('order_detail.show');
+    Route::get('manage-order', [OrderController::class, 'showManageOrder'])->name('admin.order.show');
+    Route::get('order-detail', [OrderController::class, 'showOrderDetail'])->name('admin.order_detail.show');
 });

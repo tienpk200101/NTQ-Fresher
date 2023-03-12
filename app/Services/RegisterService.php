@@ -32,7 +32,7 @@ class RegisterService
         $user = User::create([
             'name' => $user_name,
             'email' => $email,
-            'password' => Hash::make($password)
+            'password' => Hash::make($password),
         ]);
 
         if($user) {
