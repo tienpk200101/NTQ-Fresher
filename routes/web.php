@@ -23,7 +23,7 @@ use App\Http\Controllers\CheckoutController;
 */
 
 // Auth
-Route::get('login', [LoginController::class, 'showLogin'])->name('login')->middleware('checkLogin');
+Route::get('login', [LoginController::class, 'showLogin'])->name('login');
 Route::post('login', [LoginController::class, 'handleLogin'])->name('login.post');
 Route::get('sign-out', [LoginController::class, 'logout'])->name('logout');
 Route::get('register', [RegisterController::class, 'showRegister'])->name('register');
@@ -43,9 +43,13 @@ Route::post('validate-checkout', [CheckoutController::class, 'checkout'])->name(
 
 // Admin
 Route::group(['prefix' => 'admin', 'middleware' => ['can:isAdmin']], function(){
-//Route::group(['prefix' => 'admin'], function(){
     Route::get('manage-product', [ManageProductController::class, 'showManageProduct'])->name('admin.product.show');
     Route::get('add-product', [ManageProductController::class, 'showAddProduct'])->name('admin.product_add.show');
+    Route::post('add-product', [ManageProductController::class, 'handleAddProduct'])->name('admin.product_add.post');
+    Route::get('edit-product/{id}', [ManageProductController::class, 'showEditProduct'])->name('admin.product_edit.show');
+    Route::post('edit-product/{id}', [ManageProductController::class, 'handleEditProduct'])->name('admin.product_edit.post');
+    Route::post('delete-product/{id}', [ManageProductController::class, 'deleteProduct'])->name('admin.product_delete.post');
+    Route::get('view-product/{id}', [ManageProductController::class, 'showViewProduct'])->name('admin.product_view.show');
 
     // Order
     Route::get('manage-order', [OrderController::class, 'showManageOrder'])->name('admin.order.show');
