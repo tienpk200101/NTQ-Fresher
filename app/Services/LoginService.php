@@ -16,22 +16,23 @@ class LoginService
     }
 
     public function show() {
-        return view('auth.login');
+        return view('clients.auth.login');
     }
 
     public function handleLogin(Request $request) {
         $request->validate([
-            'name' => 'required|max:255',
+            'username' => 'required|max:255',
             'password' => 'required|max:255'
         ]);
 
-        $credentials = $request->only('name', 'password');
-        if(Auth::attempt($credentials)) {
-            if (Gate::allows('isAdmin')) {
-                return redirect()->intended('/admin/manage-product');
-            } elseif (Gate::allows('isClient')) {
-                return redirect()->intended('/');
-            }
+        $credentials = $request->only('username', 'password');
+
+        if(Auth::guard('customer')->attempt($credentials)) {
+//            if (Gate::allows('isAdmin')) {
+//                return redirect()->intended('/admin/manage-product');
+//            } elseif (Gate::allows('isClient')) {
+                return redirect()->intended();
+//            }
         }
 
         return redirect(route('login'));

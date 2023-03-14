@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('admins.layouts.layout')
 
 @push('css')
     <!-- Plugins css -->

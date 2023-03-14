@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('admins.layouts.layout')
 
 @section('css')
      <!-- Sweet Alert css-->
@@ -354,10 +354,10 @@
 
       <!--list pagination js-->
       <script src="{{ asset('assets/libs/list.pagination.js/list.pagination.min.js') }}"></script>
-  
+
       <!-- ecommerce-order init js -->
       <script src="{{ asset('assets/js/pages/ecommerce-order.init.js') }}"></script>
-  
+
       <!-- Sweet Alerts js -->
       <script src="{{ asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
 @endsection

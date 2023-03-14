@@ -1,12 +1,12 @@
-@extends('layouts.layout')
+@extends('clients.layouts.layout')
 
-@section('css')
+@push('css')
 {{--    /*<!-- nouisliderribute css -->*/--}}
     <link rel="stylesheet" href="{{ asset('assets/libs/nouislider/nouislider.min.css') }}">
 
 {{--    <!-- gridjs css -->--}}
     <link rel="stylesheet" href="{{ asset('assets/libs/gridjs/theme/mermaid.min.css') }}" />
-@endsection
+@endpush
 
 @section('content')
     <div class="main-content">

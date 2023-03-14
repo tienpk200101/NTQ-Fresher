@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\User;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -14,23 +14,22 @@ class RegisterService
     }
 
     public function show() {
-        return view('auth.register');
+        return view('clients.auth.register');
     }
 
     public function handleRegister(Request $request) {
         $request->validate([
-            'email' => 'required|email|unique:users|max:255',
-            'name' => 'required|max:255|unique:users',
+            'email' => 'required|email|max:255',
+            'username' => 'required|max:255',
             'password' => 'required|max:255',
             'confirm-password' => 'required|same:password'
         ]);
 
         $email = $request->get('email');
-        $user_name = $request->get('name');
+        $user_name = $request->get('username');
         $password = $request->get('password');
-
-        $user = User::create([
-            'name' => $user_name,
+        $user = Customer::create([
+            'username' => $user_name,
             'email' => $email,
             'password' => Hash::make($password),
         ]);

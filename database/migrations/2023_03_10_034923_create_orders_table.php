@@ -15,10 +15,16 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->char('customer_name', 100)->nullable();
-            $table->string('product', 255)->nullable();
-            $table->integer('total')->nullable();
-            $table->unsignedBigInteger('payment_id')->nullable();
+            $table->unsignedBigInteger('customer_id')->nullable();
+            $table->text('description')->nullable();
+            $table->integer('tracking_id')->nullable();
+            $table->integer('carrier')->nullable();
+            $table->string('voucher', 100)->nullable();
+            $table->float('sub_total', 8, 2)->nullable();
+            $table->float('total', 8, 2)->nullable();
+            $table->unsignedBigInteger('payment_method')->nullable();
+            $table->float('tax', 8, 2)->nullable();
+            $table->dateTime('delivery_date')->nullable();
             $table->enum('status', [0,1,2,3,4,5])->nullable(); // 0-pending, 1-inprogress, 2-delivered, 3-pickups, 4-returns, 5-cancelled
             $table->timestamps();
         });

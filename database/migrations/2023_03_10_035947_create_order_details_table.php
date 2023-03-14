@@ -16,13 +16,13 @@ return new class extends Migration
         Schema::create('order_details', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('order_id');
-            $table->json('customer_info')->nullable();
-            $table->json('product_details')->nullable();
-            $table->integer('sub_total')->nullable();
+            $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('product_id');
+            $table->float('sub_total')->nullable();
+            $table->float('total')->nullable();
             $table->integer('discount')->nullable();
             $table->integer('shipping_charge')->nullable();
             $table->integer('estimate_tax')->nullable();
-            $table->integer('total')->nullable();
             $table->integer('payment_detail')->nullable();
             $table->timestamps();
         });

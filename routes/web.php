@@ -42,7 +42,11 @@ Route::post('choose-var', [ProductDetailController::class, 'chooseProduct'])->na
 Route::post('validate-checkout', [CheckoutController::class, 'checkout'])->name('checkout.validate.post');
 
 // Admin
-Route::group(['prefix' => 'admin', 'middleware' => ['can:isAdmin']], function(){
+Route::get('/admin/login', [\App\Http\Controllers\Admin\Auth\LoginController::class, 'showLoginForm'])->name('admin.login.show');
+Route::post('/admin/login', [\App\Http\Controllers\Admin\Auth\LoginController::class, 'login'])->name('admin.login.handle');
+Route::get('/admin/logout', [\App\Http\Controllers\Admin\Auth\LoginController::class, 'logout'])->name('admin.logout.handle');
+//Route::group(['prefix' => 'admin', 'middleware' => ['can:isAdmin']], function(){
+Route::group(['prefix' => 'admin'], function(){
     Route::get('manage-product', [ManageProductController::class, 'showManageProduct'])->name('admin.product.show');
     Route::get('add-product', [ManageProductController::class, 'showAddProduct'])->name('admin.product_add.show');
     Route::post('add-product', [ManageProductController::class, 'handleAddProduct'])->name('admin.product_add.post');

@@ -1,10 +1,10 @@
-@extends('layouts.layout')
+@extends('clients.layouts.layout')
 
-@section('css')
+@push('css')
     <!--Swiper slider css-->
     <link href="{{ asset('assets/libs/swiper/swiper-bundle.min.css') }}" rel="stylesheet" type="text/css" />
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> --}}
-@endsection
+@endpush
 
 @section('content')
     <div class="main-content">
@@ -86,7 +86,7 @@
                                                                 class="img-fluid d-block" />
                                                         </div>
                                                     </div>
-                                                </div> 
+                                                </div>
                                             </div> --}}
                                             <!-- end swiper nav slide -->
                                         </div>

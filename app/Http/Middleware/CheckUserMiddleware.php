@@ -17,14 +17,14 @@ class CheckUserMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->check()) {
-            if(auth()->user()->role == UserConst::ADMIN) {
+        if(auth()->guard('web')->check()) {
+//            if(auth()->user()->role == UserConst::ADMIN) {
                 return redirect(route('admin.product.show'));
-            } elseif(auth()->user()->role == UserConst::CLIENT) {
-                return redirect(route('home'));
-            }
+//            } elseif(auth()->user()->role == UserConst::CLIENT) {
+//                return redirect(route('home'));
+//            }
         }
 
-        return redirect(route('login'));
+        return redirect(route('admin.login.show'));
     }
 }

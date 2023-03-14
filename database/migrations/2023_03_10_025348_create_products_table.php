@@ -16,18 +16,20 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('title', 255);
-            $table->unsignedBigInteger('category_id');
+            $table->string('slug', 100)->nullable();
             $table->text('description')->nullable();
-            $table->string('short_description', 255)->nullable();
-            $table->string('tag', 255)->nullable();
-            $table->integer('price')->nullable();
-            $table->string('image', 255)->nullable();
-//            $table->json('gallery')->nullable();
-//            $table->json('color')->nullable();
-            $table->integer('order')->nullable();
+            $table->string('short_description', 1000)->nullable();
+            $table->json('images')->nullable();
+            $table->integer('regular_price')->nullable();
+            $table->integer('sale_price')->nullable();
+            $table->integer('order')->default(0);
             $table->integer('stock')->nullable();
             $table->integer('discount')->nullable();
-            $table->unsignedBigInteger('manufacture_id')->nullable();
+            $table->string('author', 100)->nullable();
+            //prodcut_type
+            //referProductId
+            $table->string('tax', 100)->nullable();
+            $table->string('ship', 100)->nullable();
             $table->timestamps();
         });
     }

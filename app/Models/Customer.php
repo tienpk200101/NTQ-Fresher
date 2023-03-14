@@ -3,13 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
-
-class Admin extends Authenticatable
+class Customer extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -18,11 +16,7 @@ class Admin extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $fillable = ['name', 'password', 'username', 'email', 'avatar', 'birth_date', 'address', 'gender', 'phone', 'city', 'country', 'zip_code', 'status'];
 
     /**
      * The attributes that should be hidden for serialization.

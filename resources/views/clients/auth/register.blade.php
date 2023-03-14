@@ -3,28 +3,28 @@
     data-sidebar-image="none" data-layout-mode="dark" data-body-image="img-1" data-preloader="disable">
 
 
-<!-- Mirrored from themesbrand.com/velzon/html/galaxy/auth-signin-cover.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Feb 2023 02:12:47 GMT -->
+<!-- Mirrored from themesbrand.com/velzon/html/galaxy/auth-signup-cover.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Feb 2023 02:12:48 GMT -->
 
 <head>
 
     <meta charset="utf-8" />
-    <title>Sign In | Velzon - Admin & Dashboard Template</title>
+    <title>Sign Up | Velzon - Admin & Dashboard Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
 
     <!-- Layout config Js -->
-    <script src="assets/js/layout.js"></script>
+    <script src="{{ asset('assets/js/layout.js') }}"></script>
     <!-- Bootstrap Css -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
-    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
-    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- custom Css-->
-    <link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -38,8 +38,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="card overflow-hidden card-bg-fill border-0 card-border-effect-none">
-                            <div class="row g-0">
+                        <div class="card overflow-hidden m-0 card-bg-fill border-0 card-border-effect-none">
+                            <div class="row justify-content-center g-0">
                                 <div class="col-lg-6">
                                     <div class="p-lg-5 p-4 auth-one-bg h-100">
                                         <div class="bg-overlay"></div>
@@ -48,6 +48,7 @@
                                                 <a href="{{ route('home') }}" class="d-block">
                                                     <img src="{{ asset('assets/images/logo-light.png') }}"
                                                         alt="" height="24">
+
                                                 </a>
                                             </div>
                                             <div class="mt-auto">
@@ -85,72 +86,111 @@
                                                     </div>
                                                 </div>
                                                 <!-- end carousel -->
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- end col -->
 
                                 <div class="col-lg-6">
                                     <div class="p-lg-5 p-4">
                                         <div>
-                                            <h5 class="text-primary">Welcome Back !</h5>
-                                            <p class="text-muted">Sign in to continue to Velzon.</p>
+                                            <h5 class="text-primary">Register Account</h5>
+                                            <p class="text-muted">Get your Free Velzon account now.</p>
                                         </div>
-                                        @if (Session::has('message'))
-                                            <div class="alert alert-success" role="alert">
-                                                {{ Session::get('message') }}
-                                            </div>
-                                        @endif
+
                                         <div class="mt-4">
-                                            <form action="{{ route('login.post') }}" method="POST">
+                                            <form class="needs-validation" action="{{ route('register.post') }}" method="post">
                                                 @csrf
                                                 <div class="mb-3">
-                                                    <label for="username" class="form-label">Username</label>
+                                                    <label for="email" class="form-label">Email <span
+                                                            class="text-danger">*</span></label>
+                                                    <input type="email"
+                                                        class="form-control @error('email') is-invalid @enderror"
+                                                        id="email" name="email" placeholder="Enter email address"
+                                                        required>
+                                                    <div class="invalid-feedback">
+                                                        Please enter email
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="username" class="form-label">Username <span
+                                                            class="text-danger">*</span></label>
                                                     <input type="text"
-                                                        class="form-control @error('name') is-invalid @enderror"
-                                                        name="name" id="username" placeholder="Enter username">
-                                                    @error('name')
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
+                                                        class="form-control @error('username') is-invalid @enderror"
+                                                        id="username" name="username" placeholder="Enter username"
+                                                        required>
+                                                    <div class="invalid-feedback">
+                                                        Please enter username
+                                                    </div>
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <div class="float-end">
-                                                        <a href="{{ route('forgotpass') }}" class="text-muted">Forgot
-                                                            password?</a>
-                                                    </div>
                                                     <label class="form-label" for="password-input">Password</label>
-                                                    <div class="position-relative auth-pass-inputgroup mb-3">
+                                                    <div class="position-relative auth-pass-inputgroup">
                                                         <input type="password"
                                                             class="form-control pe-5 password-input @error('password') is-invalid @enderror"
-                                                            name="password" placeholder="Enter password"
-                                                            id="password-input">
+                                                            onpaste="return false" name="password"
+                                                            placeholder="Enter password" id="password-input"
+                                                            aria-describedby="passwordInput"
+                                                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
                                                         <button
                                                             class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon"
                                                             type="button" id="password-addon"><i
                                                                 class="ri-eye-fill align-middle"></i></button>
+                                                        <div class="invalid-feedback">
+                                                            Please enter password
+                                                        </div>
                                                     </div>
-                                                    @error('password')
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
                                                 </div>
 
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="auth-remember-check">
-                                                    <label class="form-check-label" for="auth-remember-check">Remember
-                                                        me</label>
+                                                <div class="mb-3">
+                                                    <label class="form-label" for="password-input">Confirm Password</label>
+                                                    <div class="position-relative auth-pass-inputgroup">
+                                                        <input type="password"
+                                                               class="form-control pe-5 password-input @error('confirm-password') is-invalid @enderror"
+                                                               onpaste="return false" name="confirm-password"
+                                                               placeholder="Enter confirm password" id="password-input"
+                                                               aria-describedby="passwordInput"
+                                                               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                                                        <button
+                                                            class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon"
+                                                            type="button" id="password-addon"><i
+                                                                class="ri-eye-fill align-middle"></i></button>
+                                                        <div class="invalid-feedback">
+                                                            Please enter confirm password
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-4">
+                                                    <p class="mb-0 fs-12 text-muted fst-italic">By registering you
+                                                        agree to the Velzon <a href="#"
+                                                            class="text-primary text-decoration-underline fst-normal fw-medium">Terms
+                                                            of Use</a></p>
+                                                </div>
+
+                                                <div id="password-contain" class="p-3 bg-light mb-2 rounded">
+                                                    <h5 class="fs-13">Password must contain:</h5>
+                                                    <p id="pass-length" class="invalid fs-12 mb-2">Minimum <b>8
+                                                            characters</b></p>
+                                                    <p id="pass-lower" class="invalid fs-12 mb-2">At <b>lowercase</b>
+                                                        letter (a-z)</p>
+                                                    <p id="pass-upper" class="invalid fs-12 mb-2">At least
+                                                        <b>uppercase</b> letter (A-Z)</p>
+                                                    <p id="pass-number" class="invalid fs-12 mb-0">A least
+                                                        <b>number</b> (0-9)</p>
                                                 </div>
 
                                                 <div class="mt-4">
                                                     <button class="btn btn-primary w-100" type="submit">Sign
-                                                        In</button>
+                                                        Up</button>
                                                 </div>
 
                                                 <div class="mt-4 text-center">
                                                     <div class="signin-other-title">
-                                                        <h5 class="fs-13 mb-4 title">Sign In with</h5>
+                                                        <h5 class="fs-13 mb-4 title text-muted">Create account with
+                                                        </h5>
                                                     </div>
 
                                                     <div>
@@ -168,21 +208,17 @@
                                                                 class="ri-twitter-fill fs-16"></i></button>
                                                     </div>
                                                 </div>
-
                                             </form>
                                         </div>
 
                                         <div class="mt-5 text-center">
-                                            <p class="mb-0">Don't have an account ? <a
-                                                    href="{{ route('register') }}"
+                                            <p class="mb-0">Already have an account ? <a href="{{ route('login') }}"
                                                     class="fw-semibold text-primary text-decoration-underline">
-                                                    Signup</a> </p>
+                                                    Signin</a> </p>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- end col -->
                             </div>
-                            <!-- end row -->
                         </div>
                         <!-- end card -->
                     </div>
@@ -204,8 +240,8 @@
                             <p class="mb-0">&copy;
                                 <script>
                                     document.write(new Date().getFullYear())
-                                </script> Velzon. Crafted with <i class="mdi mdi-heart text-danger"></i>
-                                by Themesbrand
+                                </script> Velzon. Crafted with <i
+                                    class="mdi mdi-heart text-danger"></i> by Themesbrand
                             </p>
                         </div>
                     </div>
@@ -217,18 +253,20 @@
     <!-- end auth-page-wrapper -->
 
     <!-- JAVASCRIPT -->
-    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/libs/simplebar/simplebar.min.js"></script>
-    <script src="assets/libs/node-waves/waves.min.js"></script>
-    <script src="assets/libs/feather-icons/feather.min.js"></script>
-    <script src="assets/js/pages/plugins/lord-icon-2.1.0.js"></script>
-    <script src="assets/js/plugins.js"></script>
+    <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/feather-icons/feather.min.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins.js') }}"></script>
 
-    <!-- password-addon init -->
-    <script src="assets/js/pages/password-addon.init.js"></script>
+    <!-- validation init -->
+    <script src="{{ asset('assets/js/pages/form-validation.init.js') }}"></script>
+    <!-- password create init -->
+    <script src="{{ asset('assets/js/pages/passowrd-create.init.js') }}"></script>
 </body>
 
 
-<!-- Mirrored from themesbrand.com/velzon/html/galaxy/auth-signin-cover.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Feb 2023 02:12:47 GMT -->
+<!-- Mirrored from themesbrand.com/velzon/html/galaxy/auth-signup-cover.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Feb 2023 02:12:48 GMT -->
 
 </html>

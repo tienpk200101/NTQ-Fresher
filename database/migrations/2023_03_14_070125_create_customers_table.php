@@ -13,21 +13,24 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255)->nullable();
             $table->string('username', 255)->unique();
             $table->string('email', 255)->unique();
             $table->string('avatar', 255)->nullable();
+            $table->dateTime('birth_date')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password', 255);
             $table->string('address', 255)->nullable();
-            $table->enum('gender', [0, 1, 2])->nullable()->comment('0 - male , 1 - female, 2 - other'); // 0 - male , 1 - female, 2 - other
+            $table->enum('gender', [0, 1, 2])->nullable()->comment('0 - male , 1 - female, 2 - other'); // 0 - male , 1 - female
             $table->string('phone', 15)->nullable();
-            $table->enum('is_active', [0, 1])->default(1)->comment('0 - unactive, 1 - active');
+            $table->string('city', 50)->nullable();
+            $table->string('country', 50)->nullable();
+            $table->integer('zip_code')->nullable();
+            $table->enum('status', [0, 1])->default(1)->comment('0 - unactive, 1 - active'); // 0 - unactive, 1 - active
             $table->rememberToken();
             $table->timestamps();
-            $table->enum('role', [0, 1, 2])->default(2); //
         });
     }
 
@@ -38,6 +41,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('customers');
     }
 };
