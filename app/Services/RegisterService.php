@@ -28,6 +28,7 @@ class RegisterService
         $email = $request->get('email');
         $user_name = $request->get('username');
         $password = $request->get('password');
+
         $user = Customer::create([
             'username' => $user_name,
             'email' => $email,
@@ -35,7 +36,7 @@ class RegisterService
         ]);
 
         if($user) {
-            auth()->login($user);
+            auth()->guard('customer')->login($user);
             return redirect(route('home'));
         } else {
             return redirect(route('register'));
