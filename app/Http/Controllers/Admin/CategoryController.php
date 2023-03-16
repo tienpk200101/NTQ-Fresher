@@ -36,9 +36,14 @@ class CategoryController extends Controller
     }
 
     public function handleAddCategory(CategoryRequest $request){
-        $this->category_service->handleAddCategory($request);
+        try {
+            $this->category_service->handleAddCategory($request);
+        } catch (\Exception $e) {
+            return back()->with('error', $e->getMessage());
+        }
 
-        return back()->with('success', 'Create category success!');
+        return redirect(route('admin.list_category.show'))
+            ->with('success', 'Create category success!');
     }
 
     public function showEditCategory($id){
@@ -50,5 +55,25 @@ class CategoryController extends Controller
             'category' => $category,
             'categories' => $categories
         ]);
+    }
+
+    public function handleEditCategory($id, CategoryRequest $request) {
+        try {
+            $this->category_service->handleEditCategory($id, $request);
+        } catch (\Exception $e) {
+            return back()->with('error', $e->getMessage());
+        }
+
+        return back()->with('success', 'Create category success!');
+    }
+
+    public function deleteCategory($id, Request $request){
+        try {
+            $this->category_service->deleteCategory($id);
+        }catch (\Exception $e) {
+            return back()->with('error', 'Can\'t delete this row');
+        }
+
+        return back()->with('success', 'Delete Category Success!');
     }
 }

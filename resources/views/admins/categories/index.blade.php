@@ -39,8 +39,9 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
+                            @include('errors.error')
                             <div class="card-header">
-                                <button class="btn btn-primary">+ Add Category</button>
+                                <a href="{{ route('admin.add_category.show') }}" class="btn btn-primary">+ Add Category</a>
                             </div>
                             <div class="card-body">
                                 <table id="example" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%">
@@ -56,46 +57,48 @@
                                         <th data-ordering="false">Parent</th>
                                         <th data-ordering="false">Description</th>
                                         <th data-ordering="false">Thumbnail</th>
-                                        <th>Assigned To</th>
-                                        <th>Created By</th>
                                         <th>Create Date</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <th scope="row">
-                                            <div class="form-check">
-                                                <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option1">
-                                            </div>
-                                        </th>
-                                        <td>01</td>
-                                        <td>VLZ-452</td>
-                                        <td>VLZ1400087402</td>
-                                        <td><a href="#!">Post launch reminder/ post list</a></td>
-                                        <td>Joseph Parker</td>
-                                        <td>Alexis Clarke</td>
-                                        <td>Joseph Parker</td>
-                                        <td>03 Oct, 2021</td>
-                                        <td><span class="badge badge-soft-info">Re-open</span></td>
-                                        <td>
-                                            <div class="dropdown d-inline-block">
-                                                <button class="btn btn-soft-primary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="ri-more-fill align-middle"></i>
-                                                </button>
-                                                <ul class="dropdown-menu dropdown-menu-end" style="">
-                                                    <li><a href="#!" class="dropdown-item"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li>
-                                                    <li><a class="dropdown-item edit-item-btn"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a></li>
-                                                    <li>
-                                                        <a class="dropdown-item remove-item-btn">
-                                                            <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    @foreach($categories as $category)
+                                        <tr>
+                                            <th scope="row">
+                                                <div class="form-check">
+                                                    <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option1">
+                                                </div>
+                                            </th>
+                                            <td>01</td>
+                                            <td>{{ $category->title }}</td>
+                                            <td>{{ $category->category_id ?? ''  }}</td>
+                                            <td>{!! $category->description !!}</td>
+                                            <td><img src="{{ $category->thumbnail }}" width="100px" alt=""></td>
+                                            <td>{{ $category->created_at }}</td>
+                                            <td><span class="badge badge-soft-{{ $category->status == 1 ? 'info' : 'danger' }}">{{ $category->status == 1 ? 'Re-open' : 'Closed' }}</span></td>
+                                            <td>
+                                                <div class="dropdown d-inline-block">
+                                                    <button class="btn btn-soft-primary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="ri-more-fill align-middle"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu dropdown-menu-end" style="">
+                                                        <li><a href="#!" class="dropdown-item"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li>
+                                                        <li><a href="{{ route('admin.edit_category.show', $category->id) }}" class="dropdown-item edit-item-btn"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a></li>
+                                                        <li>
+
+                                                            <form action="{{ route('admin.delete_category.post', $category->id) }}" method="POST">
+                                                                @csrf
+                                                                <button class="dropdown-item remove-item-btn">
+                                                                    <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete
+                                                                </button>
+                                                            </form>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
