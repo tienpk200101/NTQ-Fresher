@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('product_variations', function (Blueprint $table) {
+        Schema::create('attr_variables', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
-            $table->string('color', 50)->nullable();
-            $table->string('size', 50)->nullable();
-            $table->float('regular_price', 8, 2)->nullable();
-            $table->string('sale_price', 8, 2)->nullable();
-            $table->integer('stock')->nullable();
+            $table->unsignedBigInteger('attr_id');
+            $table->unsignedBigInteger('product_variable_id');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_variations');
+        Schema::dropIfExists('attr_variables');
     }
 };

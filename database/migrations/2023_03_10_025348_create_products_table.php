@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('slug', 100)->nullable();
             $table->text('description')->nullable();
             $table->string('short_description', 1000)->nullable();
-            $table->json('images')->nullable();
+            $table->longText('images')->nullable();
             $table->integer('regular_price')->nullable();
             $table->integer('sale_price')->nullable();
             $table->integer('order')->default(0);
@@ -30,6 +30,7 @@ return new class extends Migration
             //referProductId
             $table->string('tax', 100)->nullable();
             $table->string('ship', 100)->nullable();
+            $table->enum('is_attr', [0, 1])->default(0);
             $table->timestamps();
         });
     }
