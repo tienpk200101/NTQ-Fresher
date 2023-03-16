@@ -10,6 +10,7 @@ use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\Admin\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,18 +45,30 @@ Route::post('validate-checkout', [CheckoutController::class, 'checkout'])->name(
 // Admin
 Route::get('/admin/login', [\App\Http\Controllers\Admin\Auth\LoginController::class, 'showLoginForm'])->name('admin.login.show');
 Route::post('/admin/login', [\App\Http\Controllers\Admin\Auth\LoginController::class, 'login'])->name('admin.login.handle');
-Route::get('/admin/logout', [\App\Http\Controllers\Admin\Auth\LoginController::class, 'logout'])->name('admin.logout.handle');
 //Route::group(['prefix' => 'admin', 'middleware' => ['can:isAdmin']], function(){
-Route::group(['prefix' => 'admin'], function(){
-    Route::get('manage-product', [ManageProductController::class, 'showManageProduct'])->name('admin.product.show');
-    Route::get('add-product', [ManageProductController::class, 'showAddProduct'])->name('admin.product_add.show');
-    Route::post('add-product', [ManageProductController::class, 'handleAddProduct'])->name('admin.product_add.post');
-    Route::get('edit-product/{id}', [ManageProductController::class, 'showEditProduct'])->name('admin.product_edit.show');
-    Route::post('edit-product/{id}', [ManageProductController::class, 'handleEditProduct'])->name('admin.product_edit.post');
-    Route::post('delete-product/{id}', [ManageProductController::class, 'deleteProduct'])->name('admin.product_delete.post');
-    Route::get('view-product/{id}', [ManageProductController::class, 'showViewProduct'])->name('admin.product_view.show');
+Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function(){
+    Route::get('/admin/logout', [\App\Http\Controllers\Admin\Auth\LoginController::class, 'logout'])->name('admin.logout.handle');
+
+    Route::controller(ManageProductController::class)->group(function (){
+        Route::get('manage-product', 'showManageProduct')->name('admin.product.show');
+        Route::get('add-product', 'showAddProduct')->name('admin.product_add.show');
+        Route::post('add-product', 'handleAddProduct')->name('admin.product_add.post');
+        Route::get('edit-product/{id}', 'showEditProduct')->name('admin.product_edit.show');
+        Route::post('edit-product/{id}', 'handleEditProduct')->name('admin.product_edit.post');
+        Route::post('delete-product/{id}', 'deleteProduct')->name('admin.product_delete.post');
+        Route::get('view-product/{id}', 'showViewProduct')->name('admin.product_view.show');
+    });
 
     // Order
     Route::get('manage-order', [OrderController::class, 'showManageOrder'])->name('admin.order.show');
     Route::get('order-detail', [OrderController::class, 'showOrderDetail'])->name('admin.order_detail.show');
+
+    // Category group
+    Route::controller(CategoryController::class)->group(function (){
+        Route::get('category', 'listCategory')->name('admin.list_category.show');
+        Route::get('add-category', 'showAddCategory')->name('admin.add_category.show');
+        Route::post('add-category', 'handleAddCategory')->name('admin.add_category.post');
+        Route::get('edit-category/{id}', 'showEditCategory')->name('admin.edit_category.show');
+    });
 });
+

@@ -14,7 +14,7 @@ class Category extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['title', 'parent_id'];
+    protected $fillable = ['title', 'slug', 'category_id', 'description', 'thumbnail'];
 
     /**
      * The attributes that should be hidden for serialization.
