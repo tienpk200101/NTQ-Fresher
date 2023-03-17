@@ -816,83 +816,80 @@
                         </ul>
                     </div>
                 </li>
-                {{--                            <li class="nav-item">--}}
-                {{--                                <a href="#sidebarEcommerce" class="nav-link" data-bs-toggle="collapse"--}}
-                {{--                                   role="button" aria-expanded="false" aria-controls="sidebarEcommerce"--}}
-                {{--                                   data-key="t-ecommerce">--}}
-                {{--                                    Ecommerce--}}
-                {{--                                </a>--}}
-                {{--                                <div class="collapse menu-dropdown" id="sidebarEcommerce">--}}
-                {{--                                    <ul class="nav nav-sm flex-column">--}}
-                {{--                                        <li class="nav-item">--}}
-                {{--                                            <a href="apps-ecommerce-products.html" class="nav-link"--}}
-                {{--                                               data-key="t-products"> Products </a>--}}
-                {{--                                        </li>--}}
-                {{--                                        <li class="nav-item">--}}
-                {{--                                            <a href="apps-ecommerce-product-details.html" class="nav-link"--}}
-                {{--                                               data-key="t-product-Details"> Product Details </a>--}}
-                {{--                                        </li>--}}
-                {{--                                        <li class="nav-item">--}}
-                {{--                                            <a href="apps-ecommerce-add-product.html" class="nav-link"--}}
-                {{--                                               data-key="t-create-product"> Create Product </a>--}}
-                {{--                                        </li>--}}
-                {{--                                        <li class="nav-item">--}}
-                {{--                                            <a href="apps-ecommerce-orders.html" class="nav-link"--}}
-                {{--                                               data-key="t-orders">--}}
-                {{--                                                Orders </a>--}}
-                {{--                                        </li>--}}
-                {{--                                        <li class="nav-item">--}}
-                {{--                                            <a href="apps-ecommerce-order-details.html" class="nav-link"--}}
-                {{--                                               data-key="t-order-details"> Order Details </a>--}}
-                {{--                                        </li>--}}
-                {{--                                        <li class="nav-item">--}}
-                {{--                                            <a href="apps-ecommerce-customers.html" class="nav-link"--}}
-                {{--                                               data-key="t-customers"> Customers </a>--}}
-                {{--                                        </li>--}}
-                {{--                                        <li class="nav-item">--}}
-                {{--                                            <a href="apps-ecommerce-cart.html" class="nav-link"--}}
-                {{--                                               data-key="t-shopping-cart"> Shopping Cart </a>--}}
-                {{--                                        </li>--}}
-                {{--                                        <li class="nav-item">--}}
-                {{--                                            <a href="apps-ecommerce-checkout.html" class="nav-link"--}}
-                {{--                                               data-key="t-checkout"> Checkout </a>--}}
-                {{--                                        </li>--}}
-                {{--                                        <li class="nav-item">--}}
-                {{--                                            <a href="apps-ecommerce-sellers.html" class="nav-link"--}}
-                {{--                                               data-key="t-sellers">--}}
-                {{--                                                Sellers </a>--}}
-                {{--                                        </li>--}}
-                {{--                                        <li class="nav-item">--}}
-                {{--                                            <a href="apps-ecommerce-seller-details.html" class="nav-link"--}}
-                {{--                                               data-key="t-sellers-details"> Seller Details </a>--}}
-                {{--                                        </li>--}}
-                {{--                                    </ul>--}}
-                {{--                                </div>--}}
-                {{--                            </li>--}}
-                {{--                            <li class="nav-item">--}}
-                {{--                                <a href="#sidebarProjects" class="nav-link" data-bs-toggle="collapse"--}}
-                {{--                                   role="button" aria-expanded="false" aria-controls="sidebarProjects"--}}
-                {{--                                   data-key="t-projects">--}}
-                {{--                                    Projects--}}
-                {{--                                </a>--}}
-                {{--                                <div class="collapse menu-dropdown" id="sidebarProjects">--}}
-                {{--                                    <ul class="nav nav-sm flex-column">--}}
-                {{--                                        <li class="nav-item">--}}
-                {{--                                            <a href="apps-projects-list.html" class="nav-link" data-key="t-list">--}}
-                {{--                                                List--}}
-                {{--                                            </a>--}}
-                {{--                                        </li>--}}
-                {{--                                        <li class="nav-item">--}}
-                {{--                                            <a href="apps-projects-overview.html" class="nav-link"--}}
-                {{--                                               data-key="t-overview"> Overview </a>--}}
-                {{--                                        </li>--}}
-                {{--                                        <li class="nav-item">--}}
-                {{--                                            <a href="apps-projects-create.html" class="nav-link"--}}
-                {{--                                               data-key="t-create-project"> Create Project </a>--}}
-                {{--                                        </li>--}}
-                {{--                                    </ul>--}}
-                {{--                                </div>--}}
-                {{--                            </li>--}}
+                <li class="nav-item">
+                    <a href="#sidebarProjects" class="nav-link" data-bs-toggle="collapse"
+                       role="button" aria-expanded="false" aria-controls="sidebarProjects"
+                       data-key="t-projects">
+                        Terms
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarProjects">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('admin.list_term.show') }}" class="nav-link" data-key="t-list">
+                                    List
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.add_term.show') }}" class="nav-link"
+                                   data-key="t-overview"> Add Term </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                {{--                <li class="nav-item">--}}
+{{--                    <a href="#sidebarEcommerce" class="nav-link" data-bs-toggle="collapse"--}}
+{{--                       role="button" aria-expanded="false" aria-controls="sidebarEcommerce"--}}
+{{--                       data-key="t-ecommerce">--}}
+{{--                        Ecommerce--}}
+{{--                    </a>--}}
+{{--                    <div class="collapse menu-dropdown" id="sidebarEcommerce">--}}
+{{--                        <ul class="nav nav-sm flex-column">--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a href="apps-ecommerce-products.html" class="nav-link"--}}
+{{--                                   data-key="t-products"> Products </a>--}}
+{{--                            </li>--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a href="apps-ecommerce-product-details.html" class="nav-link"--}}
+{{--                                   data-key="t-product-Details"> Product Details </a>--}}
+{{--                            </li>--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a href="apps-ecommerce-add-product.html" class="nav-link"--}}
+{{--                                   data-key="t-create-product"> Create Product </a>--}}
+{{--                            </li>--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a href="apps-ecommerce-orders.html" class="nav-link"--}}
+{{--                                   data-key="t-orders">--}}
+{{--                                    Orders </a>--}}
+{{--                            </li>--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a href="apps-ecommerce-order-details.html" class="nav-link"--}}
+{{--                                   data-key="t-order-details"> Order Details </a>--}}
+{{--                            </li>--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a href="apps-ecommerce-customers.html" class="nav-link"--}}
+{{--                                   data-key="t-customers"> Customers </a>--}}
+{{--                            </li>--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a href="apps-ecommerce-cart.html" class="nav-link"--}}
+{{--                                   data-key="t-shopping-cart"> Shopping Cart </a>--}}
+{{--                            </li>--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a href="apps-ecommerce-checkout.html" class="nav-link"--}}
+{{--                                   data-key="t-checkout"> Checkout </a>--}}
+{{--                            </li>--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a href="apps-ecommerce-sellers.html" class="nav-link"--}}
+{{--                                   data-key="t-sellers">--}}
+{{--                                    Sellers </a>--}}
+{{--                            </li>--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a href="apps-ecommerce-seller-details.html" class="nav-link"--}}
+{{--                                   data-key="t-sellers-details"> Seller Details </a>--}}
+{{--                            </li>--}}
+{{--                        </ul>--}}
+{{--                    </div>--}}
+{{--                </li>--}}
                 {{--                            <li class="nav-item">--}}
                 {{--                                <a href="#sidebarTasks" class="nav-link" data-bs-toggle="collapse"--}}
                 {{--                                   role="button" aria-expanded="false" aria-controls="sidebarTasks"--}}
