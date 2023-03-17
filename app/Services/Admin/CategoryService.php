@@ -45,4 +45,32 @@ class CategoryService
     public function findCategory($id) {
         return $this->categoryRepository->findCategoryById($id);
     }
+
+    public function handleEditCategory($id, $request) {
+        $data = $request->all();
+
+        if($request->hasFile('thumbnail') && !empty($request->file('thumbnail'))) {
+            $thumbnail = Cloudinary::upload($request->file('thumbnail')->getRealPath())->getSecurePath();
+            $data['thumbnail'] = $thumbnail;
+        }
+
+        $data['slug'] = Str::slug($data['title']);
+        $data['category_id'] = (int)$data['category_id'];
+        unset($data['_token']);
+
+        try {
+            return $this->categoryRepository->updateCategory($id, $data);
+        } catch(\Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function deleteCategory($id){
+        $category_child = Category::where('parent_id', $id)->get();
+        if(count($category_child)) {
+            return false;
+        }
+
+        return $this->categoryRepository->deleteCategory($id);
+    }
 }

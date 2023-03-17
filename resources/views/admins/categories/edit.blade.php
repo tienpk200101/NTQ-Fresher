@@ -22,20 +22,12 @@
                             </div>
 
                         </div>
-                        @if(Session::has('success'))
-                            <div class="alert alert-success">
-                                {{ Session::get('success') }}
-                            </div>
-                        @elseif(Session::has('error'))
-                            <div class="alert alert-danger">
-                                {{ Session::get('error') }}
-                            </div>
-                        @endif
+                        @include('errors.error')
                     </div>
                 </div>
                 <!-- end page title -->
 
-                <form action="{{ route('admin.add_category.post') }}" method="POST" id="createproduct-form" autocomplete="off" class="needs-validation"
+                <form action="{{ route('admin.edit_category.post', $category->id) }}" method="POST" id="editcategory-form" autocomplete="off" class="needs-validation"
                       novalidate enctype="multipart/form-data">
                     @csrf
                     <div class="row">
@@ -49,7 +41,9 @@
                                         <input type="text" class="form-control @error('title') is-invalid @enderror" id="product-title-input" name="title"
                                                value="{{ $category->title }}" placeholder="Enter product title" required>
                                         <div class="invalid-feedback">Please Enter a category title.</div>
-
+{{--                                        @error('title')--}}
+{{--                                            {{ $error->title }}--}}
+{{--                                        @enderror--}}
                                     </div>
                                     <div>
                                         <label for="ckeditor-classic">Category Description</label>
@@ -149,11 +143,10 @@
                                     <h5 class="card-title mb-0">Parent Category</h5>
                                 </div>
                                 <div class="card-body">
-                                    <select class="form-select" id="choices-category-input" name="category_id" data-choices
-                                            data-choices-search-false>
+                                    <select class="form-select" id="choices-category-input" name="category_id">
                                         <option value=""></option>
                                         @foreach($categories as $category_i)
-                                            <option value="{{ $category_i->id }}" {{ $category_i->id == $category->id ? 'selected' : '' }}>{{ $category_i->title }}</option>
+                                            <option value="{{ $category_i->id }}" {{ $category_i->id == $category->parent_id ? 'selected' : '' }}>{{ $category_i->title }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -166,7 +159,6 @@
                     <!-- end row -->
 
                 </form>
-
             </div>
             <!-- container-fluid -->
         </div>

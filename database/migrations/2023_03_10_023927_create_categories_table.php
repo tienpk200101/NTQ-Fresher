@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id')->nullable();
             $table->text('description')->nullable();
             $table->string('thumbnail', 255)->nullable();
+            $table->enum('status', [0, 1])->default(1)->comment('0 - block, 1 - active');
             $table->timestamps();
         });
     }

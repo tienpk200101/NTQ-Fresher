@@ -69,6 +69,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function(){
         Route::get('add-category', 'showAddCategory')->name('admin.add_category.show');
         Route::post('add-category', 'handleAddCategory')->name('admin.add_category.post');
         Route::get('edit-category/{id}', 'showEditCategory')->name('admin.edit_category.show');
+        Route::post('edit-category/{id}', 'handleEditCategory')->name('admin.edit_category.post');
+        Route::post('delete-category/{id}', 'deleteCategory')->name('admin.delete_category.post');
     });
 });
 
