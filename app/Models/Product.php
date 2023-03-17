@@ -14,7 +14,22 @@ class Product extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['title', 'category_id', 'description', 'short_description', 'price', 'image', 'color', 'order', 'stock', 'discount', 'manufacture_id'];
+    protected $fillable = [
+        'title',
+        'slug',
+        'description',
+        'short_description',
+        'regular_price',
+        'sale_price',
+        'images',
+        'order',
+        'stock',
+        'discount',
+        'author',
+        'tax',
+        'ship',
+        'is_attr',
+    ];
 
     /**
      * The attributes that should be hidden for serialization.

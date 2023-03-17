@@ -47,23 +47,17 @@
                                         <input type="text" class="form-control d-none" id="product-id-input">
                                         <input type="text" class="form-control @error('title') is-invalid @enderror" id="product-title-input" name="title"
                                                value="{{ old('title') }}" placeholder="Enter product title" required>
-                                        <div class="invalid-feedback">Please Enter a product title.</div>
-
+                                        @error('title')
+                                            <div class="text text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div>
                                         <label for="ckeditor-classic">Product Description</label>
-
-                                        {{--                                        <div id="ckeditor-classic">--}}
-                                        {{--                                            <p>Tommy Hilfiger men striped pink sweatshirt. Crafted with cotton. Material composition is 100% organic cotton. This is one of the world’s leading designer lifestyle brands and is internationally recognized for celebrating the essence of classic American cool style, featuring preppy with a twist designs.</p>--}}
-                                        {{--                                            <ul>--}}
-                                        {{--                                                <li>Full Sleeve</li>--}}
-                                        {{--                                                <li>Cotton</li>--}}
-                                        {{--                                                <li>All Sizes available</li>--}}
-                                        {{--                                                <li>4 Different Color</li>--}}
-                                        {{--                                            </ul>--}}
-                                        {{--                                        </div>--}}
                                         <textarea id="ckeditor-classic" name="description"
                                                   class="@error('description') is-invalid @enderror">{{ old('description') }}</textarea>
+                                        @error('description')
+                                            <div class="text text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -98,6 +92,9 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @error('images')
+                                            <div class="text text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div>
                                         <h5 class="fs-14 mb-1">Product Gallery</h5>
@@ -190,18 +187,22 @@
                                                         <label class="form-label" for="stocks-input">Stocks</label>
                                                         <input type="text" class="form-control @error('stock') is-invalid @enderror" id="stocks-input"
                                                                value="{{ old('stock') }}" name="stock" placeholder="Stocks" required>
-                                                        <div class="invalid-feedback">Please Enter a product stocks.</div>
+                                                        @error('stock')
+                                                            <div class="text text-danger">{{ $message }}</div>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 col-sm-6">
                                                     <div class="mb-3">
-                                                        <label class="form-label" for="product-price-input">Price</label>
+                                                        <label class="form-label" for="product-price-input">Regular price</label>
                                                         <div class="input-group has-validation mb-3">
                                                             <span class="input-group-text" id="product-price-addon">$</span>
-                                                            <input type="text" class="form-control @error('price') is-invalid @enderror"
+                                                            <input type="text" class="form-control @error('regular_price') is-invalid @enderror"
                                                                    id="product-price-input" value="{{ old('price') }}" name="price" placeholder="Enter price"
                                                                    aria-label="Price" aria-describedby="product-price-addon" required>
-                                                            <div class="invalid-feedback">Please Enter a product price.</div>
+                                                            @error('regular_price')
+                                                                <div class="text text-danger">{{ $message }}</div>
+                                                            @enderror
                                                         </div>
                                                     </div>
                                                 </div>
@@ -320,16 +321,11 @@
                                 <div class="card-body">
                                     <p class="text-muted mb-2"><a href="#" class="float-end text-decoration-underline">Add
                                             New</a>Select product category</p>
-                                    <select class="form-select" id="choices-category-input" name="choices-category-input" data-choices
-                                            data-choices-search-false>
-                                        <option value="Appliances">Appliances</option>
-                                        <option value="Automotive Accessories">Automotive Accessories</option>
-                                        <option value="Electronics">Electronics</option>
-                                        <option value="Fashion">Fashion</option>
-                                        <option value="Furniture">Furniture</option>
-                                        <option value="Grocery">Grocery</option>
-                                        <option value="Kids">Kids</option>
-                                        <option value="Watches">Watches</option>
+                                    <select class="form-select" id="choices-category-input" name="category_id" data-choices
+                                            data-choices-search-true>
+                                        @foreach($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <!-- end card body -->
@@ -343,7 +339,7 @@
                                     <div class="hstack gap-3 align-items-start">
                                         <div class="flex-grow-1">
                                             <input class="form-control" data-choices data-choices-multiple-remove="true" placeholder="Enter tags" type="text"
-                                                   value="Cotton"/>
+                                                   name="tag" value="Cotton"/>
                                         </div>
                                     </div>
                                 </div>
@@ -357,7 +353,7 @@
                                 </div>
                                 <div class="card-body">
                                     <p class="text-muted mb-2">Add short description for product</p>
-                                    <textarea class="form-control" placeholder="Must enter minimum of a 100 characters" rows="3"></textarea>
+                                    <textarea class="form-control" name="short_description" placeholder="Must enter minimum of a 100 characters" rows="3"></textarea>
                                 </div>
                                 <!-- end card body -->
                             </div>

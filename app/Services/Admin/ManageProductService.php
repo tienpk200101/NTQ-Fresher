@@ -2,7 +2,9 @@
 
 namespace App\Services\Admin;
 
+use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductCategoryModel;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class ManageProductService
@@ -16,7 +18,8 @@ class ManageProductService
 
     public function showAddProduct() {
         return view('admins.products.add', [
-            'title_head' => 'Add Product'
+            'title_head' => 'Add Product',
+            'categories' => Category::all()
         ]);
     }
 
@@ -25,32 +28,33 @@ class ManageProductService
      * Handle add product
      */
     public function handleAddProduct($request) {
-//        $request->validate([
-//            'title' => 'required|max:255',
-//            'description' => 'required',
-//            'price' => 'required|numeric',
-//            'stock' => 'required|numeric',
-//            'discount' => 'required|numeric',
-//            'order' => 'required|numeric',
-//            'image' => 'required|image'
-//        ]);
-        if($request->hasFile('image') && !empty($request->file('image'))) {
-            $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
-        }
+        $discount = $request->discount ?? 0;
+        $sale_price = ($request->price * (100 - $discount)) / 100;
 
-        $product = Product::create([
+        $data_post = [
             'title' => $request->title,
             'description' => $request->description,
-            'category_id' => 1,
-            'price' => $request->price,
+            'short_description' => $request->get('short_description', ''),
+            'regular_price' => $request->price,
+            'sale_price' => $sale_price,
             'stock' => $request->stock,
             'discount' => $request->discount,
             'order' => $request->order,
-            'image' => $uploadedFileUrl
-        ]);
+        ];
 
+        if($request->hasFile('images') && !empty($request->file('images'))) {
+            $uploadedFileUrl = Cloudinary::upload($request->file('images')->getRealPath())->getSecurePath();
+            $data_post['images'] = $uploadedFileUrl;
+        }
+
+        $product = Product::create($data_post);
         if($product) {
-            return back()->with('success', 'Create product success');
+            ProductCategoryModel::create([
+                'category_id' => $request->category_id,
+                'product_id' => $product->id
+            ]);
+
+            return redirect(route('admin.product.show'))->with('success', 'Create product success');
         }
 
         return back()->with('error', 'Create product failed');
