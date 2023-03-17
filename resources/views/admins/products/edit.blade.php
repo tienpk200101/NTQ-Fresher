@@ -50,16 +50,6 @@
                                     </div>
                                     <div>
                                         <label for="ckeditor-classic">Product Description</label>
-
-{{--                                        <div id="ckeditor-classic">--}}
-{{--                                            <p>Tommy Hilfiger men striped pink sweatshirt. Crafted with cotton. Material composition is 100% organic cotton. This is one of the world’s leading designer lifestyle brands and is internationally recognized for celebrating the essence of classic American cool style, featuring preppy with a twist designs.</p>--}}
-{{--                                            <ul>--}}
-{{--                                                <li>Full Sleeve</li>--}}
-{{--                                                <li>Cotton</li>--}}
-{{--                                                <li>All Sizes available</li>--}}
-{{--                                                <li>4 Different Color</li>--}}
-{{--                                            </ul>--}}
-{{--                                        </div>--}}
                                         <textarea id="ckeditor-classic" name="description" class="@error('description') is-invalid @enderror">{!! $product->description !!}</textarea>
                                     </div>
                                 </div>
@@ -84,11 +74,11 @@
                                                             </div>
                                                         </div>
                                                     </label>
-                                                    <input type="file" class="form-control d-none @error('image') is-invalid @enderror" value="{{ $product->image }}" id="product-image-input" name="image" accept="image/png, image/gif, image/jpeg">
+                                                    <input type="file" class="form-control d-none @error('images') is-invalid @enderror" value="{{ $product->images }}" id="product-image-input" name="images" accept="image/png, image/gif, image/jpeg">
                                                 </div>
                                                 <div class="avatar-lg">
                                                     <div class="avatar-title bg-light rounded">
-                                                        <img src="{{ $product->image }}" id="product-img" class="avatar-md h-auto" />
+                                                        <img src="{{ $product->images }}" id="product-img" class="avatar-md h-auto" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -189,7 +179,7 @@
                                                         <label class="form-label" for="product-price-input">Price</label>
                                                         <div class="input-group has-validation mb-3">
                                                             <span class="input-group-text" id="product-price-addon">$</span>
-                                                            <input type="text" class="form-control @error('price') is-invalid @enderror" id="product-price-input" value="{{ $product->price }}" name="price" placeholder="Enter price" aria-label="Price" aria-describedby="product-price-addon" required>
+                                                            <input type="text" class="form-control @error('regular_price') is-invalid @enderror" id="product-price-input" value="{{ $product->regular_price }}" name="regular_price" placeholder="Enter price" aria-label="Price" aria-describedby="product-price-addon" required>
                                                             <div class="invalid-feedback">Please Enter a product price.</div>
                                                         </div>
 
@@ -304,15 +294,10 @@
                                 <div class="card-body">
                                     <p class="text-muted mb-2"> <a href="#" class="float-end text-decoration-underline">Add
                                             New</a>Select product category</p>
-                                    <select class="form-select" id="choices-category-input" name="choices-category-input" data-choices data-choices-search-false>
-                                        <option value="Appliances">Appliances</option>
-                                        <option value="Automotive Accessories">Automotive Accessories</option>
-                                        <option value="Electronics">Electronics</option>
-                                        <option value="Fashion">Fashion</option>
-                                        <option value="Furniture">Furniture</option>
-                                        <option value="Grocery">Grocery</option>
-                                        <option value="Kids">Kids</option>
-                                        <option value="Watches">Watches</option>
+                                    <select class="form-select" id="choices-category-input" name="category_id" data-choices data-choices-search-false>
+                                         @foreach($categories as $category)
+                                            <option value="{{ $category->id }}" {{ $category->id == $category_id ? 'selected' : '' }}>{{ $category->title }}</option>
+                                         @endforeach
                                     </select>
                                 </div>
                                 <!-- end card body -->

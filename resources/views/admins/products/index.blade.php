@@ -155,9 +155,9 @@
                                         </div>
                                     </div>
                                     <div class="formCost d-flex gap-2 align-items-center mt-3">
-                                        <input class="form-control form-control-sm" type="text" id="minCost" value="0"> <span
-                                            class="fw-semibold text-muted">to</span> <input class="form-control form-control-sm" type="text" id="maxCost"
-                                                                                            value="1000">
+                                        <input class="form-control form-control-sm" type="text" id="minCost" value="0">
+                                        <span class="fw-semibold text-muted">to</span>
+                                        <input class="form-control form-control-sm" type="text" id="maxCost" value="1000">
                                     </div>
                                 </div>
 
@@ -333,6 +333,7 @@
                     <div class="col-xl-9 col-lg-8">
                         <div>
                             <div class="card">
+                                @include('errors.error')
                                 <div class="card-header border-0">
                                     <div class="row g-4">
                                         <div class="col-sm-auto">
@@ -413,7 +414,12 @@
                                                                 class="gridjs-sort gridjs-sort-neutral"></button>
                                                     </th>
                                                     <th data-column-id="price" class="gridjs-th gridjs-th-sort text-muted" tabindex="0" style="width: 101px;">
-                                                        <div class="gridjs-th-content">Price</div>
+                                                        <div class="gridjs-th-content">Regular Price</div>
+                                                        <button tabindex="-1" aria-label="Sort column ascending" title="Sort column ascending"
+                                                                class="gridjs-sort gridjs-sort-neutral"></button>
+                                                    </th>
+                                                    <th data-column-id="price" class="gridjs-th gridjs-th-sort text-muted" tabindex="0" style="width: 101px;">
+                                                        <div class="gridjs-th-content">Sale Price</div>
                                                         <button tabindex="-1" aria-label="Sort column ascending" title="Sort column ascending"
                                                                 class="gridjs-sort gridjs-sort-neutral"></button>
                                                     </th>
@@ -454,7 +460,7 @@
                                                             <div class="d-flex align-items-center">
                                                                 <div class="flex-shrink-0 me-3">
                                                                     <div class="avatar-sm bg-light rounded p-1">
-                                                                        <img src="{{ empty($product->image) ? '' : $product->image }}" alt=""
+                                                                        <img src="{{ empty($product->images) ? '' : $product->images }}" alt=""
                                                                              class="img-fluid d-block"></div></div><div
                                                                     class="flex-grow-1">
                                                                     <h5 class="fs-14 mb-1"><a href="apps-ecommerce-product-details.html" class="text-dark">{{ $product->title }}</a></h5>
@@ -464,7 +470,8 @@
                                                         </span>
                                                         </td>
                                                         <td data-column-id="stock" class="gridjs-td">{{ $product->stock }}</td>
-                                                        <td data-column-id="price" class="gridjs-td"><span>${{ $product->price }}</span></td>
+                                                        <td data-column-id="price" class="gridjs-td"><span>${{ $product->regular_price }}</span></td>
+                                                        <td data-column-id="price" class="gridjs-td"><span>${{ $product->sale_price }}</span></td>
                                                         <td data-column-id="orders" class="gridjs-td">{{ $product->order }}</td>
                                                         <td data-column-id="rating" class="gridjs-td">
                                                             <span>

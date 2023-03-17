@@ -9,6 +9,9 @@ use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class ManageProductService
 {
+    /**
+     * @return \Illuminate\Contracts\View\View
+     */
     public function showManageProduct() {
         return view('admins.products.index', [
             'title_head' => 'Manage Product',
@@ -16,6 +19,9 @@ class ManageProductService
         ]);
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\View
+     */
     public function showAddProduct() {
         return view('admins.products.add', [
             'title_head' => 'Add Product',
@@ -29,22 +35,22 @@ class ManageProductService
      */
     public function handleAddProduct($request) {
         $discount = $request->discount ?? 0;
-        $sale_price = ($request->price * (100 - $discount)) / 100;
+        $sale_price = ($request->regular_price * (100 - $discount)) / 100;
 
         $data_post = [
             'title' => $request->title,
             'description' => $request->description,
             'short_description' => $request->get('short_description', ''),
-            'regular_price' => $request->price,
+            'regular_price' => $request->regular_price,
             'sale_price' => $sale_price,
             'stock' => $request->stock,
             'discount' => $request->discount,
             'order' => $request->order,
         ];
 
-        if($request->hasFile('images') && !empty($request->file('images'))) {
-            $uploadedFileUrl = Cloudinary::upload($request->file('images')->getRealPath())->getSecurePath();
-            $data_post['images'] = $uploadedFileUrl;
+        $imageUpload = $this->uploadImage($request);
+        if($imageUpload) {
+            $data_post['images'] = $imageUpload;
         }
 
         $product = Product::create($data_post);
@@ -60,26 +66,40 @@ class ManageProductService
         return back()->with('error', 'Create product failed');
     }
 
+    /**
+     * @param $request
+     * @param $id
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
+     */
     public function showEditProduct($request, $id) {
         $product = Product::find($id);
+        $category_id = ProductCategoryModel::where('product_id', $id)->first()->category_id;
+
         if(empty($product)) {
             return back()->with('error', 'Product not found');
         }
 
         return view('admins.products.edit', [
             'title_head' => 'Edit Product',
-            'product' => $product
+            'product' => $product,
+            'categories' => Category::all(),
+            'category_id' => $category_id
         ]);
     }
 
+    /**
+     * @param $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function handleEditProduct($request, $id) {
         $request->validate([
             'title' => 'required|max:255',
             'description' => 'required',
-            'price' => 'required|numeric',
+            'regular_price' => 'required|numeric',
             'stock' => 'required|numeric',
-            'discount' => 'required|numeric',
-            'order' => 'required|numeric'
+            'discount' => 'numeric',
+            'order' => 'numeric'
         ]);
 
         $product = Product::find($id);
@@ -87,23 +107,38 @@ class ManageProductService
             return back()->with('error', 'Product not found');
         }
 
-//        $data = $request->only(['title', 'description', 'price', 'stock', 'order', 'discount']);
-        $data = $request->post();
-        if($request->hasFile('image') && !empty($request->file('image'))) {
-            $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
-            $data = array_merge($data, ['image' => $uploadedFileUrl]);
+        $discount = $request->discount ?? 0;
+        $sale_price = ($request->regular_price * (100 - $discount)) / 100;
+
+        $data_post = [
+            'title' => $request->title,
+            'description' => $request->description,
+            'short_description' => $request->get('short_description', ''),
+            'regular_price' => $request->regular_price,
+            'sale_price' => $sale_price,
+            'stock' => $request->stock,
+            'discount' => $request->discount,
+            'order' => $request->order,
+        ];
+
+        $image = $this->uploadImage($request);
+        if($image) {
+            $data_post['images'] = $image;
         }
 
-        unset($data['_token'], $data['formAction'], $data['choices-category-input']);
-
-        $result = Product::where('id', $id)->update($data);
+        $result = Product::where('id', $id)->update($data_post);
         if($result) {
+            ProductCategoryModel::where('product_id', $id)->update(['category_id' => $request->category_id]);
             return back()->with('success', 'Update product success');
         }
 
         return back()->with('error', 'Update product failed');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
+     */
     public function showViewProduct($id) {
         $product = Product::find($id);
         if(empty($product)) {
@@ -116,16 +151,31 @@ class ManageProductService
         ]);
     }
 
+    /**
+     * @param $id // id product.
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function deleteProduct($id){
         $product = Product::find($id);
         if(empty($product)) {
             return back()->with('error', 'Product not found');
         }
 
-        $result = $product->delete();
-        if($result) {
-            return back()->with('success', 'Delete product successfully');
+        try{
+            ProductCategoryModel::where('product_id', $id)->delete();
+            $product->delete();
+        } catch (\Exception $exception) {
+            return back()->with('error', 'Delete product failed');
         }
-        return back()->with('error', 'Delete product failed');
+
+        return back()->with('success', 'Delete product successfully');
+    }
+
+    public function uploadImage($request) {
+        if($request->hasFile('images') && !empty($request->file('images'))) {
+            return Cloudinary::upload($request->file('images')->getRealPath())->getSecurePath();
+        }
+
+        return false;
     }
 }

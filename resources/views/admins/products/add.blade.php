@@ -82,8 +82,8 @@
                                                             </div>
                                                         </div>
                                                     </label>
-                                                    <input type="file" class="form-control d-none @error('image') is-invalid @enderror" value=""
-                                                           id="product-image-input" name="image" accept="image/png, image/gif, image/jpeg">
+                                                    <input type="file" class="form-control d-none @error('images') is-invalid @enderror" value=""
+                                                           id="product-image-input" name="images" accept="image/png, image/gif, image/jpeg">
                                                 </div>
                                                 <div class="avatar-lg">
                                                     <div class="avatar-title bg-light rounded">
@@ -198,7 +198,7 @@
                                                         <div class="input-group has-validation mb-3">
                                                             <span class="input-group-text" id="product-price-addon">$</span>
                                                             <input type="text" class="form-control @error('regular_price') is-invalid @enderror"
-                                                                   id="product-price-input" value="{{ old('price') }}" name="price" placeholder="Enter price"
+                                                                   id="product-price-input" value="{{ old('regular_price') }}" name="regular_price" placeholder="Enter price"
                                                                    aria-label="Price" aria-describedby="product-price-addon" required>
                                                             @error('regular_price')
                                                                 <div class="text text-danger">{{ $message }}</div>
