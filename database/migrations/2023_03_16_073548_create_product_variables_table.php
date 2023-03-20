@@ -19,8 +19,9 @@ return new class extends Migration
             $table->integer('stock')->nullable();
             $table->string('image', 255)->nullable();
             $table->text('description')->nullable();
-            $table->float('regular_price', 8, 2)->nullable();
-            $table->float('sale_price', 8, 2)->nullable();
+            $table->float('discount',8,2)->nullable();
+            $table->float('regular_price', 10, 2)->nullable();
+            $table->float('sale_price', 10, 2)->nullable();
             $table->foreign('product_id')->references('id')->on('products');
             $table->timestamps();
         });

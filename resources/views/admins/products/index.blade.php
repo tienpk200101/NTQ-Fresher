@@ -493,6 +493,11 @@
                                                                 </button>
                                                                 <ul class="dropdown-menu dropdown-menu-end">
                                                                     <li>
+                                                                        <a class="dropdown-item" href="{{ route('admin.product_variable.index', $product->id) }}">
+                                                                            <i class="ri-pencil-fill align-bottom me-2 text-muted"></i> List Variable
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
                                                                         <a class="dropdown-item" href="{{ route('admin.product_view.show', ['id' => $product->id]) }}">
                                                                             <i class="ri-eye-fill align-bottom me-2 text-muted"></i> View
                                                                         </a>

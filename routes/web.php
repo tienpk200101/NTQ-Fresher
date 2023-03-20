@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\ManageProductController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -12,16 +12,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\TermController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Http\Controllers\Admin\ProductVariableController;
 
 // Auth
 Route::get('login', [LoginController::class, 'showLogin'])->name('login');
@@ -49,7 +40,7 @@ Route::post('/admin/login', [\App\Http\Controllers\Admin\Auth\LoginController::c
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], function(){
     Route::get('/admin/logout', [\App\Http\Controllers\Admin\Auth\LoginController::class, 'logout'])->name('logout.handle');
 
-    Route::controller(ManageProductController::class)->group(function (){
+    Route::controller(ProductController::class)->group(function (){
         Route::get('manage-product', 'showManageProduct')->name('product.show');
         Route::get('add-product', 'showAddProduct')->name('product_add.show');
         Route::post('add-product', 'handleAddProduct')->name('product_add.post');
@@ -80,6 +71,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         Route::get('/edit/{id}', 'showEditTerm')->name('edit_term.show');
         Route::post('/edit/{id}', 'handleEditTerm')->name('edit_term.post');
         Route::post('/delete/{id}', 'deleteTerm')->name('delete_term.post');
+    });
+
+    Route::group(['controller' => ProductVariableController::class, 'prefix' => 'product-variable'], function (){
+        Route::get('/{id}', 'listProductVariable')->name('product_variable.index');
+        Route::get('/add/{id}', 'showAddProductVariable')->name('product_variable.create');
+        Route::post('/add/{id}', 'handleAddProductVariable')->name('product_variable.store');
+        Route::get('/edit/{id}', 'showEditProductVariable')->name('product_variable.edit');
+        Route::post('/edit/{id}', 'handleEditProductVariable')->name('product_variable.update');
+        Route::post('/delete/{id}', 'deleteProductVariable')->name('product_variable.destroy');
     });
 });
 

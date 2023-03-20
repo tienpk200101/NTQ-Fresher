@@ -7,7 +7,7 @@ use App\Http\Requests\ProductRequest;
 use App\Services\Admin\ManageProductService;
 use Illuminate\Http\Request;
 
-class ManageProductController extends Controller
+class ProductController extends Controller
 {
     /**
      * @var ManageProductService
