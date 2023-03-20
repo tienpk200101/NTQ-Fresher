@@ -5,13 +5,13 @@ namespace App\Services\Admin;
 class OrderService
 {
     public function showManageOrder(){
-        return view('admins.orders.manage-order', [
+        return view('admin.orders.manage-order', [
             'title_head' => 'Manage Order'
         ]);
     }
 
     public function showOrderDetail() {
-        return view('admins.orders.order-detail', [
+        return view('admin.orders.order-detail', [
             'title_head' => 'Order Detail'
         ]);
     }

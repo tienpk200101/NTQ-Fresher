@@ -13,6 +13,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\TermController;
 use App\Http\Controllers\Admin\ProductVariableController;
+use App\Http\Controllers\Admin\AttributeController;
 
 // Auth
 Route::get('login', [LoginController::class, 'showLogin'])->name('login');
@@ -80,6 +81,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         Route::get('/edit/{id}', 'showEditProductVariable')->name('product_variable.edit');
         Route::post('/edit/{id}', 'handleEditProductVariable')->name('product_variable.update');
         Route::post('/delete/{id}', 'deleteProductVariable')->name('product_variable.destroy');
+    });
+
+    Route::group(['controller' => AttributeController::class, 'prefix' => 'attribute'], function (){
+       Route::get('/{id}', 'listAttribute')->name('attribute.index');
+       Route::post('/add', 'handleAddAttribute')->name('attribute.store');
+       Route::get('/show/{id}', 'findAttribute')->name('attribute.show');
+       Route::get('/edit/{slug}/{id}', 'showEditAttribute')->name('attribute.edit');
+       Route::post('/edit/{term_id}/{id}', 'handleEditAttribute')->name('attribute.update');
+       Route::post('/delete/{id}', 'deleteAttribute')->name('attribute.destroy');
     });
 });
 

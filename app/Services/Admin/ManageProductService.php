@@ -13,7 +13,7 @@ class ManageProductService
      * @return \Illuminate\Contracts\View\View
      */
     public function showManageProduct() {
-        return view('admins.products.index', [
+        return view('admin.products.index', [
             'title_head' => 'Manage Product',
             'products' => Product::all()
         ]);
@@ -23,7 +23,7 @@ class ManageProductService
      * @return \Illuminate\Contracts\View\View
      */
     public function showAddProduct() {
-        return view('admins.products.add', [
+        return view('admin.products.add', [
             'title_head' => 'Add Product',
             'categories' => Category::all()
         ]);
@@ -79,7 +79,7 @@ class ManageProductService
             return back()->with('error', 'Product not found');
         }
 
-        return view('admins.products.edit', [
+        return view('admin.products.edit', [
             'title_head' => 'Edit Product',
             'product' => $product,
             'categories' => Category::all(),
@@ -145,7 +145,7 @@ class ManageProductService
             return back()->with('error', 'Product not found');
         }
 
-        return view('admins.products.view', [
+        return view('admin.products.view', [
             'title_head' => 'View Product',
             'product' => $product
         ]);

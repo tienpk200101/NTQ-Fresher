@@ -20,7 +20,7 @@ class CategoryController extends Controller
     public function listCategory() {
         $categories = $this->category_service->getAllCategory();
 
-        return view('admins.categories.index', [
+        return view('admin.categories.index', [
             'title_head' => 'Category',
             'categories' => $categories
         ]);
@@ -29,7 +29,7 @@ class CategoryController extends Controller
     public function showAddCategory(){
         $categories = $this->category_service->getAllCategory();
 
-        return view('admins.categories.add', [
+        return view('admin.categories.add', [
             'title_head' => 'Add Category',
             'categories' => $categories
         ]);
@@ -50,7 +50,7 @@ class CategoryController extends Controller
         $category = $this->category_service->findCategory($id);
         $categories = $this->category_service->getAllCategory();
 
-        return view('admins.categories.edit', [
+        return view('admin.categories.edit', [
             'title_head' => 'Edit Category',
             'category' => $category,
             'categories' => $categories

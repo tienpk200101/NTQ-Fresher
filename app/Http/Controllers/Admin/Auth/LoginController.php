@@ -18,7 +18,7 @@ class LoginController extends Controller
         if (Auth::check()) {
             return redirect()->route('admin.product.show');
         } else {
-            return view('admins.auth.login');
+            return view('admin.auth.login');
         }
     }
 
@@ -38,6 +38,7 @@ class LoginController extends Controller
         $credentials = $request->only('username', 'password');
 
         if(auth()->guard('web')->attempt($credentials)) {
+            $request->session()->regenerate();
             return redirect()->intended(route('admin.product.show'));
         } else {
             return redirect()->back()->withError('Credentials doesn\'t match.');

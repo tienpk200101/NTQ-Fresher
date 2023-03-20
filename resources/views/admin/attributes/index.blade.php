@@ -1,4 +1,4 @@
-@extends('admins.layouts.layout')
+@extends('admin.layouts.layout')
 
 @push('css')
     <link rel="stylesheet" href="../../../../cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" />
@@ -18,12 +18,12 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0">Terms</h4>
+                            <h4 class="mb-sm-0">Attributes</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
-                                    <li class="breadcrumb-item active">Terms</li>
+                                    <li class="breadcrumb-item active">Attributes</li>
                                 </ol>
                             </div>
 
@@ -40,7 +40,7 @@
                     <div class="col-lg-8">
                         <div class="card">
                             <div class="show-alert"></div>
-{{--                            @include('errors.error')--}}
+                            @include('errors.error')
                             <div class="card-header">
                                 <a href="{{ route('admin.add_term.show') }}" class="btn btn-primary">+ Add Term</a>
                             </div>
@@ -54,24 +54,24 @@
                                             </div>
                                         </th>
                                         <th>SR No.</th>
-                                        <th>Title</th>
-                                        <th>Slug</th>
+                                        <th>Term</th>
+                                        <th>Value</th>
                                         <th>Create Date</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($terms as $key => $term)
-                                        <tr class="item-{{ $term->id }}">
+                                    @foreach($attributes as $key => $attribute)
+                                        <tr class="item-{{ $attribute->id }}">
                                             <th scope="row">
                                                 <div class="form-check">
                                                     <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option1">
                                                 </div>
                                             </th>
                                             <td>{{ ++$key }}</td>
-                                            <td>{{ $term->title }}</td>
-                                            <td>{{ $term->slug ?? ''  }}</td>
-                                            <td>{{ $term->created_at }}</td>
+                                            <td>{{ $attribute->getTermAttribute->title }}</td>
+                                            <td>{{ $attribute->value  }}</td>
+                                            <td>{{ $attribute->created_at }}</td>
                                             <td>
                                                 <div class="dropdown d-inline-block">
                                                     <button class="btn btn-soft-primary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -80,14 +80,14 @@
                                                     <ul class="dropdown-menu dropdown-menu-end" style="">
                                                         <li><a href="#!" class="dropdown-item"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li>
                                                         <li>
-                                                            <a href="{{ route('admin.edit_term.show', $term->id) }}" class="dropdown-item edit-item-btn">
+                                                            <a href="{{ route('admin.attribute.edit', ['slug' => $attribute->getTermAttribute->slug, 'id' => $attribute->id]) }}" class="dropdown-item edit-item-btn">
                                                                 <i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <form action="{{ route('admin.delete_term.post', $term->id) }}" method="POST" class="delete-form">
+                                                            <form action="{{ route('admin.attribute.destroy', $attribute->id) }}" method="POST" class="delete-form">
                                                                 @csrf
-                                                                <button type="button" class="dropdown-item remove-item-btn" data-id="{{ $term->id }}">
+                                                                <button type="button" class="dropdown-item remove-item-btn" data-id="{{ $attribute->id }}">
                                                                     <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete
                                                                 </button>
                                                             </form>
@@ -102,20 +102,31 @@
                             </div>
                         </div>
                     </div><!--end col-->
-                    <div class="col-lg-4">
-                        <form action="{{ route('admin.add_term.post') }}" method="POST" id="form-addterm">
+                    <div class="col-lg-4 form-add-edit">
+                        <form action="{{ route('admin.attribute.store') }}" method="POST" id="form-addterm">
                             @csrf
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Add Term</h5>
+                                    <h5>Add Attribute</h5>
                                 </div>
                                 <div class="card-body">
+                                    <div class="mb-3 select-term">
+                                        <label class="form-label" for="choice-term">Term</label>
+                                        <select id="choice-term" class="form-control" name="term_id">
+                                            @foreach($terms as $term)
+                                                <option value="{{ $term->id }}">{{ $term->title }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('term_id')
+                                        <div class="text text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
                                     <div class="mb-3">
-                                        <label class="form-label" for="product-title-input">Term Title</label>
-                                        <input type="text" class="form-control @error('title') is-invalid @enderror"
-                                               id="product-title-input" name="title" value="{{ old('title') }}"
-                                               placeholder="Enter product title" required>
-                                        @error('title')
+                                        <label class="form-label" for="attribute-value-input">Term Title</label>
+                                        <input type="text" class="form-control @error('value') is-invalid @enderror"
+                                               id="attribute-value-input" name="value" value="{{ old('value') }}"
+                                               placeholder="Enter attribute value" required>
+                                        @error('value')
                                             <div class="text text-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -150,18 +161,18 @@
 @endsection
 
 @section('js')
-    <script src="../../../../code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="{{ asset('../../../../code.jquery.com/jquery-3.6.0.min.js') }}" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
     <!--datatable js-->
-    <script src="../../../../cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    <script src="../../../../cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
-    <script src="../../../../cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
-    <script src="../../../../cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
-    <script src="../../../../cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
-    <script src="../../../../cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
-    <script src="../../../../cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-    <script src="../../../../cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-    <script src="../../../../cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="{{ asset('../../../../cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('../../../../cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('../../../../cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('../../../../cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('../../../../cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('../../../../cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('../../../../cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('../../../../cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('../../../../cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js') }}"></script>
     <script src="{{ asset('assets/js/pages/datatables.init.js') }}"></script>
     <script>
         $(document).ready(function(){
@@ -179,7 +190,7 @@
                             id: term_id
                         },
                         success:function(response) {
-                            if(response.code == 1) {
+                            if(response.code === 1) {
                                 $('tr').remove('.item-'+term_id)
 
                                 alert('Delete successful');
