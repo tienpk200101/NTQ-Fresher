@@ -10,14 +10,14 @@ class TermService
     public function showListTerm(){
         $terms = TermModel::all();
 
-        return view('admins.terms.index', [
+        return view('admin.terms.index', [
             'title_head' => 'Term',
             'terms' => $terms
         ]);
     }
 
     public function showAddTerm(){
-        return view('admins.terms.add', [
+        return view('admin.terms.add', [
             'title_head' => 'Add term'
         ]);
     }
@@ -42,7 +42,7 @@ class TermService
     public function showEditTerm($id) {
         $term = TermModel::find($id);
         if(!empty($term)) {
-            return view('admins.terms.edit', ['term' => $term]);
+            return view('admin.terms.edit', ['term' => $term]);
         }
 
         return back()->with('error', 'Doesn\'t find record');

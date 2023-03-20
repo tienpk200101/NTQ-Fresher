@@ -1,4 +1,4 @@
-@extends('admins.layouts.layout')
+@extends('admin.layouts.layout')
 
 @push('css')
     <!-- Plugins css -->
@@ -15,12 +15,12 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0">Create Product Variable</h4>
+                            <h4 class="mb-sm-0">Create Product</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
-                                    <li class="breadcrumb-item active">Create Product Variable</li>
+                                    <li class="breadcrumb-item active">Create Product</li>
                                 </ol>
                             </div>
 
@@ -34,17 +34,27 @@
                 </div>
                 <!-- end page title -->
 
-                <form action="{{ route('admin.product_variable.update', ['id' => $product_variable->id]) }}" method="POST" id="createproduct-form" autocomplete="off" class="needs-validation"
+                <form action="{{ route('admin.product_add.post') }}" method="POST" id="createproduct-form" autocomplete="off" class="needs-validation"
                       novalidate enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-lg-8">
                             <div class="card">
                                 <div class="card-body">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="product-title-input">Product Title</label>
+                                        <input type="hidden" class="form-control" id="formAction" name="formAction" value="add">
+                                        <input type="text" class="form-control d-none" id="product-id-input">
+                                        <input type="text" class="form-control @error('title') is-invalid @enderror" id="product-title-input" name="title"
+                                               value="{{ old('title') }}" placeholder="Enter product title" required>
+                                        @error('title')
+                                            <div class="text text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
                                     <div>
                                         <label for="ckeditor-classic">Product Description</label>
                                         <textarea id="ckeditor-classic" name="description"
-                                                  class="@error('description') is-invalid @enderror">{!! $product_variable->description !!}</textarea>
+                                                  class="@error('description') is-invalid @enderror">{{ old('description') }}</textarea>
                                         @error('description')
                                             <div class="text text-danger">{{ $message }}</div>
                                         @enderror
@@ -72,17 +82,17 @@
                                                             </div>
                                                         </div>
                                                     </label>
-                                                    <input type="file" class="form-control d-none @error('image') is-invalid @enderror" value=""
-                                                           id="product-image-input" name="image" accept="image/png, image/gif, image/jpeg">
+                                                    <input type="file" class="form-control d-none @error('images') is-invalid @enderror" value=""
+                                                           id="product-image-input" name="images" accept="image/png, image/gif, image/jpeg">
                                                 </div>
                                                 <div class="avatar-lg">
                                                     <div class="avatar-title bg-light rounded">
-                                                        <img src="{{ $product_variable->image }}" id="product-img" class="avatar-md h-auto"/>
+                                                        <img src="#" id="product-img" class="avatar-md h-auto"/>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        @error('image')
+                                        @error('images')
                                             <div class="text text-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -154,23 +164,41 @@
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="addproduct-general-info" role="tabpanel">
                                             <div class="row">
-                                                <div class="col-lg-4 col-sm-6">
-                                                    <div class="mb-4">
+                                                <div class="col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="manufacturer-name-input">Manufacturer Name</label>
+                                                        <input type="text" class="form-control" id="manufacturer-name-input"
+                                                               placeholder="Enter manufacturer name">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="manufacturer-brand-input">Manufacturer Brand</label>
+                                                        <input type="text" class="form-control" id="manufacturer-brand-input"
+                                                               placeholder="Enter manufacturer brand">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- end row -->
+
+                                            <div class="row">
+                                                <div class="col-lg-3 col-sm-6">
+                                                    <div class="mb-3">
                                                         <label class="form-label" for="stocks-input">Stocks</label>
                                                         <input type="text" class="form-control @error('stock') is-invalid @enderror" id="stocks-input"
-                                                               value="{{ $product_variable->stock }}" name="stock" placeholder="Stocks" required>
+                                                               value="{{ old('stock') }}" name="stock" placeholder="Stocks" required>
                                                         @error('stock')
                                                             <div class="text text-danger">{{ $message }}</div>
                                                         @enderror
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4 col-sm-6">
-                                                    <div class="mb-4">
+                                                <div class="col-lg-3 col-sm-6">
+                                                    <div class="mb-3">
                                                         <label class="form-label" for="product-price-input">Regular price</label>
                                                         <div class="input-group has-validation mb-3">
                                                             <span class="input-group-text" id="product-price-addon">$</span>
                                                             <input type="text" class="form-control @error('regular_price') is-invalid @enderror"
-                                                                   id="product-price-input" value="{{ $product_variable->regular_price }}" name="regular_price" placeholder="Enter price"
+                                                                   id="product-price-input" value="{{ old('regular_price') }}" name="regular_price" placeholder="Enter price"
                                                                    aria-label="Price" aria-describedby="product-price-addon" required>
                                                             @error('regular_price')
                                                                 <div class="text text-danger">{{ $message }}</div>
@@ -178,16 +206,24 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4 col-sm-6">
-                                                    <div class="mb-4">
+                                                <div class="col-lg-3 col-sm-6">
+                                                    <div class="mb-3">
                                                         <label class="form-label" for="product-discount-input">Discount</label>
                                                         <div class="input-group mb-3">
                                                             <span class="input-group-text" id="product-discount-addon">%</span>
                                                             <input type="text" class="form-control @error('discount') is-invalid @enderror"
-                                                                   id="product-discount-input" value="{{ $product_variable->discount }}" name="discount"
+                                                                   id="product-discount-input" value="{{ old('discount') }}" name="discount"
                                                                    placeholder="Enter discount" aria-label="discount" aria-describedby="product-discount-addon">
                                                             <div class="invalid-feedback">Please Enter a product discount.</div>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-sm-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="orders-input">Orders</label>
+                                                        <input type="text" class="form-control @error('order') is-invalid @enderror" id="orders-input"
+                                                               value="{{ old('order') }}" name="order" placeholder="Orders" required>
+                                                        <div class="invalid-feedback">Please Enter a product orders.</div>
                                                     </div>
                                                 </div>
                                                 <!-- end col -->
@@ -230,32 +266,32 @@
                             </div>
                             <!-- end card -->
                             <div class="text-end mb-3">
-                                <button type="submit" class="btn btn-primary w-sm">Update</button>
+                                <button type="submit" class="btn btn-primary w-sm">Submit</button>
                             </div>
                         </div>
                         <!-- end col -->
-{{--                        @dd($product_variable->color == 5)--}}
+
                         <div class="col-lg-4">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5 class="card-title mb-0">Attribute</h5>
+                                    <h5 class="card-title mb-0">Publish</h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="mb-3">
-                                        <label for="choices-color" class="form-label">Color</label>
-                                        <select class="form-select" name="color" id="choices-color" data-choices data-choices-search-false>
-                                            @foreach($terms['color'] as $color)
-                                                <option value="{{ $color->id }}" {{ $color->id == $product_variable->color ? 'selected' : '' }}>{{ $color->value }}</option>
-                                            @endforeach
+                                        <label for="choices-publish-status-input" class="form-label">Status</label>
+
+                                        <select class="form-select" id="choices-publish-status-input" data-choices data-choices-search-false>
+                                            <option value="Published" selected>Published</option>
+                                            <option value="Scheduled">Scheduled</option>
+                                            <option value="Draft">Draft</option>
                                         </select>
                                     </div>
 
                                     <div>
-                                        <label for="choices-size" class="form-label">Size</label>
-                                        <select class="form-select" name="size" id="choices-size" data-choices data-choices-search-false>
-                                            @foreach($terms['size'] as $size)
-                                                <option value="{{ $size->id }}" {{ $size->id == $product_variable->size ? 'selected' : '' }}>{{ $size->value }}</option>
-                                            @endforeach
+                                        <label for="choices-publish-visibility-input" class="form-label">Visibility</label>
+                                        <select class="form-select" id="choices-publish-visibility-input" data-choices data-choices-search-false>
+                                            <option value="Public" selected>Public</option>
+                                            <option value="Hidden">Hidden</option>
                                         </select>
                                     </div>
                                 </div>
@@ -276,9 +312,52 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- end card -->
 
-
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Product Categories</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p class="text-muted mb-2"><a href="#" class="float-end text-decoration-underline">Add
+                                            New</a>Select product category</p>
+                                    <select class="form-select" id="choices-category-input" name="category_id" data-choices
+                                            data-choices-search-true>
+                                        @foreach($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <!-- end card body -->
                             </div>
+                            <!-- end card -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Product Tags</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="hstack gap-3 align-items-start">
+                                        <div class="flex-grow-1">
+                                            <input class="form-control" data-choices data-choices-multiple-remove="true" placeholder="Enter tags" type="text"
+                                                   name="tag" value="Cotton"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end card body -->
+                            </div>
+                            <!-- end card -->
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Product Short Description</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p class="text-muted mb-2">Add short description for product</p>
+                                    <textarea class="form-control" name="short_description" placeholder="Must enter minimum of a 100 characters" rows="3"></textarea>
+                                </div>
+                                <!-- end card body -->
+                            </div>
+                            <!-- end card -->
 
                         </div>
                         <!-- end col -->

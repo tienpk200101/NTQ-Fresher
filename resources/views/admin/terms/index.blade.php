@@ -1,4 +1,4 @@
-@extends('admins.layouts.layout')
+@extends('admin.layouts.layout')
 
 @push('css')
     <link rel="stylesheet" href="../../../../cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" />
@@ -18,12 +18,12 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0">Categories</h4>
+                            <h4 class="mb-sm-0">Terms</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
-                                    <li class="breadcrumb-item active">Categories</li>
+                                    <li class="breadcrumb-item active">Terms</li>
                                 </ol>
                             </div>
 
@@ -37,11 +37,12 @@
 {{--                </div>--}}
 
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-8">
                         <div class="card">
-                            @include('errors.error')
+                            <div class="show-alert"></div>
+{{--                            @include('errors.error')--}}
                             <div class="card-header">
-                                <a href="{{ route('admin.add_category.show') }}" class="btn btn-primary">+ Add Category</a>
+                                <a href="{{ route('admin.add_term.show') }}" class="btn btn-primary">+ Add Term</a>
                             </div>
                             <div class="card-body">
                                 <table id="example" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%">
@@ -52,44 +53,46 @@
                                                 <input class="form-check-input fs-15" type="checkbox" id="checkAll" value="option">
                                             </div>
                                         </th>
-                                        <th data-ordering="false">SR No.</th>
-                                        <th data-ordering="false">Title</th>
-                                        <th data-ordering="false">Parent</th>
-                                        <th data-ordering="false">Description</th>
-                                        <th data-ordering="false">Thumbnail</th>
+                                        <th>SR No.</th>
+                                        <th>Title</th>
+                                        <th>Slug</th>
                                         <th>Create Date</th>
-                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($categories as $category)
-                                        <tr>
+                                    @foreach($terms as $key => $term)
+                                        <tr class="item-{{ $term->id }}">
                                             <th scope="row">
                                                 <div class="form-check">
                                                     <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option1">
                                                 </div>
                                             </th>
-                                            <td>01</td>
-                                            <td>{{ $category->title }}</td>
-                                            <td>{{ $category->category_id ?? ''  }}</td>
-                                            <td>{!! $category->description !!}</td>
-                                            <td><img src="{{ $category->thumbnail }}" width="100px" alt=""></td>
-                                            <td>{{ $category->created_at }}</td>
-                                            <td><span class="badge badge-soft-{{ $category->status == 1 ? 'info' : 'danger' }}">{{ $category->status == 1 ? 'Re-open' : 'Closed' }}</span></td>
+                                            <td>{{ ++$key }}</td>
+                                            <td>{{ $term->title }}</td>
+                                            <td>{{ $term->slug ?? ''  }}</td>
+                                            <td>{{ $term->created_at }}</td>
                                             <td>
                                                 <div class="dropdown d-inline-block">
                                                     <button class="btn btn-soft-primary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                         <i class="ri-more-fill align-middle"></i>
                                                     </button>
                                                     <ul class="dropdown-menu dropdown-menu-end" style="">
-                                                        <li><a href="#!" class="dropdown-item"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li>
-                                                        <li><a href="{{ route('admin.edit_category.show', $category->id) }}" class="dropdown-item edit-item-btn"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a></li>
                                                         <li>
-
-                                                            <form action="{{ route('admin.delete_category.post', $category->id) }}" method="POST">
+                                                            <a href="{{ route('admin.attribute.index', $term->id) }}" class="dropdown-item edit-item-btn">
+                                                                <i class="ri-navigation-fill align-bottom me-2 text-muted"></i> List
+                                                            </a>
+                                                        </li>
+{{--                                                        <li><a href="#!" class="dropdown-item"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li>--}}
+                                                        <li>
+                                                            <a href="{{ route('admin.edit_term.show', $term->id) }}" class="dropdown-item edit-item-btn">
+                                                                <i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <form action="{{ route('admin.delete_term.post', $term->id) }}" method="POST" class="delete-form">
                                                                 @csrf
-                                                                <button class="dropdown-item remove-item-btn">
+                                                                <button type="button" class="dropdown-item remove-item-btn" data-id="{{ $term->id }}">
                                                                     <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete
                                                                 </button>
                                                             </form>
@@ -104,6 +107,30 @@
                             </div>
                         </div>
                     </div><!--end col-->
+                    <div class="col-lg-4">
+                        <form action="{{ route('admin.add_term.post') }}" method="POST" id="form-addterm">
+                            @csrf
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Add Term</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="product-title-input">Term Title</label>
+                                        <input type="text" class="form-control @error('title') is-invalid @enderror"
+                                               id="product-title-input" name="title" value="{{ old('title') }}"
+                                               placeholder="Enter product title" required>
+                                        @error('title')
+                                            <div class="text text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-end mb-3">
+                                <button type="submit" class="btn btn-primary btn-submit w-sm">Add</button>
+                            </div>
+                        </form>
+                    </div>
                 </div><!--end row-->
             </div>
             <!-- container-fluid -->
@@ -140,6 +167,32 @@
     <script src="../../../../cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="../../../../cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
     <script src="../../../../cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="{{ asset('assets/js/pages/datatables.init.js') }}"></script>
+    <script>
+        $(document).ready(function(){
+            $('.remove-item-btn').click(removeTerm);
 
-    <script src="assets/js/pages/datatables.init.js"></script>
+            function removeTerm() {
+                let term_id = $(this).data('id')
+                console.log();
+                if(confirm('Are you sure to delete this record')) {
+                    $.ajax({
+                        type:'POST',
+                        url: $(this).parent('.delete-form').attr('action'),
+                        data: {
+                            _token: $('meta[name="csrf-token"]').attr('content'),
+                            id: term_id
+                        },
+                        success:function(response) {
+                            if(response.code == 1) {
+                                $('tr').remove('.item-'+term_id)
+
+                                alert('Delete successful');
+                            }
+                        }
+                    })
+                }
+            }
+        });
+    </script>
 @endsection

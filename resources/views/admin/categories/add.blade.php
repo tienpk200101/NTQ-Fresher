@@ -1,4 +1,4 @@
-@extends('admins.layouts.layout')
+@extends('admin.layouts.layout')
 
 @push('css')
     <!-- Plugins css -->
@@ -12,12 +12,12 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0">Edit Category</h4>
+                            <h4 class="mb-sm-0">Create Category</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">Edit Category</li>
+                                    <li class="breadcrumb-item active">Create Category</li>
                                 </ol>
                             </div>
 
@@ -27,7 +27,7 @@
                 </div>
                 <!-- end page title -->
 
-                <form action="{{ route('admin.edit_category.post', $category->id) }}" method="POST" id="editcategory-form" autocomplete="off" class="needs-validation"
+                <form action="{{ route('admin.add_category.post') }}" method="POST" id="createproduct-form" autocomplete="off" class="needs-validation"
                       novalidate enctype="multipart/form-data">
                     @csrf
                     <div class="row">
@@ -39,16 +39,14 @@
                                         {{--                                        <input type="hidden" class="form-control" id="formAction" name="formAction" value="add">--}}
                                         {{--                                        <input type="text" class="form-control d-none" id="product-id-input">--}}
                                         <input type="text" class="form-control @error('title') is-invalid @enderror" id="product-title-input" name="title"
-                                               value="{{ $category->title }}" placeholder="Enter product title" required>
+                                               value="{{ old('title') }}" placeholder="Enter product title" required>
                                         <div class="invalid-feedback">Please Enter a category title.</div>
-{{--                                        @error('title')--}}
-{{--                                            {{ $error->title }}--}}
-{{--                                        @enderror--}}
+
                                     </div>
                                     <div>
                                         <label for="ckeditor-classic">Category Description</label>
                                         <textarea id="ckeditor-classic" name="description"
-                                                  class="@error('description') is-invalid @enderror">{!! $category->description !!}</textarea>
+                                                  class="@error('description') is-invalid @enderror">{{ old('description') }}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -78,7 +76,7 @@
                                                 </div>
                                                 <div class="avatar-lg">
                                                     <div class="avatar-title bg-light rounded">
-                                                        <img src="{{ $category->thumbnail }}" id="product-img" class="avatar-md h-auto" width="300px" height="100px"/>
+                                                        <img src="#" id="product-img" class="avatar-md h-auto" width="300px" height="100px"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -143,10 +141,11 @@
                                     <h5 class="card-title mb-0">Parent Category</h5>
                                 </div>
                                 <div class="card-body">
-                                    <select class="form-select" id="choices-category-input" name="category_id">
+                                    <select class="form-select" id="choices-category-input" name="category_id" data-choices
+                                            data-choices-search-false>
                                         <option value=""></option>
-                                        @foreach($categories as $category_i)
-                                            <option value="{{ $category_i->id }}" {{ $category_i->id == $category->parent_id ? 'selected' : '' }}>{{ $category_i->title }}</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->title }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -159,6 +158,7 @@
                     <!-- end row -->
 
                 </form>
+
             </div>
             <!-- container-fluid -->
         </div>

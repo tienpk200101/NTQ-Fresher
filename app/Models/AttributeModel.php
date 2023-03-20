@@ -11,5 +11,9 @@ class AttributeModel extends Model
 
     protected $table = 'attributes';
 
-    protected $fillable = ['title', 'slug'];
+    protected $fillable = ['term_id', 'value', 'slug'];
+
+    public function getTermAttribute() {
+        return  $this->belongsTo(TermModel::class, 'term_id');
+    }
 }

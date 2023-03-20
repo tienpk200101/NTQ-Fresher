@@ -28,7 +28,7 @@ class ProductVariableService
             }
         }
 
-        return view('admins.product_variables.index', [
+        return view('admin.product_variables.index', [
             'title_head' => 'Product Variables',
             'product_variables' => $product_variables,
             'product' => $product
@@ -42,7 +42,7 @@ class ProductVariableService
             $arr_term[$term->slug] = AttributeModel::where('term_id', $term->id)->get();
         }
 
-        return view('admins.product_variables.add', [
+        return view('admin.product_variables.add', [
             'title_head' => 'Add Product Variable',
             'product_id' => $id,
             'terms' => $arr_term
@@ -100,7 +100,7 @@ class ProductVariableService
             $product_variable[$attr_variable->slug] = $attr_variable->attr_id;
         }
 
-        return view('admins.product_variables.edit',[
+        return view('admin.product_variables.edit',[
             'title_head' => 'Edit Product Variable',
             'product_variable' => $product_variable,
             'terms' => $arr_term
