@@ -1,8 +1,8 @@
 <?php
-
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -28,18 +28,22 @@ Route::post('reset-password', [ForgotPasswordController::class, 'handleResetPass
 
 // Home
 Route::get('/', [HomeController::class, 'showHome'])->name('home');
-Route::get('product-detail', [ProductDetailController::class, 'showProductDetail'])->name('product-detail');
-Route::get('checkout', [CheckoutController::class, 'showCheckout'])->name('checkout.show');
-Route::get('cart', [CartController::class, 'showCart'])->name('cart.show');
+
+Route::get('product-detail/{id}', [ProductDetailController::class, 'showProductDetail'])->name('product-detail');
 Route::post('choose-var', [ProductDetailController::class, 'chooseProduct'])->name('choose.product');
+Route::get('get-product-valiable', [ProductDetailController::class, 'getProductVariable'])->name('product.variable.show');
+
+Route::get('checkout', [CheckoutController::class, 'showCheckout'])->name('checkout.show');
 Route::post('validate-checkout', [CheckoutController::class, 'checkout'])->name('checkout.validate.post');
 
+Route::get('cart', [CartController::class, 'showCart'])->name('cart.show');
+
 // Admin
-Route::get('/admin/login', [\App\Http\Controllers\Admin\Auth\LoginController::class, 'showLoginForm'])->name('admin.login.show');
-Route::post('/admin/login', [\App\Http\Controllers\Admin\Auth\LoginController::class, 'login'])->name('admin.login.handle');
+Route::get('/admin/login', [AdminLoginController::class, 'showLoginForm'])->name('admin.login.show');
+Route::post('/admin/login', [AdminLoginController::class, 'login'])->name('admin.login.handle');
 //Route::group(['prefix' => 'admin', 'middleware' => ['can:isAdmin']], function(){
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], function(){
-    Route::get('/admin/logout', [\App\Http\Controllers\Admin\Auth\LoginController::class, 'logout'])->name('logout.handle');
+    Route::get('/admin/logout', [AdminLoginController::class, 'logout'])->name('logout.handle');
 
     Route::controller(ProductController::class)->group(function (){
         Route::get('manage-product', 'showManageProduct')->name('product.show');

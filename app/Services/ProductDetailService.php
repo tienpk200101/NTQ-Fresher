@@ -2,123 +2,93 @@
 
 namespace App\Services;
 
+use App\Models\ProductModel;
+use App\Models\ProductVariableModel;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
+
 class ProductDetailService
 {
-    public function showProductDetail()
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function showProductDetail($id)
     {
-        $title = 'Product detail';
-        $product = [
-            'name' => 'Áo hoodie R Star unisex ullzang nỉ ngoại local brand MOUTEE - Áo khoác nỉ trơn unisex 7 màu có form rộng XL - MOUTEE.SG',
-            'image' => 'https://cf.shopee.vn/file/vn-11134201-23020-hqepqqxwbpnv30',
-            'price' => '169.000',
-            'old_price' => '460.000',
-            'images' => [
-                'https://cf.shopee.vn/file/vn-11134201-23020-hqepqqxwbpnv30',
-                'https://cf.shopee.vn/file/vn-11134201-23020-650tenxwbpnvb4',
-                'https://cf.shopee.vn/file/vn-11134201-23020-6kinf4wwbpnv81',
-                'https://cf.shopee.vn/file/vn-11134201-23020-zapmz4wwbpnvf7',
-                'https://cf.shopee.vn/file/vn-11134201-23020-2dahawxwbpnv72'
-            ],
-            'sizes' => ['S', 'M', 'L', 'XL']
-        ];
+        $product = ProductModel::find($id);
 
-        return view('clients.product-detail', [
+        // Lấy ra tất cả các biến thể của sản phẩm.
+        $product_variables = ProductVariableModel::where('product_id', $id)->get();
+        $images = [];
+
+        foreach ($product_variables as $product_variable) {
+            // 1 biến thể sản phẩm lấy ra các attr_variable.
+            $attr_variables = $product_variable->getAttributeVariable;
+
+            foreach ($attr_variables as $attr_variable) {
+                // lấy ra các attribute của 1 attr_variable.
+                $attribute = $attr_variable->getAttributeModel;
+
+                // Lấy ra term từ attribute để biết nó là của thuộc tính nào (size hay color).
+                $term = $attribute->getTermAttribute;
+                $product_variable[$term->slug] = $attribute->slug;
+            }
+
+            // Add tất cả các ảnh của các biến thể và một mảng.
+            array_push($images, $product_variable->image);
+        }
+        Cache::put('products', $product_variables, 30 * 60);
+
+        return view('client.product-detail', [
             'product' => $product,
-            'title_head' => $title
+            'product_variables' => $product_variables,
+            'images' => $images,
+            'title_head' => 'Product detail'
         ]);
     }
 
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     * Lấy ra tất cả các thuộc tính và truyền qua json cho bên javascript xử lý.
+     */
+    public function getProductVariables() {
+        if(Cache::has('products')) {
+            return response()->json(['data' => Cache::get('products')]);
+        }
+
+        return response()->json(['data' => '']);
+    }
+
+    /**
+     * @param $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function chooseProduct($request) {
-        $data = $request->all();
+        $data_chooses = $request->all();
+        $products = Cache::get('products');
 
-        $products = [
-            'purple' => [
-                'price' => 111,
-                'order' => 100,
-                'revenue' => 12345,
-                'images' => [
-                    'assets/images/products/img-8.png'
-                ],
-                'image_index' => 0,
-                'size' => [
-                    's' => [
-                        'price' => 111,
-                        'stock' => 4,
-                    ],
-                    'm' => [
-                        'price' => 115,
-                        'stock' => 3,
-                    ],
-                    'l' => [
-                        'price' => 116,
-                        'stock' => 7,
-                    ],
-                ]
-            ],
-            'blue' => [
-                'price' => 144,
-                'order' => 120,
-                'revenue' => 13545,
-                'images' => [
-                    'assets/images/products/img-6.png'
-                ],
-                'image_index' => 1,
-                'size' => [
-                    's' => [
-                        'price' => 144,
-                        'stock' => 4,
-                    ],
-                    'm' => [
-                        'price' => 147,
-                        'stock' => 4,
-                    ],
-                    'l' => [
-                        'price' => 149,
-                        'stock' => 4,
-                    ],
-                ]
-            ],
-            'green' => [
-                'price' => 124,
-                'order' => 150,
-                'revenue' => 15545,
-                'images' => [
-                    'assets/images/products/img-1.png'
-                ],
-                'image_index' => 2,
-                'size' => [
-                    's' => [
-                        'price' => 124,
-                        'stock' => 3,
-                    ],
-                    'm' => [
-                        'price' => 126,
-                        'stock' => 4,
-                    ],
-                    'l' => [
-                        'price' => 127,
-                        'stock' => 2,
-                    ],
-                ]
-            ],
+        $color = strtolower(empty($data_chooses['color']) ? $products[0]->color : $data_chooses['color']);
+        $size = strtolower(empty($data_chooses['size']) ? $products[0]->size : $data_chooses['size']);
+
+        $product_default = [
+            'id' => 0,
+            'product_id' => 0,
+            'stock' => 0,
+            'image' => '',
+            'description' => '',
+            'discount' => 0,
+            'regular_price' => 0,
+            'sale_price' => 0,
+            'color' => '',
+            'size' => ''
         ];
-        
-        $color = strtolower($data['color']);
-        $size = strtolower($data['size']);
 
-        $product_color = array_merge([
-            'price' => 0,
-			'order' => 0,
-			'revenue' => 0,
-			'images' => 0,
-			'stock' => 0
-        ], $products[$color] ?? []);
+        foreach ($products as $product) {
+            if($product->size == $size && $product->color == $color) {
+                return response()->json(['product' => $product, 'color' => $color, 'size' => $size]);
+            }
+        }
 
-        $product_size = !empty($products[$color]['size'][$size]) ? $products[$color]['size'][$size] : [];
-
-        $response = array_merge($product_color, $product_size);
-        unset($response['size']);
-
-        return $response;
+        return response()->json(['product' => $product_default, 'color' => $color, 'size' => $size]);
     }
 }

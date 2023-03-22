@@ -3,7 +3,7 @@
 namespace App\Services\Admin;
 
 use App\Models\Category;
-use App\Models\Product;
+use App\Models\ProductModel;
 use App\Models\ProductCategoryModel;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
@@ -15,7 +15,7 @@ class ManageProductService
     public function showManageProduct() {
         return view('admin.products.index', [
             'title_head' => 'Manage Product',
-            'products' => Product::all()
+            'products' => ProductModel::all()
         ]);
     }
 
@@ -53,7 +53,7 @@ class ManageProductService
             $data_post['images'] = $imageUpload;
         }
 
-        $product = Product::create($data_post);
+        $product = ProductModel::create($data_post);
         if($product) {
             ProductCategoryModel::create([
                 'category_id' => $request->category_id,
@@ -72,7 +72,7 @@ class ManageProductService
      * @return \Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
      */
     public function showEditProduct($request, $id) {
-        $product = Product::find($id);
+        $product = ProductModel::find($id);
         $category_id = ProductCategoryModel::where('product_id', $id)->first()->category_id;
 
         if(empty($product)) {
@@ -102,7 +102,7 @@ class ManageProductService
             'order' => 'numeric'
         ]);
 
-        $product = Product::find($id);
+        $product = ProductModel::find($id);
         if(empty($product)) {
             return back()->with('error', 'Product not found');
         }
@@ -126,7 +126,7 @@ class ManageProductService
             $data_post['images'] = $image;
         }
 
-        $result = Product::where('id', $id)->update($data_post);
+        $result = ProductModel::where('id', $id)->update($data_post);
         if($result) {
             ProductCategoryModel::where('product_id', $id)->update(['category_id' => $request->category_id]);
             return back()->with('success', 'Update product success');
@@ -140,7 +140,7 @@ class ManageProductService
      * @return \Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
      */
     public function showViewProduct($id) {
-        $product = Product::find($id);
+        $product = ProductModel::find($id);
         if(empty($product)) {
             return back()->with('error', 'Product not found');
         }
@@ -156,7 +156,7 @@ class ManageProductService
      * @return \Illuminate\Http\RedirectResponse
      */
     public function deleteProduct($id){
-        $product = Product::find($id);
+        $product = ProductModel::find($id);
         if(empty($product)) {
             return back()->with('error', 'Product not found');
         }

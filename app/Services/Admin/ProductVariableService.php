@@ -4,7 +4,7 @@ namespace App\Services\Admin;
 
 use App\Models\AttributeModel;
 use App\Models\AttributeVariableModel;
-use App\Models\Product;
+use App\Models\ProductModel;
 use App\Models\ProductCategoryModel;
 use App\Models\ProductVariableModel;
 use App\Models\TermModel;
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 class ProductVariableService
 {
     public function listProductVariable($id) {
-        $product = Product::find($id);
+        $product = ProductModel::find($id);
         $product_variables = ProductVariableModel::where('product_id', $id)->get();
         foreach ($product_variables as $product_variable) {
             $attr_variables = DB::table('attr_variables')

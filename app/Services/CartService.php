@@ -7,7 +7,7 @@ class CartService
     public function showCart() {
         $title_page = 'Cart';
 
-        return view('clients.cart', [
+        return view('client.cart', [
             'title_head' => $title_page
         ]);
     }

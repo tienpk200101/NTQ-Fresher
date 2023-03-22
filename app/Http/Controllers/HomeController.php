@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\HomeService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {

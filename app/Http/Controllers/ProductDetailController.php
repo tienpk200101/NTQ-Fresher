@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\ProductDetailService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class ProductDetailController extends Controller
 {
@@ -14,8 +15,12 @@ class ProductDetailController extends Controller
         $this->productDetailService = $productDetailService;
     }
 
-    public function showProductDetail() {
-        return $this->productDetailService->showProductDetail();
+    public function showProductDetail($id) {
+        return $this->productDetailService->showProductDetail($id);
+    }
+
+    public function getProductVariable() {
+        return $this->productDetailService->getProductVariables();
     }
 
     public function chooseProduct(Request $request) {

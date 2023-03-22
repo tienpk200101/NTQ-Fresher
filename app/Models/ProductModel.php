@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class ProductModel extends Model
 {
     use HasFactory;
 
+    protected $table = 'products';
     /**
      * The attributes that are mass assignable.
      *
@@ -37,4 +38,8 @@ class Product extends Model
      * @var array<int, string>
      */
     protected $hidden = [];
+
+    public function getProductVariable() {
+        return $this->hasMany(ProductVariableModel::class, 'product_id');
+    }
 }

@@ -12,4 +12,8 @@ class ProductVariableModel extends Model
     protected $table = 'product_variables';
 
     protected $fillable = ['product_id', 'stock', 'image', 'image', 'description', 'regular_price', 'sale_price', 'color', 'size'];
+
+    public function getAttributeVariable() {
+        return $this->hasMany(AttributeVariableModel::class, 'product_variable_id');
+    }
 }

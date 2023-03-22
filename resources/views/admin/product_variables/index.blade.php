@@ -226,7 +226,7 @@
 
     <!-- gridjs js -->
     <script src="{{ asset('assets/libs/gridjs/gridjs.umd.js') }}"></script>
-    <script src="../../../../unpkg.com/gridjs%406.0.6/plugins/selection/dist/selection.umd.js"></script>
+    <script src="{{ asset('../../../../unpkg.com/gridjs%406.0.6/plugins/selection/dist/selection.umd.js') }}"></script>
     <!-- ecommerce product list -->
     <script src="{{ asset('assets/js/pages/ecommerce-product-list.init.js') }}"></script>
     <script>

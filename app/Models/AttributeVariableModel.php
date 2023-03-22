@@ -12,4 +12,8 @@ class AttributeVariableModel extends Model
     protected $table = 'attr_variables';
 
     protected $fillable = ['attr_id', 'product_variable_id'];
+
+    public function getAttributeModel(){
+        return $this->belongsTo(AttributeModel::class, 'attr_id');
+    }
 }

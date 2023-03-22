@@ -11,7 +11,7 @@ class CheckoutService
     {
         $title_page = 'Checkout';
 
-        return view('clients.checkout', [
+        return view('client.checkout', [
             'title_head' => $title_page
         ]);
     }
