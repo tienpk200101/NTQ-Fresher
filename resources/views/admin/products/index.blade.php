@@ -360,21 +360,21 @@
                                                 <li class="nav-item" role="presentation">
                                                     <a class="nav-link active fw-semibold" data-bs-toggle="tab" href="#productnav-all" role="tab"
                                                        aria-selected="true">
-                                                        All <span class="badge badge-soft-danger align-middle rounded-pill ms-1">12</span>
+                                                        All <span class="badge badge-soft-danger align-middle rounded-pill ms-1 count-product" data-count-product="{{ count($products) }}">{{ count($products) }}</span>
                                                     </a>
                                                 </li>
-                                                <li class="nav-item" role="presentation">
-                                                    <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#productnav-published" role="tab"
-                                                       aria-selected="false" tabindex="-1">
-                                                        Published <span class="badge badge-soft-danger align-middle rounded-pill ms-1">5</span>
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item" role="presentation">
-                                                    <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#productnav-draft" role="tab"
-                                                       aria-selected="false" tabindex="-1">
-                                                        Draft
-                                                    </a>
-                                                </li>
+{{--                                                <li class="nav-item" role="presentation">--}}
+{{--                                                    <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#productnav-published" role="tab"--}}
+{{--                                                       aria-selected="false" tabindex="-1">--}}
+{{--                                                        Published <span class="badge badge-soft-danger align-middle rounded-pill ms-1">5</span>--}}
+{{--                                                    </a>--}}
+{{--                                                </li>--}}
+{{--                                                <li class="nav-item" role="presentation">--}}
+{{--                                                    <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#productnav-draft" role="tab"--}}
+{{--                                                       aria-selected="false" tabindex="-1">--}}
+{{--                                                        Draft--}}
+{{--                                                    </a>--}}
+{{--                                                </li>--}}
                                             </ul>
                                         </div>
                                         <div class="col-auto">
@@ -396,139 +396,6 @@
 
                                     <div class="tab-content text-muted">
                                         <div class="tab-pane active" id="productnav-all" role="tabpanel">
-                                            {{--                                            <div id="table-product-list-all" class="table-card gridjs-border-none"><div role="complementary" class="gridjs gridjs-container" style="width: 100%;"><div class="gridjs-wrapper" style="height: auto;"><table role="grid" class="gridjs-table" style="height: auto;"><thead class="gridjs-thead"><tr class="gridjs-tr"><th data-column-id="#" class="gridjs-th text-muted" style="width: 40px;"><div class="gridjs-th-content">#</div></th><th data-column-id="product" class="gridjs-th gridjs-th-sort text-muted" tabindex="0" style="width: 360px;"><div class="gridjs-th-content">Product</div><button tabindex="-1" aria-label="Sort column ascending" title="Sort column ascending" class="gridjs-sort gridjs-sort-neutral"></button></th><th data-column-id="stock" class="gridjs-th gridjs-th-sort text-muted" tabindex="0" style="width: 94px;"><div class="gridjs-th-content">Stock</div><button tabindex="-1" aria-label="Sort column ascending" title="Sort column ascending" class="gridjs-sort gridjs-sort-neutral"></button></th><th data-column-id="price" class="gridjs-th gridjs-th-sort text-muted" tabindex="0" style="width: 101px;"><div class="gridjs-th-content">Price</div><button tabindex="-1" aria-label="Sort column ascending" title="Sort column ascending" class="gridjs-sort gridjs-sort-neutral"></button></th><th data-column-id="orders" class="gridjs-th gridjs-th-sort text-muted" tabindex="0" style="width: 84px;"><div class="gridjs-th-content">Orders</div><button tabindex="-1" aria-label="Sort column ascending" title="Sort column ascending" class="gridjs-sort gridjs-sort-neutral"></button></th><th data-column-id="rating" class="gridjs-th gridjs-th-sort text-muted" tabindex="0" style="width: 105px;"><div class="gridjs-th-content">Rating</div><button tabindex="-1" aria-label="Sort column ascending" title="Sort column ascending" class="gridjs-sort gridjs-sort-neutral"></button></th><th data-column-id="published" class="gridjs-th gridjs-th-sort text-muted" tabindex="0" style="width: 220px;"><div class="gridjs-th-content">Published</div><button tabindex="-1" aria-label="Sort column ascending" title="Sort column ascending" class="gridjs-sort gridjs-sort-neutral"></button></th><th data-column-id="action" class="gridjs-th text-muted" style="width: 80px;"><div class="gridjs-th-content">Action</div></th></tr></thead><tbody class="gridjs-tbody"><tr class="gridjs-tr"><td data-column-id="#" class="gridjs-td"><span><div class="form-check checkbox-product-list">					<input class="form-check-input" type="checkbox" value="1" id="checkbox-1">					<label class="form-check-label" for="checkbox-1"></label>				  </div></span></td><td data-column-id="product" class="gridjs-td"><span><div class="d-flex align-items-center"><div class="flex-shrink-0 me-3"><div class="avatar-sm bg-light rounded p-1"><img src="assets/images/products/img-1.png" alt="" class="img-fluid d-block"></div></div><div class="flex-grow-1"><h5 class="fs-14 mb-1"><a href="apps-ecommerce-product-details.html" class="text-dark">Half Sleeve Round Neck T-Shirts</a></h5><p class="text-muted mb-0">Category : <span class="fw-medium">Fashion</span></p></div></div></span></td><td data-column-id="stock" class="gridjs-td">12</td><td data-column-id="price" class="gridjs-td"><span>$215.00</span></td><td data-column-id="orders" class="gridjs-td">48</td><td data-column-id="rating" class="gridjs-td"><span><span class="badge bg-light text-body fs-12 fw-medium"><i class="mdi mdi-star text-warning me-1"></i>4.2</span></span></td><td data-column-id="published" class="gridjs-td"><span>12 Oct, 2021<small class="text-muted ms-1">10:05 AM</small></span></td><td data-column-id="action" class="gridjs-td"><span><div class="dropdown"><button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></button><ul class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item" href="apps-ecommerce-product-details.html"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li><li><a class="dropdown-item edit-list" data-edit-id="1" href="apps-ecommerce-add-product.html"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a></li><li class="dropdown-divider"></li><li><a class="dropdown-item remove-list" href="#" data-id="1" data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete</a></li></ul></div></span></td></tr><tr class="gridjs-tr"><td data-column-id="#" class="gridjs-td"><span><div class="form-check checkbox-product-list">					<input class="form-check-input" type="checkbox" value="2" id="checkbox-2">					<label class="form-check-label" for="checkbox-2"></label>				  </div></span></td><td data-column-id="product" class="gridjs-td"><span><div class="d-flex align-items-center"><div class="flex-shrink-0 me-3"><div class="avatar-sm bg-light rounded p-1"><img src="assets/images/products/img-2.png" alt="" class="img-fluid d-block"></div></div><div class="flex-grow-1"><h5 class="fs-14 mb-1"><a href="apps-ecommerce-product-details.html" class="text-dark">Urban Ladder Pashe Chair</a></h5><p class="text-muted mb-0">Category : <span class="fw-medium">Furniture</span></p></div></div></span></td><td data-column-id="stock" class="gridjs-td">06</td><td data-column-id="price" class="gridjs-td"><span>$160.00</span></td><td data-column-id="orders" class="gridjs-td">30</td><td data-column-id="rating" class="gridjs-td"><span><span class="badge bg-light text-body fs-12 fw-medium"><i class="mdi mdi-star text-warning me-1"></i>4.3</span></span></td><td data-column-id="published" class="gridjs-td"><span>06 Jan, 2021<small class="text-muted ms-1">01:31 PM</small></span></td><td data-column-id="action" class="gridjs-td"><span><div class="dropdown"><button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></button><ul class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item" href="apps-ecommerce-product-details.html"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li><li><a class="dropdown-item edit-list" data-edit-id="2" href="apps-ecommerce-add-product.html"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a></li><li class="dropdown-divider"></li><li><a class="dropdown-item remove-list" href="#" data-id="2" data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete</a></li></ul></div></span></td></tr><tr class="gridjs-tr"><td data-column-id="#" class="gridjs-td"><span><div class="form-check checkbox-product-list">					<input class="form-check-input" type="checkbox" value="3" id="checkbox-3">					<label class="form-check-label" for="checkbox-3"></label>				  </div></span></td><td data-column-id="product" class="gridjs-td"><span><div class="d-flex align-items-center"><div class="flex-shrink-0 me-3"><div class="avatar-sm bg-light rounded p-1"><img src="assets/images/products/img-3.png" alt="" class="img-fluid d-block"></div></div><div class="flex-grow-1"><h5 class="fs-14 mb-1"><a href="apps-ecommerce-product-details.html" class="text-dark">350 ml Glass Grocery Container</a></h5><p class="text-muted mb-0">Category : <span class="fw-medium">Grocery</span></p></div></div></span></td><td data-column-id="stock" class="gridjs-td">10</td><td data-column-id="price" class="gridjs-td"><span>$125.00</span></td><td data-column-id="orders" class="gridjs-td">48</td><td data-column-id="rating" class="gridjs-td"><span><span class="badge bg-light text-body fs-12 fw-medium"><i class="mdi mdi-star text-warning me-1"></i>4.5</span></span></td><td data-column-id="published" class="gridjs-td"><span>26 Mar, 2021<small class="text-muted ms-1">11:40 AM</small></span></td><td data-column-id="action" class="gridjs-td"><span><div class="dropdown"><button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></button><ul class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item" href="apps-ecommerce-product-details.html"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li><li><a class="dropdown-item edit-list" data-edit-id="3" href="apps-ecommerce-add-product.html"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a></li><li class="dropdown-divider"></li><li><a class="dropdown-item remove-list" href="#" data-id="3" data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete</a></li></ul></div></span></td></tr><tr class="gridjs-tr"><td data-column-id="#" class="gridjs-td"><span><div class="form-check checkbox-product-list">					<input class="form-check-input" type="checkbox" value="4" id="checkbox-4">					<label class="form-check-label" for="checkbox-4"></label>				  </div></span></td><td data-column-id="product" class="gridjs-td"><span><div class="d-flex align-items-center"><div class="flex-shrink-0 me-3"><div class="avatar-sm bg-light rounded p-1"><img src="assets/images/products/img-4.png" alt="" class="img-fluid d-block"></div></div><div class="flex-grow-1"><h5 class="fs-14 mb-1"><a href="apps-ecommerce-product-details.html" class="text-dark">Fabric Dual Tone Living Room Chair</a></h5><p class="text-muted mb-0">Category : <span class="fw-medium">Furniture</span></p></div></div></span></td><td data-column-id="stock" class="gridjs-td">15</td><td data-column-id="price" class="gridjs-td"><span>$340.00</span></td><td data-column-id="orders" class="gridjs-td">40</td><td data-column-id="rating" class="gridjs-td"><span><span class="badge bg-light text-body fs-12 fw-medium"><i class="mdi mdi-star text-warning me-1"></i>4.2</span></span></td><td data-column-id="published" class="gridjs-td"><span>19 Apr, 2021<small class="text-muted ms-1">02:51 PM</small></span></td><td data-column-id="action" class="gridjs-td"><span><div class="dropdown"><button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></button><ul class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item" href="apps-ecommerce-product-details.html"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li><li><a class="dropdown-item edit-list" data-edit-id="4" href="apps-ecommerce-add-product.html"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a></li><li class="dropdown-divider"></li><li><a class="dropdown-item remove-list" href="#" data-id="4" data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete</a></li></ul></div></span></td></tr><tr class="gridjs-tr"><td data-column-id="#" class="gridjs-td"><span><div class="form-check checkbox-product-list">					<input class="form-check-input" type="checkbox" value="5" id="checkbox-5">					<label class="form-check-label" for="checkbox-5"></label>				  </div></span></td><td data-column-id="product" class="gridjs-td"><span><div class="d-flex align-items-center"><div class="flex-shrink-0 me-3"><div class="avatar-sm bg-light rounded p-1"><img src="assets/images/products/img-5.png" alt="" class="img-fluid d-block"></div></div><div class="flex-grow-1"><h5 class="fs-14 mb-1"><a href="apps-ecommerce-product-details.html" class="text-dark">Crux Motorsports Helmet</a></h5><p class="text-muted mb-0">Category : <span class="fw-medium">Automotive Accessories</span></p></div></div></span></td><td data-column-id="stock" class="gridjs-td">08</td><td data-column-id="price" class="gridjs-td"><span>$175.00</span></td><td data-column-id="orders" class="gridjs-td">55</td><td data-column-id="rating" class="gridjs-td"><span><span class="badge bg-light text-body fs-12 fw-medium"><i class="mdi mdi-star text-warning me-1"></i>4.4</span></span></td><td data-column-id="published" class="gridjs-td"><span>30 Mar, 2021<small class="text-muted ms-1">09:42 AM</small></span></td><td data-column-id="action" class="gridjs-td"><span><div class="dropdown"><button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></button><ul class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item" href="apps-ecommerce-product-details.html"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li><li><a class="dropdown-item edit-list" data-edit-id="5" href="apps-ecommerce-add-product.html"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a></li><li class="dropdown-divider"></li><li><a class="dropdown-item remove-list" href="#" data-id="5" data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete</a></li></ul></div></span></td></tr><tr class="gridjs-tr"><td data-column-id="#" class="gridjs-td"><span><div class="form-check checkbox-product-list">					<input class="form-check-input" type="checkbox" value="6" id="checkbox-6">					<label class="form-check-label" for="checkbox-6"></label>				  </div></span></td><td data-column-id="product" class="gridjs-td"><span><div class="d-flex align-items-center"><div class="flex-shrink-0 me-3"><div class="avatar-sm bg-light rounded p-1"><img src="assets/images/products/img-6.png" alt="" class="img-fluid d-block"></div></div><div class="flex-grow-1"><h5 class="fs-14 mb-1"><a href="apps-ecommerce-product-details.html" class="text-dark">Half Sleeve T-Shirts (Blue)</a></h5><p class="text-muted mb-0">Category : <span class="fw-medium">Fashion</span></p></div></div></span></td><td data-column-id="stock" class="gridjs-td">15</td><td data-column-id="price" class="gridjs-td"><span>$225.00</span></td><td data-column-id="orders" class="gridjs-td">48</td><td data-column-id="rating" class="gridjs-td"><span><span class="badge bg-light text-body fs-12 fw-medium"><i class="mdi mdi-star text-warning me-1"></i>4.2</span></span></td><td data-column-id="published" class="gridjs-td"><span>12 Oct, 2021<small class="text-muted ms-1">04:55 PM</small></span></td><td data-column-id="action" class="gridjs-td"><span><div class="dropdown"><button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></button><ul class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item" href="apps-ecommerce-product-details.html"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li><li><a class="dropdown-item edit-list" data-edit-id="6" href="apps-ecommerce-add-product.html"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a></li><li class="dropdown-divider"></li><li><a class="dropdown-item remove-list" href="#" data-id="6" data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete</a></li></ul></div></span></td></tr><tr class="gridjs-tr"><td data-column-id="#" class="gridjs-td"><span><div class="form-check checkbox-product-list">					<input class="form-check-input" type="checkbox" value="7" id="checkbox-7">					<label class="form-check-label" for="checkbox-7"></label>				  </div></span></td><td data-column-id="product" class="gridjs-td"><span><div class="d-flex align-items-center"><div class="flex-shrink-0 me-3"><div class="avatar-sm bg-light rounded p-1"><img src="assets/images/products/img-7.png" alt="" class="img-fluid d-block"></div></div><div class="flex-grow-1"><h5 class="fs-14 mb-1"><a href="apps-ecommerce-product-details.html" class="text-dark">Noise Evolve Smartwatch</a></h5><p class="text-muted mb-0">Category : <span class="fw-medium">Watches</span></p></div></div></span></td><td data-column-id="stock" class="gridjs-td">12</td><td data-column-id="price" class="gridjs-td"><span>$105.00</span></td><td data-column-id="orders" class="gridjs-td">45</td><td data-column-id="rating" class="gridjs-td"><span><span class="badge bg-light text-body fs-12 fw-medium"><i class="mdi mdi-star text-warning me-1"></i>4.3</span></span></td><td data-column-id="published" class="gridjs-td"><span>15 May, 2021<small class="text-muted ms-1">03:40 PM</small></span></td><td data-column-id="action" class="gridjs-td"><span><div class="dropdown"><button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></button><ul class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item" href="apps-ecommerce-product-details.html"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li><li><a class="dropdown-item edit-list" data-edit-id="7" href="apps-ecommerce-add-product.html"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a></li><li class="dropdown-divider"></li><li><a class="dropdown-item remove-list" href="#" data-id="7" data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete</a></li></ul></div></span></td></tr><tr class="gridjs-tr"><td data-column-id="#" class="gridjs-td"><span><div class="form-check checkbox-product-list">					<input class="form-check-input" type="checkbox" value="8" id="checkbox-8">					<label class="form-check-label" for="checkbox-8"></label>				  </div></span></td><td data-column-id="product" class="gridjs-td"><span><div class="d-flex align-items-center"><div class="flex-shrink-0 me-3"><div class="avatar-sm bg-light rounded p-1"><img src="assets/images/products/img-8.png" alt="" class="img-fluid d-block"></div></div><div class="flex-grow-1"><h5 class="fs-14 mb-1"><a href="apps-ecommerce-product-details.html" class="text-dark">Sweatshirt for Men (Pink)</a></h5><p class="text-muted mb-0">Category : <span class="fw-medium">Fashion</span></p></div></div></span></td><td data-column-id="stock" class="gridjs-td">20</td><td data-column-id="price" class="gridjs-td"><span>$120.00</span></td><td data-column-id="orders" class="gridjs-td">48</td><td data-column-id="rating" class="gridjs-td"><span><span class="badge bg-light text-body fs-12 fw-medium"><i class="mdi mdi-star text-warning me-1"></i>4.2</span></span></td><td data-column-id="published" class="gridjs-td"><span>21 Jun, 2021<small class="text-muted ms-1">12:18 PM</small></span></td><td data-column-id="action" class="gridjs-td"><span><div class="dropdown"><button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></button><ul class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item" href="apps-ecommerce-product-details.html"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li><li><a class="dropdown-item edit-list" data-edit-id="8" href="apps-ecommerce-add-product.html"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a></li><li class="dropdown-divider"></li><li><a class="dropdown-item remove-list" href="#" data-id="8" data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete</a></li></ul></div></span></td></tr><tr class="gridjs-tr"><td data-column-id="#" class="gridjs-td"><span><div class="form-check checkbox-product-list">					<input class="form-check-input" type="checkbox" value="9" id="checkbox-9">					<label class="form-check-label" for="checkbox-9"></label>				  </div></span></td><td data-column-id="product" class="gridjs-td"><span><div class="d-flex align-items-center"><div class="flex-shrink-0 me-3"><div class="avatar-sm bg-light rounded p-1"><img src="assets/images/products/img-9.png" alt="" class="img-fluid d-block"></div></div><div class="flex-grow-1"><h5 class="fs-14 mb-1"><a href="apps-ecommerce-product-details.html" class="text-dark">Reusable Ecological Coffee Cup</a></h5><p class="text-muted mb-0">Category : <span class="fw-medium">Grocery</span></p></div></div></span></td><td data-column-id="stock" class="gridjs-td">14</td><td data-column-id="price" class="gridjs-td"><span>$325.00</span></td><td data-column-id="orders" class="gridjs-td">55</td><td data-column-id="rating" class="gridjs-td"><span><span class="badge bg-light text-body fs-12 fw-medium"><i class="mdi mdi-star text-warning me-1"></i>4.3</span></span></td><td data-column-id="published" class="gridjs-td"><span>15 Jan, 2021<small class="text-muted ms-1">10:29 PM</small></span></td><td data-column-id="action" class="gridjs-td"><span><div class="dropdown"><button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></button><ul class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item" href="apps-ecommerce-product-details.html"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li><li><a class="dropdown-item edit-list" data-edit-id="9" href="apps-ecommerce-add-product.html"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a></li><li class="dropdown-divider"></li><li><a class="dropdown-item remove-list" href="#" data-id="9" data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete</a></li></ul></div></span></td></tr><tr class="gridjs-tr"><td data-column-id="#" class="gridjs-td"><span><div class="form-check checkbox-product-list">					<input class="form-check-input" type="checkbox" value="10" id="checkbox-10">					<label class="form-check-label" for="checkbox-10"></label>				  </div></span></td><td data-column-id="product" class="gridjs-td"><span><div class="d-flex align-items-center"><div class="flex-shrink-0 me-3"><div class="avatar-sm bg-light rounded p-1"><img src="assets/images/products/img-10.png" alt="" class="img-fluid d-block"></div></div><div class="flex-grow-1"><h5 class="fs-14 mb-1"><a href="apps-ecommerce-product-details.html" class="text-dark">Travel Carrying Pouch Bag</a></h5><p class="text-muted mb-0">Category : <span class="fw-medium">Kids</span></p></div></div></span></td><td data-column-id="stock" class="gridjs-td">20</td><td data-column-id="price" class="gridjs-td"><span>$180.00</span></td><td data-column-id="orders" class="gridjs-td">60</td><td data-column-id="rating" class="gridjs-td"><span><span class="badge bg-light text-body fs-12 fw-medium"><i class="mdi mdi-star text-warning me-1"></i>4.3</span></span></td><td data-column-id="published" class="gridjs-td"><span>15 Jun, 2021<small class="text-muted ms-1">03:51 PM</small></span></td><td data-column-id="action" class="gridjs-td"><span><div class="dropdown"><button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></button><ul class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item" href="apps-ecommerce-product-details.html"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li><li><a class="dropdown-item edit-list" data-edit-id="10" href="apps-ecommerce-add-product.html"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a></li><li class="dropdown-divider"></li><li><a class="dropdown-item remove-list" href="#" data-id="10" data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete</a></li></ul></div></span></td></tr></tbody></table></div><div class="gridjs-footer"><div class="gridjs-pagination"><div role="status" aria-live="polite" class="gridjs-summary" title="Page 1 of 2">Showing <b>1</b> to <b>10</b> of <b>12</b> results</div><div class="gridjs-pages"><button tabindex="0" role="button" disabled="" title="Previous" aria-label="Previous" class="">Previous</button><button tabindex="0" role="button" class="gridjs-currentPage" title="Page 1" aria-label="Page 1">1</button><button tabindex="0" role="button" class="" title="Page 2" aria-label="Page 2">2</button><button tabindex="0" role="button" title="Next" aria-label="Next" class="">Next</button></div></div></div><div id="gridjs-temp" class="gridjs-temp"></div></div></div>--}}
-                                            <table role="grid" class="gridjs-table" style="height: auto;">
-                                                <thead class="gridjs-thead">
-                                                <tr class="gridjs-tr">
-                                                    <th data-column-id="#" class="gridjs-th text-muted" style="width: 40px;">
-                                                        <div class="gridjs-th-content">#</div>
-                                                    </th>
-                                                    <th data-column-id="product" class="gridjs-th gridjs-th-sort text-muted" tabindex="0" style="width: 360px;">
-                                                        <div class="gridjs-th-content">Product</div>
-                                                        <button tabindex="-1" aria-label="Sort column ascending" title="Sort column ascending"
-                                                                class="gridjs-sort gridjs-sort-neutral"></button>
-                                                    </th>
-                                                    <th data-column-id="stock" class="gridjs-th gridjs-th-sort text-muted" tabindex="0" style="width: 94px;">
-                                                        <div class="gridjs-th-content">Stock</div>
-                                                        <button tabindex="-1" aria-label="Sort column ascending" title="Sort column ascending"
-                                                                class="gridjs-sort gridjs-sort-neutral"></button>
-                                                    </th>
-                                                    <th data-column-id="price" class="gridjs-th gridjs-th-sort text-muted" tabindex="0" style="width: 101px;">
-                                                        <div class="gridjs-th-content">Regular Price</div>
-                                                        <button tabindex="-1" aria-label="Sort column ascending" title="Sort column ascending"
-                                                                class="gridjs-sort gridjs-sort-neutral"></button>
-                                                    </th>
-                                                    <th data-column-id="price" class="gridjs-th gridjs-th-sort text-muted" tabindex="0" style="width: 101px;">
-                                                        <div class="gridjs-th-content">Sale Price</div>
-                                                        <button tabindex="-1" aria-label="Sort column ascending" title="Sort column ascending"
-                                                                class="gridjs-sort gridjs-sort-neutral"></button>
-                                                    </th>
-                                                    <th data-column-id="orders" class="gridjs-th gridjs-th-sort text-muted" tabindex="0" style="width: 84px;">
-                                                        <div class="gridjs-th-content">Orders</div>
-                                                        <button tabindex="-1" aria-label="Sort column ascending" title="Sort column ascending"
-                                                                class="gridjs-sort gridjs-sort-neutral"></button>
-                                                    </th>
-                                                    <th data-column-id="rating" class="gridjs-th gridjs-th-sort text-muted" tabindex="0" style="width: 105px;">
-                                                        <div class="gridjs-th-content">Rating</div>
-                                                        <button tabindex="-1" aria-label="Sort column ascending" title="Sort column ascending"
-                                                                class="gridjs-sort gridjs-sort-neutral"></button>
-                                                    </th>
-                                                    <th data-column-id="published" class="gridjs-th gridjs-th-sort text-muted" tabindex="0"
-                                                        style="width: 220px;">
-                                                        <div class="gridjs-th-content">Published</div>
-                                                        <button tabindex="-1" aria-label="Sort column ascending" title="Sort column ascending"
-                                                                class="gridjs-sort gridjs-sort-neutral"></button>
-                                                    </th>
-                                                    <th data-column-id="action" class="gridjs-th text-muted" style="width: 80px;">
-                                                        <div class="gridjs-th-content">Action</div>
-                                                    </th>
-                                                </tr>
-                                                </thead>
-                                                <tbody class="gridjs-tbody">
-                                                @foreach($products as $product)
-                                                    <tr class="gridjs-tr">
-                                                        <td data-column-id="#" class="gridjs-td">
-                                                         <span>
-                                                             <div class="form-check checkbox-product-list">
-                                                                 <input class="form-check-input" type="checkbox" value="1" id="checkbox-1">
-                                                                 <label class="form-check-label" for="checkbox-1"></label>
-                                                             </div>
-                                                         </span>
-                                                        </td>
-                                                        <td data-column-id="product" class="gridjs-td">
-                                                        <span>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="flex-shrink-0 me-3">
-                                                                    <div class="avatar-sm bg-light rounded p-1">
-                                                                        <img src="{{ empty($product->images) ? '' : $product->images }}" alt=""
-                                                                             class="img-fluid d-block"></div></div><div
-                                                                    class="flex-grow-1">
-                                                                    <h5 class="fs-14 mb-1"><a href="apps-ecommerce-product-details.html" class="text-dark">{{ $product->title }}</a></h5>
-                                                                    <p class="text-muted mb-0">Category : <span class="fw-medium">Fashion</span></p>
-                                                                </div>
-                                                            </div>
-                                                        </span>
-                                                        </td>
-                                                        <td data-column-id="stock" class="gridjs-td">{{ $product->stock }}</td>
-                                                        <td data-column-id="price" class="gridjs-td"><span>${{ $product->regular_price }}</span></td>
-                                                        <td data-column-id="price" class="gridjs-td"><span>${{ $product->sale_price }}</span></td>
-                                                        <td data-column-id="orders" class="gridjs-td">{{ $product->order }}</td>
-                                                        <td data-column-id="rating" class="gridjs-td">
-                                                            <span>
-                                                                <span class="badge bg-light text-body fs-12 fw-medium">
-                                                                    <i class="mdi mdi-star text-warning me-1"></i>4.2
-                                                                </span>
-                                                            </span>
-                                                        </td>
-                                                        <td data-column-id="published" class="gridjs-td">
-                                                            <span>{{ $product->created_at->format('Y/m/d') }}
-                                                                <small class="text-muted ms-1">10:05 AM</small>
-                                                            </span>
-                                                        </td>
-                                                        <td data-column-id="action" class="gridjs-td">
-                                                        <span>
-                                                            <div class="dropdown">
-                                                                <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown"
-                                                                        aria-expanded="false"><i class="ri-more-fill"></i>
-                                                                </button>
-                                                                <ul class="dropdown-menu dropdown-menu-end">
-                                                                    <li>
-                                                                        <a class="dropdown-item" href="{{ route('admin.product_variable.index', $product->id) }}">
-                                                                            <i class="ri-pencil-fill align-bottom me-2 text-muted"></i> List Variable
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a class="dropdown-item" href="{{ route('admin.product_view.show', ['id' => $product->id]) }}">
-                                                                            <i class="ri-eye-fill align-bottom me-2 text-muted"></i> View
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a class="dropdown-item edit-list" data-edit-id="1"
-                                                                           href="{{ route('admin.product_edit.show', ['id' => $product->id]) }}">
-                                                                            <i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit
-                                                                        </a>
-                                                                    </li>
-                                                                    <li class="dropdown-divider"></li>
-                                                                    <li>
-                                                                        <form action="{{ route('admin.product_delete.post', ['id' => $product->id]) }}" method="post">
-                                                                            @csrf
-                                                                            <button type="submit" class="dropdown-item remove-list" href="#" data-id="1" data-bs-toggle="modal" data-bs-target="#removeItemModal">
-                                                                                <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete
-                                                                            </button>
-                                                                        </form>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </span>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- end tab pane -->
-
-                                        <div class="tab-pane" id="productnav-published" role="tabpanel">
                                             <div id="table-product-list-published" class="table-card gridjs-border-none">
                                                 <div role="complementary" class="gridjs gridjs-container" style="width: 100%;">
                                                     <div class="gridjs-wrapper" style="height: auto;">
@@ -580,191 +447,73 @@
                                                             </tr>
                                                             </thead>
                                                             <tbody class="gridjs-tbody">
-                                                            <tr class="gridjs-tr">
-                                                                <td data-column-id="#" class="gridjs-td"><span><div class="form-check checkbox-product-list">					<input
-                                                                                class="form-check-input" type="checkbox" value="undefined"
-                                                                                id="checkboxpublished-undefined">					<label
-                                                                                class="form-check-label"
-                                                                                for="checkbox-undefined"></label>				  </div></span></td>
-                                                                <td data-column-id="product" class="gridjs-td"><span><div class="d-flex align-items-center"><div
-                                                                                class="flex-shrink-0 me-3"><div class="avatar-sm bg-light rounded p-1"><img
-                                                                                        src="assets/images/products/img-2.png" alt="" class="img-fluid d-block"></div></div><div
-                                                                                class="flex-grow-1"><h5 class="fs-14 mb-1"><a
-                                                                                        href="apps-ecommerce-product-details.html" class="text-dark">Urban Ladder Pashe Chair</a></h5><p
-                                                                                    class="text-muted mb-0">Category : <span class="fw-medium">Furniture</span></p></div></div></span>
-                                                                </td>
-                                                                <td data-column-id="stock" class="gridjs-td">06</td>
-                                                                <td data-column-id="price" class="gridjs-td"><span>$160.00</span></td>
-                                                                <td data-column-id="orders" class="gridjs-td">30</td>
-                                                                <td data-column-id="rating" class="gridjs-td"><span><span
-                                                                            class="badge bg-light text-body fs-12 fw-medium"><i
-                                                                                class="mdi mdi-star text-warning me-1"></i>4.3</span></span></td>
-                                                                <td data-column-id="published" class="gridjs-td"><span>06 Jan, 2021<small
-                                                                            class="text-muted ms-1">01:31 PM</small></span></td>
-                                                                <td data-column-id="action" class="gridjs-td"><span><div class="dropdown"><button
-                                                                                class="btn btn-soft-secondary btn-sm dropdown" type="button"
-                                                                                data-bs-toggle="dropdown" aria-expanded="false"><i
-                                                                                    class="ri-more-fill"></i></button><ul
-                                                                                class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item"
-                                                                                                                               href="apps-ecommerce-product-details.html"><i
-                                                                                            class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li><li><a
-                                                                                        class="dropdown-item" href="apps-ecommerce-add-product.html"><i
-                                                                                            class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a></li><li
-                                                                                    class="dropdown-divider"></li><li><a class="dropdown-item remove-list"
-                                                                                                                         href="#" data-id="undefined"
-                                                                                                                         data-bs-toggle="modal"
-                                                                                                                         data-bs-target="#removeItemModal"><i
-                                                                                            class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete</a></li></ul></div></span>
-                                                                </td>
-                                                            </tr>
-                                                            <tr class="gridjs-tr">
-                                                                <td data-column-id="#" class="gridjs-td"><span><div class="form-check checkbox-product-list">					<input
-                                                                                class="form-check-input" type="checkbox" value="undefined"
-                                                                                id="checkboxpublished-undefined">					<label
-                                                                                class="form-check-label"
-                                                                                for="checkbox-undefined"></label>				  </div></span></td>
-                                                                <td data-column-id="product" class="gridjs-td"><span><div class="d-flex align-items-center"><div
-                                                                                class="flex-shrink-0 me-3"><div class="avatar-sm bg-light rounded p-1"><img
-                                                                                        src="assets/images/products/img-6.png" alt="" class="img-fluid d-block"></div></div><div
-                                                                                class="flex-grow-1"><h5 class="fs-14 mb-1"><a
-                                                                                        href="apps-ecommerce-product-details.html" class="text-dark">Half Sleeve T-Shirts (Blue)</a></h5><p
-                                                                                    class="text-muted mb-0">Category : <span
-                                                                                        class="fw-medium">Fashion</span></p></div></div></span></td>
-                                                                <td data-column-id="stock" class="gridjs-td">15</td>
-                                                                <td data-column-id="price" class="gridjs-td"><span>$125.00</span></td>
-                                                                <td data-column-id="orders" class="gridjs-td">48</td>
-                                                                <td data-column-id="rating" class="gridjs-td"><span><span
-                                                                            class="badge bg-light text-body fs-12 fw-medium"><i
-                                                                                class="mdi mdi-star text-warning me-1"></i>4.2</span></span></td>
-                                                                <td data-column-id="published" class="gridjs-td"><span>12 Oct, 2021<small
-                                                                            class="text-muted ms-1">04:55 PM</small></span></td>
-                                                                <td data-column-id="action" class="gridjs-td"><span><div class="dropdown"><button
-                                                                                class="btn btn-soft-secondary btn-sm dropdown" type="button"
-                                                                                data-bs-toggle="dropdown" aria-expanded="false"><i
-                                                                                    class="ri-more-fill"></i></button><ul
-                                                                                class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item"
-                                                                                                                               href="apps-ecommerce-product-details.html"><i
-                                                                                            class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li><li><a
-                                                                                        class="dropdown-item" href="apps-ecommerce-add-product.html"><i
-                                                                                            class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a></li><li
-                                                                                    class="dropdown-divider"></li><li><a class="dropdown-item remove-list"
-                                                                                                                         href="#" data-id="undefined"
-                                                                                                                         data-bs-toggle="modal"
-                                                                                                                         data-bs-target="#removeItemModal"><i
-                                                                                            class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete</a></li></ul></div></span>
-                                                                </td>
-                                                            </tr>
-                                                            <tr class="gridjs-tr">
-                                                                <td data-column-id="#" class="gridjs-td"><span><div class="form-check checkbox-product-list">					<input
-                                                                                class="form-check-input" type="checkbox" value="undefined"
-                                                                                id="checkboxpublished-undefined">					<label
-                                                                                class="form-check-label"
-                                                                                for="checkbox-undefined"></label>				  </div></span></td>
-                                                                <td data-column-id="product" class="gridjs-td"><span><div class="d-flex align-items-center"><div
-                                                                                class="flex-shrink-0 me-3"><div class="avatar-sm bg-light rounded p-1"><img
-                                                                                        src="assets/images/products/img-4.png" alt="" class="img-fluid d-block"></div></div><div
-                                                                                class="flex-grow-1"><h5 class="fs-14 mb-1"><a
-                                                                                        href="apps-ecommerce-product-details.html" class="text-dark">Fabric Dual Tone Living Room Chair</a></h5><p
-                                                                                    class="text-muted mb-0">Category : <span class="fw-medium">Furniture</span></p></div></div></span>
-                                                                </td>
-                                                                <td data-column-id="stock" class="gridjs-td">15</td>
-                                                                <td data-column-id="price" class="gridjs-td"><span>$140.00</span></td>
-                                                                <td data-column-id="orders" class="gridjs-td">40</td>
-                                                                <td data-column-id="rating" class="gridjs-td"><span><span
-                                                                            class="badge bg-light text-body fs-12 fw-medium"><i
-                                                                                class="mdi mdi-star text-warning me-1"></i>4.2</span></span></td>
-                                                                <td data-column-id="published" class="gridjs-td"><span>19 Apr, 2021<small
-                                                                            class="text-muted ms-1">02:51 PM</small></span></td>
-                                                                <td data-column-id="action" class="gridjs-td"><span><div class="dropdown"><button
-                                                                                class="btn btn-soft-secondary btn-sm dropdown" type="button"
-                                                                                data-bs-toggle="dropdown" aria-expanded="false"><i
-                                                                                    class="ri-more-fill"></i></button><ul
-                                                                                class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item"
-                                                                                                                               href="apps-ecommerce-product-details.html"><i
-                                                                                            class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li><li><a
-                                                                                        class="dropdown-item" href="apps-ecommerce-add-product.html"><i
-                                                                                            class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a></li><li
-                                                                                    class="dropdown-divider"></li><li><a class="dropdown-item remove-list"
-                                                                                                                         href="#" data-id="undefined"
-                                                                                                                         data-bs-toggle="modal"
-                                                                                                                         data-bs-target="#removeItemModal"><i
-                                                                                            class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete</a></li></ul></div></span>
-                                                                </td>
-                                                            </tr>
-                                                            <tr class="gridjs-tr">
-                                                                <td data-column-id="#" class="gridjs-td"><span><div class="form-check checkbox-product-list">					<input
-                                                                                class="form-check-input" type="checkbox" value="undefined"
-                                                                                id="checkboxpublished-undefined">					<label
-                                                                                class="form-check-label"
-                                                                                for="checkbox-undefined"></label>				  </div></span></td>
-                                                                <td data-column-id="product" class="gridjs-td"><span><div class="d-flex align-items-center"><div
-                                                                                class="flex-shrink-0 me-3"><div class="avatar-sm bg-light rounded p-1"><img
-                                                                                        src="assets/images/products/img-4.png" alt="" class="img-fluid d-block"></div></div><div
-                                                                                class="flex-grow-1"><h5 class="fs-14 mb-1"><a
-                                                                                        href="apps-ecommerce-product-details.html" class="text-dark">350 ml Glass Grocery Container</a></h5><p
-                                                                                    class="text-muted mb-0">Category : <span
-                                                                                        class="fw-medium">Grocery</span></p></div></div></span></td>
-                                                                <td data-column-id="stock" class="gridjs-td">10</td>
-                                                                <td data-column-id="price" class="gridjs-td"><span>$125.00</span></td>
-                                                                <td data-column-id="orders" class="gridjs-td">48</td>
-                                                                <td data-column-id="rating" class="gridjs-td"><span><span
-                                                                            class="badge bg-light text-body fs-12 fw-medium"><i
-                                                                                class="mdi mdi-star text-warning me-1"></i>4.5</span></span></td>
-                                                                <td data-column-id="published" class="gridjs-td"><span>26 Mar, 2021<small
-                                                                            class="text-muted ms-1">11:40 AM</small></span></td>
-                                                                <td data-column-id="action" class="gridjs-td"><span><div class="dropdown"><button
-                                                                                class="btn btn-soft-secondary btn-sm dropdown" type="button"
-                                                                                data-bs-toggle="dropdown" aria-expanded="false"><i
-                                                                                    class="ri-more-fill"></i></button><ul
-                                                                                class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item"
-                                                                                                                               href="apps-ecommerce-product-details.html"><i
-                                                                                            class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li><li><a
-                                                                                        class="dropdown-item" href="apps-ecommerce-add-product.html"><i
-                                                                                            class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a></li><li
-                                                                                    class="dropdown-divider"></li><li><a class="dropdown-item remove-list"
-                                                                                                                         href="#" data-id="undefined"
-                                                                                                                         data-bs-toggle="modal"
-                                                                                                                         data-bs-target="#removeItemModal"><i
-                                                                                            class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete</a></li></ul></div></span>
-                                                                </td>
-                                                            </tr>
-                                                            <tr class="gridjs-tr">
-                                                                <td data-column-id="#" class="gridjs-td"><span><div class="form-check checkbox-product-list">					<input
-                                                                                class="form-check-input" type="checkbox" value="undefined"
-                                                                                id="checkboxpublished-undefined">					<label
-                                                                                class="form-check-label"
-                                                                                for="checkbox-undefined"></label>				  </div></span></td>
-                                                                <td data-column-id="product" class="gridjs-td"><span><div class="d-flex align-items-center"><div
-                                                                                class="flex-shrink-0 me-3"><div class="avatar-sm bg-light rounded p-1"><img
-                                                                                        src="assets/images/products/img-5.png" alt="" class="img-fluid d-block"></div></div><div
-                                                                                class="flex-grow-1"><h5 class="fs-14 mb-1"><a
-                                                                                        href="apps-ecommerce-product-details.html" class="text-dark">Crux Motorsports Helmet</a></h5><p
-                                                                                    class="text-muted mb-0">Category : <span class="fw-medium">Automotive Accessories</span></p></div></div></span>
-                                                                </td>
-                                                                <td data-column-id="stock" class="gridjs-td">08</td>
-                                                                <td data-column-id="price" class="gridjs-td"><span>$135.00</span></td>
-                                                                <td data-column-id="orders" class="gridjs-td">55</td>
-                                                                <td data-column-id="rating" class="gridjs-td"><span><span
-                                                                            class="badge bg-light text-body fs-12 fw-medium"><i
-                                                                                class="mdi mdi-star text-warning me-1"></i>4.4</span></span></td>
-                                                                <td data-column-id="published" class="gridjs-td"><span>30 Mar, 2021<small
-                                                                            class="text-muted ms-1">09:42 AM</small></span></td>
-                                                                <td data-column-id="action" class="gridjs-td"><span><div class="dropdown"><button
-                                                                                class="btn btn-soft-secondary btn-sm dropdown" type="button"
-                                                                                data-bs-toggle="dropdown" aria-expanded="false"><i
-                                                                                    class="ri-more-fill"></i></button><ul
-                                                                                class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item"
-                                                                                                                               href="apps-ecommerce-product-details.html"><i
-                                                                                            class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li><li><a
-                                                                                        class="dropdown-item" href="apps-ecommerce-add-product.html"><i
-                                                                                            class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a></li><li
-                                                                                    class="dropdown-divider"></li><li><a class="dropdown-item remove-list"
-                                                                                                                         href="#" data-id="undefined"
-                                                                                                                         data-bs-toggle="modal"
-                                                                                                                         data-bs-target="#removeItemModal"><i
-                                                                                            class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete</a></li></ul></div></span>
-                                                                </td>
-                                                            </tr>
+                                                            @foreach($products as $product)
+                                                                <tr class="gridjs-tr item-{{ $product->id }}">
+                                                                    <td data-column-id="#" class="gridjs-td"><span><div
+                                                                                class="form-check checkbox-product-list">					<input
+                                                                                    class="form-check-input" type="checkbox" value="undefined"
+                                                                                    id="checkboxpublished-undefined">					<label
+                                                                                    class="form-check-label"
+                                                                                    for="checkbox-undefined"></label>				  </div></span></td>
+                                                                    <td data-column-id="product" class="gridjs-td"><span><div class="d-flex align-items-center"><div
+                                                                                    class="flex-shrink-0 me-3"><div class="avatar-sm bg-light rounded p-1"><img
+                                                                                            src="{{ $product->images }}" alt="" class="img-fluid d-block"></div></div><div
+                                                                                    class="flex-grow-1"><h5 class="fs-14 mb-1"><a
+                                                                                            href="apps-ecommerce-product-details.html" class="text-dark">{{ $product->title }}</a></h5><p
+                                                                                        class="text-muted mb-0">Category : <span
+                                                                                            class="fw-medium">Furniture</span></p></div></div></span>
+                                                                    </td>
+                                                                    <td data-column-id="stock" class="gridjs-td">{{ $product->stock }}</td>
+                                                                    <td data-column-id="price" class="gridjs-td"><span>${{ $product->sale_price }}</span></td>
+                                                                    <td data-column-id="orders" class="gridjs-td">{{ $product->order }}</td>
+                                                                    <td data-column-id="rating" class="gridjs-td"><span><span
+                                                                                class="badge bg-light text-body fs-12 fw-medium"><i
+                                                                                    class="mdi mdi-star text-warning me-1"></i>4.3</span></span></td>
+                                                                    <td data-column-id="published" class="gridjs-td"><span>{{ $product->created_at->format('d M, Y') }}<small
+                                                                                class="text-muted ms-1">{{ $product->created_at->format('h:i A') }}</small></span>
+                                                                    </td>
+                                                                    <td data-column-id="action" class="gridjs-td">
+                                                                        <span>
+                                                                            <div class="dropdown">
+                                                                                <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown"
+                                                                                        aria-expanded="false"><i class="ri-more-fill"></i>
+                                                                                </button>
+                                                                                <ul class="dropdown-menu dropdown-menu-end">
+                                                                                    <li>
+                                                                                        <a class="dropdown-item"
+                                                                                           href="{{ route('admin.product_variable.index', $product->id) }}">
+                                                                                            <i class="ri-pencil-fill align-bottom me-2 text-muted"></i> List Variable
+                                                                                        </a>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <a class="dropdown-item"
+                                                                                           href="{{ route('admin.product_view.show', ['id' => $product->id]) }}">
+                                                                                            <i class="ri-eye-fill align-bottom me-2 text-muted"></i> View
+                                                                                        </a>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <a class="dropdown-item edit-list" data-edit-id="1"
+                                                                                           href="{{ route('admin.product_edit.show', ['id' => $product->id]) }}">
+                                                                                            <i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit
+                                                                                        </a>
+                                                                                    </li>
+                                                                                    <li class="dropdown-divider"></li>
+                                                                                    <li>
+                                                                                        <form action="{{ route('admin.product_delete.post', ['id' => $product->id]) }}"
+                                                                                              data-id="{{ $product->id }}" method="post" class="delete-item-product">
+                                                                                            @csrf
+                                                                                            <button type="submit" class="dropdown-item remove-list" href="#" data-id="1"
+                                                                                                    data-bs-toggle="modal" data-bs-target="#removeItemModal">
+                                                                                                <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete
+                                                                                            </button>
+                                                                                        </form>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </span>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -846,4 +595,6 @@
     <script src="../../../../unpkg.com/gridjs%406.0.6/plugins/selection/dist/selection.umd.js"></script>
     <!-- ecommerce product list -->
     <script src="{{ asset('assets/js/pages/ecommerce-product-list.init.js') }}"></script>
+
+    <script src="{{ asset('assets/js/admin/product-add.js') }}"></script>
 @endsection
