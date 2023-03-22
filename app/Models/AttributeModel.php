@@ -14,6 +14,6 @@ class AttributeModel extends Model
     protected $fillable = ['term_id', 'value', 'slug'];
 
     public function getTermAttribute() {
-        return  $this->belongsTo(TermModel::class, 'term_id');
+        return $this->belongsTo(TermModel::class, 'term_id');
     }
 }

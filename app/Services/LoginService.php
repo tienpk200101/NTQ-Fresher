@@ -16,7 +16,7 @@ class LoginService
     }
 
     public function show() {
-        return view('clients.auth.login');
+        return view('client.auth.login');
     }
 
     public function handleLogin(Request $request) {

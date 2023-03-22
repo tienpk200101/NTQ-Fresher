@@ -1,4 +1,4 @@
-@extends('clients.layouts.layout')
+@extends('client.layouts.layout')
 
 @section('content')
     <div class="main-content overflow-hidden">

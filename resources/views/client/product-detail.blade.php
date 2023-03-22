@@ -1,4 +1,4 @@
-@extends('clients.layouts.layout')
+@extends('client.layouts.layout')
 
 @push('css')
     <!--Swiper slider css-->
@@ -38,56 +38,74 @@
                                         <div class="product-img-slider sticky-side-div">
                                             <div class="swiper product-thumbnail-slider p-2 rounded bg-light mySwipper">
                                                 <div class="swiper-wrapper">
-                                                    <div class="swiper-slide" data-id="0">
-                                                        <img src="assets/images/products/img-8.png" alt=""
-                                                            class="img-fluid d-block" />
-                                                    </div>
-                                                    <div class="swiper-slide" data-id="1">
-                                                        <img src="assets/images/products/img-6.png" alt=""
-                                                            class="img-fluid d-block" />
-                                                    </div>
-                                                    <div class="swiper-slide" data-id="2">
-                                                        <img src="assets/images/products/img-1.png" alt=""
-                                                            class="img-fluid d-block" />
-                                                    </div>
-                                                    <div class="swiper-slide">
-                                                        <img src="assets/images/products/img-8.png" alt=""
-                                                            class="img-fluid d-block" />
-                                                    </div>
+{{--                                                    <div class="swiper-slide" data-id="0">--}}
+{{--                                                        <img src="{{ $product->images }}" alt=""--}}
+{{--                                                             class="img-fluid d-block" />--}}
+{{--                                                    </div>--}}
+                                                    @foreach($images as $key => $image)
+                                                        <div class="swiper-slide" data-id="{{ $key }}">
+                                                            <img src="{{ $image }}" alt=""
+                                                                 class="img-fluid d-block" />
+                                                        </div>
+                                                    @endforeach
+{{--                                                    <div class="swiper-slide" data-id="0">--}}
+{{--                                                        <img src="{{ asset('assets/images/products/img-8.png') }}" alt=""--}}
+{{--                                                            class="img-fluid d-block" />--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="swiper-slide" data-id="1">--}}
+{{--                                                        <img src="{{ asset('assets/images/products/img-6.png') }}" alt=""--}}
+{{--                                                            class="img-fluid d-block" />--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="swiper-slide" data-id="2">--}}
+{{--                                                        <img src="{{ asset('assets/images/products/img-1.png') }}" alt=""--}}
+{{--                                                            class="img-fluid d-block" />--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="swiper-slide">--}}
+{{--                                                        <img src="{{ asset('assets/images/products/img-8.png') }}" alt=""--}}
+{{--                                                            class="img-fluid d-block" />--}}
+{{--                                                    </div>--}}
                                                 </div>
                                                 <div class="swiper-button-next"></div>
                                                 <div class="swiper-button-prev"></div>
                                             </div>
                                             <!-- end swiper thumbnail slide -->
-                                            {{-- <div class="swiper product-nav-slider mt-2">
+                                             <div class="swiper product-nav-slider mt-2">
                                                 <div class="swipper-pagination"></div>
                                                 <div class="swiper-wrapper">
-                                                    <div class="swiper-slide">
-                                                        <div class="nav-slide-item">
-                                                            <img src="assets/images/products/img-8.png" alt=""
-                                                                class="img-fluid d-block" />
+                                                    @foreach($images as $image)
+                                                        <div class="swiper-slide">
+                                                            <div class="nav-slide-item">
+                                                                <img src="{{ $image }}" alt=""
+                                                                     class="img-fluid d-block" />
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="swiper-slide">
-                                                        <div class="nav-slide-item">
-                                                            <img src="assets/images/products/img-6.png" alt=""
-                                                                class="img-fluid d-block" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="swiper-slide">
-                                                        <div class="nav-slide-item">
-                                                            <img src="assets/images/products/img-1.png" alt=""
-                                                                class="img-fluid d-block" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="swiper-slide">
-                                                        <div class="nav-slide-item">
-                                                            <img src="assets/images/products/img-8.png" alt=""
-                                                                class="img-fluid d-block" />
-                                                        </div>
-                                                    </div>
+                                                    @endforeach
+{{--                                                    <div class="swiper-slide">--}}
+{{--                                                        <div class="nav-slide-item">--}}
+{{--                                                            <img src="{{ asset('assets/images/products/img-8.png') }}" alt=""--}}
+{{--                                                                class="img-fluid d-block" />--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="swiper-slide">--}}
+{{--                                                        <div class="nav-slide-item">--}}
+{{--                                                            <img src="{{ asset('assets/images/products/img-6.png') }}" alt=""--}}
+{{--                                                                class="img-fluid d-block" />--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="swiper-slide">--}}
+{{--                                                        <div class="nav-slide-item">--}}
+{{--                                                            <img src="{{ asset('assets/images/products/img-1.png') }}" alt=""--}}
+{{--                                                                class="img-fluid d-block" />--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="swiper-slide">--}}
+{{--                                                        <div class="nav-slide-item">--}}
+{{--                                                            <img src="{{ asset('assets/images/products/img-8.png') }}" alt=""--}}
+{{--                                                                class="img-fluid d-block" />--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
                                                 </div>
-                                            </div> --}}
+                                            </div>
                                             <!-- end swiper nav slide -->
                                         </div>
                                     </div>
@@ -97,7 +115,7 @@
                                         <div class="mt-xl-0 mt-5">
                                             <div class="d-flex">
                                                 <div class="flex-grow-1">
-                                                    <h4>Full Sleeve Sweatshirt for Men (Pink)</h4>
+                                                    <h4>{{ $product->title }}</h4>
                                                     <div class="hstack gap-3 flex-wrap">
                                                         <div><a href="#" class="text-primary d-block">Tommy
                                                                 Hilfiger</a></div>
@@ -141,7 +159,7 @@
                                                             </div>
                                                             <div class="flex-grow-1">
                                                                 <p class="text-muted mb-1">Price :</p>
-                                                                <h5 class="mb-0">$<span class="price-show">120.40</span></h5>
+                                                                <h5 class="mb-0">$<span class="price-show">{{ $product->sale_price }}</span></h5>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -158,7 +176,7 @@
                                                             </div>
                                                             <div class="flex-grow-1">
                                                                 <p class="text-muted mb-1">No. of Orders :</p>
-                                                                <h5 class="mb-0 order-show">2,234</h5>
+                                                                <h5 class="mb-0 order-show">{{ $product->order }}</h5>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -175,7 +193,7 @@
                                                             </div>
                                                             <div class="flex-grow-1">
                                                                 <p class="text-muted mb-1">Available Stocks :</p>
-                                                                <h5 class="mb-0 stock-show">1,230</h5>
+                                                                <h5 class="mb-0 stock-show">{{ $product->stock }}</h5>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -248,63 +266,36 @@
                                                     <div class=" mt-4">
                                                         <h5 class="fs-14">Colors :</h5>
                                                         <div class="d-flex flex-wrap gap-2 choose-color">
+{{--                                                            @foreach($product_variables as $product_variable)--}}
+{{--                                                                <div data-bs-toggle="tooltip" data-bs-trigger="hover"--}}
+{{--                                                                     data-bs-placement="top" data-color="red" title="Out of Stock">--}}
+{{--                                                                    <button type="button"--}}
+{{--                                                                            class="btn avatar-xs p-0 d-flex align-items-center justify-content-center border rounded-circle fs-20 text-primary">--}}
+{{--                                                                        <i class="ri-checkbox-blank-circle-fill"></i>--}}
+{{--                                                                    </button>--}}
+{{--                                                                </div>--}}
+{{--                                                            @endforeach--}}
                                                             <div data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                                data-bs-placement="top" data-color="purple" title="Out of Stock">
+                                                                data-bs-placement="top" data-id="0" data-color="red" title="Out of Stock">
                                                                 <button type="button"
-                                                                    class="btn avatar-xs p-0 d-flex align-items-center justify-content-center border rounded-circle fs-20 text-primary"
-                                                                    disabled>
+                                                                    class="btn avatar-xs p-0 d-flex align-items-center justify-content-center border rounded-circle fs-20 text-primary">
                                                                     <i class="ri-checkbox-blank-circle-fill"></i>
                                                                 </button>
                                                             </div>
                                                             <div data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                                data-bs-placement="top" data-color="blue" title="03 Items Available">
+                                                                data-bs-placement="top" data-id="1" data-color="blue" title="03 Items Available">
                                                                 <button type="button"
                                                                     class="btn avatar-xs p-0 d-flex align-items-center justify-content-center border rounded-circle fs-20 text-secondary">
                                                                     <i class="ri-checkbox-blank-circle-fill"></i>
                                                                 </button>
                                                             </div>
                                                             <div data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                                data-bs-placement="top" data-color="green" title="03 Items Available">
+                                                                data-bs-placement="top" data-id="2" data-color="green" title="03 Items Available">
                                                                 <button type="button"
                                                                     class="btn avatar-xs p-0 d-flex align-items-center justify-content-center border rounded-circle fs-20 text-success">
                                                                     <i class="ri-checkbox-blank-circle-fill"></i>
                                                                 </button>
                                                             </div>
-                                                            {{-- <div data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                                data-bs-placement="top" title="02 Items Available">
-                                                                <button type="button"
-                                                                    class="btn avatar-xs p-0 d-flex align-items-center justify-content-center border rounded-circle fs-20 text-info">
-                                                                    <i class="ri-checkbox-blank-circle-fill"></i>
-                                                                </button>
-                                                            </div>
-                                                            <div data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                                data-bs-placement="top" title="01 Items Available">
-                                                                <button type="button"
-                                                                    class="btn avatar-xs p-0 d-flex align-items-center justify-content-center border rounded-circle fs-20 text-warning">
-                                                                    <i class="ri-checkbox-blank-circle-fill"></i>
-                                                                </button>
-                                                            </div>
-                                                            <div data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                                data-bs-placement="top" title="04 Items Available">
-                                                                <button type="button"
-                                                                    class="btn avatar-xs p-0 d-flex align-items-center justify-content-center border rounded-circle fs-20 text-danger">
-                                                                    <i class="ri-checkbox-blank-circle-fill"></i>
-                                                                </button>
-                                                            </div>
-                                                            <div data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                                data-bs-placement="top" title="03 Items Available">
-                                                                <button type="button"
-                                                                    class="btn avatar-xs p-0 d-flex align-items-center justify-content-center border rounded-circle fs-20 text-light">
-                                                                    <i class="ri-checkbox-blank-circle-fill"></i>
-                                                                </button>
-                                                            </div>
-                                                            <div data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                                data-bs-placement="top" title="04 Items Available">
-                                                                <button type="button"
-                                                                    class="btn avatar-xs p-0 d-flex align-items-center justify-content-center border rounded-circle fs-20 text-dark">
-                                                                    <i class="ri-checkbox-blank-circle-fill"></i>
-                                                                </button>
-                                                            </div> --}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -313,12 +304,13 @@
                                             <!-- end row -->
 
                                             <div class="mt-4 text-muted">
-                                                <h5 class="fs-14">Description :</h5>
-                                                <p>Tommy Hilfiger men striped pink sweatshirt. Crafted with cotton. Material
-                                                    composition is 100% organic cotton. This is one of the world’s leading
-                                                    designer lifestyle brands and is internationally recognized for
-                                                    celebrating the essence of classic American cool style, featuring preppy
-                                                    with a twist designs.</p>
+{{--                                                <h5 class="fs-14">Description :</h5>--}}
+{{--                                                <p>Tommy Hilfiger men striped pink sweatshirt. Crafted with cotton. Material--}}
+{{--                                                    composition is 100% organic cotton. This is one of the world’s leading--}}
+{{--                                                    designer lifestyle brands and is internationally recognized for--}}
+{{--                                                    celebrating the essence of classic American cool style, featuring preppy--}}
+{{--                                                    with a twist designs.</p>--}}
+                                                {!! $product->description !!}
                                             </div>
 
                                             <div class="row">

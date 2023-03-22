@@ -14,7 +14,7 @@ class RegisterService
     }
 
     public function show() {
-        return view('clients.auth.register');
+        return view('client.auth.register');
     }
 
     public function handleRegister(Request $request) {
