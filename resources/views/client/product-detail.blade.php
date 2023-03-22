@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <!-- end page title -->
-
+{{--                @dd($product_variables)--}}
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
@@ -124,7 +124,7 @@
                                                                 class="text-body fw-medium">Zoetic Fashion</span></div>
                                                         <div class="vr"></div>
                                                         <div class="text-muted">Published : <span
-                                                                class="text-body fw-medium">26 Mar, 2021</span></div>
+                                                                class="text-body fw-medium">{{ $product->created_at->format('d M, Y') }}</span></div>
                                                     </div>
                                                 </div>
                                                 <div class="flex-shrink-0">
@@ -223,40 +223,16 @@
                                                     <div class="mt-4">
                                                         <h5 class="fs-14">Sizes :</h5>
                                                         <div class="d-flex flex-wrap gap-2 choose-size">
-                                                            <div data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                                data-bs-placement="top" data-size="S" title="Out of Stock">
-                                                                <input type="radio" class="btn-check"
-                                                                    name="productsize-radio" id="productsize-radio1" value="S">
-                                                                <label
-                                                                    class="btn btn-soft-primary avatar-xs rounded-circle p-0 d-flex justify-content-center align-items-center"
-                                                                    for="productsize-radio1">S</label>
-                                                            </div>
-
-                                                            <div data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                                data-bs-placement="top" data-size="M" title="04 Items Available">
-                                                                <input type="radio" class="btn-check"
-                                                                    name="productsize-radio" id="productsize-radio2" value="M">
-                                                                <label
-                                                                    class="btn btn-soft-primary avatar-xs rounded-circle p-0 d-flex justify-content-center align-items-center"
-                                                                    for="productsize-radio2">M</label>
-                                                            </div>
-                                                            <div data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                                data-bs-placement="top" data-size="L" title="06 Items Available">
-                                                                <input type="radio" class="btn-check"
-                                                                    name="productsize-radio" id="productsize-radio3" value="L">
-                                                                <label
-                                                                    class="btn btn-soft-primary avatar-xs rounded-circle p-0 d-flex justify-content-center align-items-center"
-                                                                    for="productsize-radio3">L</label>
-                                                            </div>
-
-                                                            <div data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                                data-bs-placement="top" data-size="XL" title="Out of Stock">
-                                                                <input type="radio" class="btn-check"
-                                                                    name="productsize-radio" id="productsize-radio4" value="XL">
-                                                                <label
-                                                                    class="btn btn-soft-primary avatar-xs rounded-circle p-0 d-flex justify-content-center align-items-center"
-                                                                    for="productsize-radio4">XL</label>
-                                                            </div>
+                                                            @foreach($sizes as $key => $size)
+                                                                <div data-bs-toggle="tooltip" data-bs-trigger="hover"
+                                                                     data-bs-placement="top" data-size="{{ $size }}" title="Out of Stock">
+                                                                    <input type="radio" class="btn-check"
+                                                                           name="productsize-radio" id="productsize-radio{{ $key }}" value="{{ $size }}">
+                                                                    <label
+                                                                        class="btn btn-soft-primary avatar-xs rounded-circle p-0 d-flex justify-content-center align-items-center"
+                                                                        for="productsize-radio{{ $key }}">{{ strtoupper($size) }}</label>
+                                                                </div>
+                                                            @endforeach
                                                         </div>
                                                     </div>
                                                 </div>
@@ -266,36 +242,15 @@
                                                     <div class=" mt-4">
                                                         <h5 class="fs-14">Colors :</h5>
                                                         <div class="d-flex flex-wrap gap-2 choose-color">
-{{--                                                            @foreach($product_variables as $product_variable)--}}
-{{--                                                                <div data-bs-toggle="tooltip" data-bs-trigger="hover"--}}
-{{--                                                                     data-bs-placement="top" data-color="red" title="Out of Stock">--}}
-{{--                                                                    <button type="button"--}}
-{{--                                                                            class="btn avatar-xs p-0 d-flex align-items-center justify-content-center border rounded-circle fs-20 text-primary">--}}
-{{--                                                                        <i class="ri-checkbox-blank-circle-fill"></i>--}}
-{{--                                                                    </button>--}}
-{{--                                                                </div>--}}
-{{--                                                            @endforeach--}}
-                                                            <div data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                                data-bs-placement="top" data-id="0" data-color="red" title="Out of Stock">
-                                                                <button type="button"
-                                                                    class="btn avatar-xs p-0 d-flex align-items-center justify-content-center border rounded-circle fs-20 text-primary">
-                                                                    <i class="ri-checkbox-blank-circle-fill"></i>
-                                                                </button>
-                                                            </div>
-                                                            <div data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                                data-bs-placement="top" data-id="1" data-color="blue" title="03 Items Available">
-                                                                <button type="button"
-                                                                    class="btn avatar-xs p-0 d-flex align-items-center justify-content-center border rounded-circle fs-20 text-secondary">
-                                                                    <i class="ri-checkbox-blank-circle-fill"></i>
-                                                                </button>
-                                                            </div>
-                                                            <div data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                                data-bs-placement="top" data-id="2" data-color="green" title="03 Items Available">
-                                                                <button type="button"
-                                                                    class="btn avatar-xs p-0 d-flex align-items-center justify-content-center border rounded-circle fs-20 text-success">
-                                                                    <i class="ri-checkbox-blank-circle-fill"></i>
-                                                                </button>
-                                                            </div>
+                                                            @foreach($colors as $key => $color)
+                                                                <div data-bs-toggle="tooltip" data-bs-trigger="hover"
+                                                                     data-bs-placement="top" data-id="{{ $key }}" data-color="{{ $color }}" title="{{ $color }}">
+                                                                    <button type="button"
+                                                                            class="btn avatar-sm p-0 d-flex align-items-center justify-content-center border fs-30 text-bg-light">
+                                                                        {{ $color }}
+                                                                    </button>
+                                                                </div>
+                                                            @endforeach
                                                         </div>
                                                     </div>
                                                 </div>
