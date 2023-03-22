@@ -29,9 +29,9 @@ Route::post('reset-password', [ForgotPasswordController::class, 'handleResetPass
 // Home
 Route::get('/', [HomeController::class, 'showHome'])->name('home');
 
-Route::get('product-detail/{id}', [ProductDetailController::class, 'showProductDetail'])->name('product-detail');
+Route::get('product-detail/{id?}', [ProductDetailController::class, 'showProductDetail'])->name('product-detail');
 Route::post('choose-var', [ProductDetailController::class, 'chooseProduct'])->name('choose.product');
-Route::get('get-product-valiable', [ProductDetailController::class, 'getProductVariable'])->name('product.variable.show');
+Route::get('get-product-variable', [ProductDetailController::class, 'getProductVariable'])->name('product.variable.show');
 
 Route::get('checkout', [CheckoutController::class, 'showCheckout'])->name('checkout.show');
 Route::post('validate-checkout', [CheckoutController::class, 'checkout'])->name('checkout.validate.post');

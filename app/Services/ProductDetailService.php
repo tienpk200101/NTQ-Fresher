@@ -16,10 +16,16 @@ class ProductDetailService
     public function showProductDetail($id)
     {
         $product = ProductModel::find($id);
+        $images = [];
+        $colors = [];
+        $sizes = [];
 
         // Lấy ra tất cả các biến thể của sản phẩm.
         $product_variables = ProductVariableModel::where('product_id', $id)->get();
-        $images = [];
+
+        if(count($product_variables) == 0) {
+            $images[] = $product->images;
+        }
 
         foreach ($product_variables as $product_variable) {
             // 1 biến thể sản phẩm lấy ra các attr_variable.
@@ -34,15 +40,17 @@ class ProductDetailService
                 $product_variable[$term->slug] = $attribute->slug;
             }
 
-            // Add tất cả các ảnh của các biến thể và một mảng.
-            array_push($images, $product_variable->image);
+            $images[] = $product_variable->image;
+            $colors[] = $product_variable->color;
+            $sizes[] = $product_variable->size;
         }
         Cache::put('products', $product_variables, 30 * 60);
 
         return view('client.product-detail', [
             'product' => $product,
-            'product_variables' => $product_variables,
             'images' => $images,
+            'colors' => array_unique($colors),
+            'sizes' => array_unique($sizes),
             'title_head' => 'Product detail'
         ]);
     }
