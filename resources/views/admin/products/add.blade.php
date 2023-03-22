@@ -3,6 +3,8 @@
 @push('css')
     <!-- Plugins css -->
     <link href="{{ asset('assets/libs/dropzone/dropzone.css') }}" rel="stylesheet" type="text/css"/>
+    <!-- Sweet Alert css-->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endpush
 
 @section('content')
@@ -10,7 +12,6 @@
 
         <div class="page-content">
             <div class="container-fluid">
-
                 <!-- start page title -->
                 <div class="row">
                     <div class="col-12">
@@ -33,7 +34,6 @@
                     </div>
                 </div>
                 <!-- end page title -->
-
                 <form action="{{ route('admin.product_add.post') }}" method="POST" id="createproduct-form" autocomplete="off" class="needs-validation"
                       novalidate enctype="multipart/form-data">
                     @csrf
@@ -83,7 +83,7 @@
                                                         </div>
                                                     </label>
                                                     <input type="file" class="form-control d-none @error('images') is-invalid @enderror" value=""
-                                                           id="product-image-input" name="images" accept="image/png, image/gif, image/jpeg">
+                                                           id="product-image-input" name="image" accept="image/png, image/gif, image/jpeg">
                                                 </div>
                                                 <div class="avatar-lg">
                                                     <div class="avatar-title bg-light rounded">
@@ -92,53 +92,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        @error('images')
+                                        @error('image')
                                             <div class="text text-danger">{{ $message }}</div>
                                         @enderror
-                                    </div>
-                                    <div>
-                                        <h5 class="fs-14 mb-1">Product Gallery</h5>
-                                        <p class="text-muted">Add Product Gallery Images.</p>
-
-                                        <div class="dropzone">
-                                            <div class="fallback">
-                                                <input id="gallery" type="file" name="file[]" class="form-control" accept="image/png, image/gif, image/jpeg"
-                                                       multiple>
-                                            </div>
-                                            <div for="gallery" class="dz-message needsclick">
-                                                <div class="mb-3">
-                                                    <i class="display-4 text-muted ri-upload-cloud-2-fill"></i>
-                                                </div>
-
-                                                <h5>Drop files here or click to upload.</h5>
-                                            </div>
-                                        </div>
-
-                                        <ul class="list-unstyled mb-0" id="dropzone-preview">
-                                            <li class="mt-2" id="dropzone-preview-list">
-                                                <!-- This is used as the file preview template -->
-                                                <div class="border rounded">
-                                                    <div class="d-flex p-2">
-                                                        <div class="flex-shrink-0 me-3">
-                                                            <div class="avatar-sm bg-light rounded">
-                                                                <img data-dz-thumbnail class="img-fluid rounded d-block" src="#" alt="Product-Image"/>
-                                                            </div>
-                                                        </div>
-                                                        <div class="flex-grow-1">
-                                                            <div class="pt-1">
-                                                                <h5 class="fs-14 mb-1" data-dz-name>&nbsp;</h5>
-                                                                <p class="fs-13 text-muted mb-0" data-dz-size></p>
-                                                                <strong class="error text-danger" data-dz-errormessage></strong>
-                                                            </div>
-                                                        </div>
-                                                        <div class="flex-shrink-0 ms-3">
-                                                            <button data-dz-remove class="btn btn-sm btn-danger">Delete</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        <!-- end dropzon-preview -->
                                     </div>
                                 </div>
                             </div>
@@ -152,11 +108,11 @@
                                                 General Info
                                             </a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-bs-toggle="tab" href="#addproduct-metadata" role="tab">
-                                                Meta Data
-                                            </a>
-                                        </li>
+{{--                                        <li class="nav-item">--}}
+{{--                                            <a class="nav-link" data-bs-toggle="tab" href="#addproduct-metadata" role="tab">--}}
+{{--                                                Meta Data--}}
+{{--                                            </a>--}}
+{{--                                        </li>--}}
                                     </ul>
                                 </div>
                                 <!-- end card header -->
@@ -164,28 +120,10 @@
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="addproduct-general-info" role="tabpanel">
                                             <div class="row">
-                                                <div class="col-lg-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="manufacturer-name-input">Manufacturer Name</label>
-                                                        <input type="text" class="form-control" id="manufacturer-name-input"
-                                                               placeholder="Enter manufacturer name">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="manufacturer-brand-input">Manufacturer Brand</label>
-                                                        <input type="text" class="form-control" id="manufacturer-brand-input"
-                                                               placeholder="Enter manufacturer brand">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- end row -->
-
-                                            <div class="row">
                                                 <div class="col-lg-3 col-sm-6">
                                                     <div class="mb-3">
                                                         <label class="form-label" for="stocks-input">Stocks</label>
-                                                        <input type="text" class="form-control @error('stock') is-invalid @enderror" id="stocks-input"
+                                                        <input type="number" class="form-control @error('stock') is-invalid @enderror" id="stocks-input"
                                                                value="{{ old('stock') }}" name="stock" placeholder="Stocks" required>
                                                         @error('stock')
                                                             <div class="text text-danger">{{ $message }}</div>
@@ -197,7 +135,7 @@
                                                         <label class="form-label" for="product-price-input">Regular price</label>
                                                         <div class="input-group has-validation mb-3">
                                                             <span class="input-group-text" id="product-price-addon">$</span>
-                                                            <input type="text" class="form-control @error('regular_price') is-invalid @enderror"
+                                                            <input type="number" class="form-control @error('regular_price') is-invalid @enderror"
                                                                    id="product-price-input" value="{{ old('regular_price') }}" name="regular_price" placeholder="Enter price"
                                                                    aria-label="Price" aria-describedby="product-price-addon" required>
                                                             @error('regular_price')
@@ -211,7 +149,7 @@
                                                         <label class="form-label" for="product-discount-input">Discount</label>
                                                         <div class="input-group mb-3">
                                                             <span class="input-group-text" id="product-discount-addon">%</span>
-                                                            <input type="text" class="form-control @error('discount') is-invalid @enderror"
+                                                            <input type="number" class="form-control @error('discount') is-invalid @enderror"
                                                                    id="product-discount-input" value="{{ old('discount') }}" name="discount"
                                                                    placeholder="Enter discount" aria-label="discount" aria-describedby="product-discount-addon">
                                                             <div class="invalid-feedback">Please Enter a product discount.</div>
@@ -266,54 +204,15 @@
                             </div>
                             <!-- end card -->
                             <div class="text-end mb-3">
-                                <button type="submit" class="btn btn-primary w-sm">Submit</button>
+                                <div id="loader" class="d-none overlay">
+                                    <img src="{{ asset('assets/images/Dual Ring-1s-90px.svg') }}" alt="">
+                                </div>
+                                <button type="submit" class="btn btn-primary w-sm">Add Product</button>
                             </div>
                         </div>
                         <!-- end col -->
 
                         <div class="col-lg-4">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title mb-0">Publish</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="mb-3">
-                                        <label for="choices-publish-status-input" class="form-label">Status</label>
-
-                                        <select class="form-select" id="choices-publish-status-input" data-choices data-choices-search-false>
-                                            <option value="Published" selected>Published</option>
-                                            <option value="Scheduled">Scheduled</option>
-                                            <option value="Draft">Draft</option>
-                                        </select>
-                                    </div>
-
-                                    <div>
-                                        <label for="choices-publish-visibility-input" class="form-label">Visibility</label>
-                                        <select class="form-select" id="choices-publish-visibility-input" data-choices data-choices-search-false>
-                                            <option value="Public" selected>Public</option>
-                                            <option value="Hidden">Hidden</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <!-- end card body -->
-                            </div>
-                            <!-- end card -->
-
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title mb-0">Publish Schedule</h5>
-                                </div>
-                                <!-- end card body -->
-                                <div class="card-body">
-                                    <div>
-                                        <label for="datepicker-publish-input" class="form-label">Publish Date & Time</label>
-                                        <input type="text" id="datepicker-publish-input" class="form-control" placeholder="Enter publish date"
-                                               data-provider="flatpickr" data-date-format="d.m.y" data-enable-time>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end card -->
-
                             <div class="card">
                                 <div class="card-header">
                                     <h5 class="card-title mb-0">Product Categories</h5>
@@ -397,4 +296,9 @@
     <script src="{{ asset('assets/libs/dropzone/dropzone-min.js') }}"></script>
 
     <script src="{{ asset('assets/js/pages/ecommerce-product-create.init.js') }}"></script>
+
+    <script src="{{ asset('assets/js/admin/product-add.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 @endsection

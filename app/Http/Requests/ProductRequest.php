@@ -25,12 +25,13 @@ class ProductRequest extends FormRequest
     {
         return [
             'title' => 'required|max:255',
-            'description' => 'required|required',
+            'description' => 'required',
+            'short_description' => 'max:100|nullable',
             'regular_price' => 'required|numeric',
             'stock' => 'required|numeric',
             'discount' => 'nullable|numeric',
             'order' => 'nullable|numeric',
-            'images' => 'required|image|max:8192'
+            'image' => 'required|image|max:8192'
         ];
     }
 }

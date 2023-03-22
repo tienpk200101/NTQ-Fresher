@@ -41,6 +41,7 @@ Route::get('cart', [CartController::class, 'showCart'])->name('cart.show');
 // Admin
 Route::get('/admin/login', [AdminLoginController::class, 'showLoginForm'])->name('admin.login.show');
 Route::post('/admin/login', [AdminLoginController::class, 'login'])->name('admin.login.handle');
+
 //Route::group(['prefix' => 'admin', 'middleware' => ['can:isAdmin']], function(){
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], function(){
     Route::get('/admin/logout', [AdminLoginController::class, 'logout'])->name('logout.handle');

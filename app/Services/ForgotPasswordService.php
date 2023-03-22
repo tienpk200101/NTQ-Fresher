@@ -19,7 +19,7 @@ class ForgotPasswordService
     }
 
     public function showForgotPassword() {
-        return view('auth.forgot-pass');
+        return view('client.auth.forgot-pass');
     }
 
     public function handleForgotPassword($request) {
@@ -44,7 +44,7 @@ class ForgotPasswordService
     }
 
     public function showResetPassword($token) {
-        return view('auth.reset-password', ['token' => $token]);
+        return view('client.auth.reset-password', ['token' => $token]);
     }
 
     public function handleResetPassword($request) {

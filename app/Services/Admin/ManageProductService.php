@@ -45,10 +45,10 @@ class ManageProductService
             'sale_price' => $sale_price,
             'stock' => $request->stock,
             'discount' => $request->discount,
-            'order' => $request->order,
+            'order' => $request->order ?? 0,
         ];
 
-        $imageUpload = $this->uploadImage($request);
+        $imageUpload = $this->uploadImage($request, 'image');
         if($imageUpload) {
             $data_post['images'] = $imageUpload;
         }
@@ -60,10 +60,10 @@ class ManageProductService
                 'product_id' => $product->id
             ]);
 
-            return redirect(route('admin.product.show'))->with('success', 'Create product success');
+            return response()->json(['data' => 'Create product success!']);
         }
 
-        return back()->with('error', 'Create product failed');
+        return response()->json(['data' => 'Create product failed!'], 405);
     }
 
     /**
@@ -121,7 +121,7 @@ class ManageProductService
             'order' => $request->order,
         ];
 
-        $image = $this->uploadImage($request);
+        $image = $this->uploadImage($request, 'image');
         if($image) {
             $data_post['images'] = $image;
         }
@@ -153,27 +153,27 @@ class ManageProductService
 
     /**
      * @param $id // id product.
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function deleteProduct($id){
         $product = ProductModel::find($id);
         if(empty($product)) {
-            return back()->with('error', 'Product not found');
+            return response()->json(['success' => 'Product not found!']);
         }
 
         try{
             ProductCategoryModel::where('product_id', $id)->delete();
             $product->delete();
         } catch (\Exception $exception) {
-            return back()->with('error', 'Delete product failed');
+            return response()->json(['error' => $exception->getMessage()]);
         }
 
-        return back()->with('success', 'Delete product successfully');
+        return response()->json(['success' => 'Delete success!']);
     }
 
-    public function uploadImage($request) {
-        if($request->hasFile('images') && !empty($request->file('images'))) {
-            return Cloudinary::upload($request->file('images')->getRealPath())->getSecurePath();
+    public function uploadImage($request, $name) {
+        if($request->hasFile($name) && !empty($request->file($name))) {
+            return Cloudinary::upload($request->file($name)->getRealPath())->getSecurePath();
         }
 
         return false;

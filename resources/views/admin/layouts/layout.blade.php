@@ -16,6 +16,8 @@
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
 
     @stack('css')
+    <link href="{{ asset('assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+
     {{-- Jquery --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
@@ -2008,6 +2010,12 @@
 <script src="{{ asset('assets/js/plugins.js') }}"></script>
 
 @yield('js')
+
+<!-- Sweet Alerts js -->
+<script src="{{ asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
+
+<!-- Sweet alert init js-->
+<script src="{{ asset('assets/js/pages/sweetalerts.init.js') }}"></script>
 
 <!-- App js -->
 <script src="{{ asset('assets/js/app.js') }}"></script>
