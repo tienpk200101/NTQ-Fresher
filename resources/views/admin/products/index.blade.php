@@ -429,6 +429,12 @@
                                                                     <button tabindex="-1" aria-label="Sort column ascending" title="Sort column ascending"
                                                                             class="gridjs-sort gridjs-sort-neutral"></button>
                                                                 </th>
+                                                                <th data-column-id="orders" class="gridjs-th gridjs-th-sort text-muted" tabindex="0"
+                                                                    style="width: 84px;">
+                                                                    <div class="gridjs-th-content">Variant</div>
+                                                                    <button tabindex="-1" aria-label="Sort column ascending" title="Sort column ascending"
+                                                                            class="gridjs-sort gridjs-sort-neutral"></button>
+                                                                </th>
                                                                 <th data-column-id="rating" class="gridjs-th gridjs-th-sort text-muted" tabindex="0"
                                                                     style="width: 105px;">
                                                                     <div class="gridjs-th-content">Rating</div>
@@ -466,6 +472,7 @@
                                                                     <td data-column-id="stock" class="gridjs-td">{{ $product->stock }}</td>
                                                                     <td data-column-id="price" class="gridjs-td"><span>${{ $product->sale_price }}</span></td>
                                                                     <td data-column-id="orders" class="gridjs-td">{{ $product->order }}</td>
+                                                                    <td data-column-id="orders" class="gridjs-td">{{ $product->is_attr == 0 ? 'NO' : 'YES' }}</td>
                                                                     <td data-column-id="rating" class="gridjs-td"><span><span
                                                                                 class="badge bg-light text-body fs-12 fw-medium"><i
                                                                                     class="mdi mdi-star text-warning me-1"></i>4.3</span></span></td>
@@ -479,7 +486,7 @@
                                                                                         aria-expanded="false"><i class="ri-more-fill"></i>
                                                                                 </button>
                                                                                 <ul class="dropdown-menu dropdown-menu-end">
-                                                                                    <li>
+                                                                                    <li class="{{ $product->is_attr == 0 ? 'd-none' : '' }}">
                                                                                         <a class="dropdown-item"
                                                                                            href="{{ route('admin.product_variable.index', $product->id) }}">
                                                                                             <i class="ri-pencil-fill align-bottom me-2 text-muted"></i> List Variable

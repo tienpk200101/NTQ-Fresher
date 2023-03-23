@@ -5,10 +5,18 @@ namespace App\Services\Admin;
 use App\Models\Category;
 use App\Models\ProductModel;
 use App\Models\ProductCategoryModel;
+use App\Repositories\Admin\ProductRepository;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class ManageProductService
 {
+    protected $productRepository;
+
+    public function __construct(ProductRepository $productRepository)
+    {
+        $this->productRepository = $productRepository;
+    }
+
     /**
      * @return \Illuminate\Contracts\View\View
      */
@@ -36,7 +44,7 @@ class ManageProductService
     public function handleAddProduct($request) {
         $discount = $request->discount ?? 0;
         $sale_price = ($request->regular_price * (100 - $discount)) / 100;
-
+//        return response()->json(['data' => $request->all()]);
         $data_post = [
             'title' => $request->title,
             'description' => $request->description,
@@ -46,6 +54,7 @@ class ManageProductService
             'stock' => $request->stock,
             'discount' => $request->discount,
             'order' => $request->order ?? 0,
+            'is_attr' => $request->is_attr
         ];
 
         $imageUpload = $this->uploadImage($request, 'image');
@@ -53,7 +62,7 @@ class ManageProductService
             $data_post['images'] = $imageUpload;
         }
 
-        $product = ProductModel::create($data_post);
+        $product = $this->productRepository->create($data_post);
         if($product) {
             ProductCategoryModel::create([
                 'category_id' => $request->category_id,
@@ -72,7 +81,7 @@ class ManageProductService
      * @return \Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
      */
     public function showEditProduct($request, $id) {
-        $product = ProductModel::find($id);
+        $product = $this->productRepository->findProductById($id);
         $category_id = ProductCategoryModel::where('product_id', $id)->first()->category_id;
 
         if(empty($product)) {
@@ -90,7 +99,7 @@ class ManageProductService
     /**
      * @param $request
      * @param $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function handleEditProduct($request, $id) {
         $request->validate([
@@ -102,9 +111,10 @@ class ManageProductService
             'order' => 'numeric'
         ]);
 
-        $product = ProductModel::find($id);
+        $product = $this->productRepository->findProductById($id);
         if(empty($product)) {
-            return back()->with('error', 'Product not found');
+//            return back()->with('error', 'Product not found');
+            return response()->json(['data' => 'Product not found!'], 422);
         }
 
         $discount = $request->discount ?? 0;
@@ -119,6 +129,7 @@ class ManageProductService
             'stock' => $request->stock,
             'discount' => $request->discount,
             'order' => $request->order,
+            'is_attr' => $request->is_attr
         ];
 
         $image = $this->uploadImage($request, 'image');
@@ -127,12 +138,16 @@ class ManageProductService
         }
 
         $result = ProductModel::where('id', $id)->update($data_post);
+//        $result = $this->productRepository->updateProduct($id, $data_post);
         if($result) {
             ProductCategoryModel::where('product_id', $id)->update(['category_id' => $request->category_id]);
-            return back()->with('success', 'Update product success');
+//            return back()->with('success', 'Update product success');
+            return response()->json(['data' => 'Update product success']);
         }
 
-        return back()->with('error', 'Update product failed');
+//        return back()->with('error', 'Update product failed');
+        return response()->json(['data' => 'Update product failed'], 422);
+
     }
 
     /**
@@ -140,7 +155,7 @@ class ManageProductService
      * @return \Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
      */
     public function showViewProduct($id) {
-        $product = ProductModel::find($id);
+        $product = $this->productRepository->findProductById($id);
         if(empty($product)) {
             return back()->with('error', 'Product not found');
         }
@@ -156,13 +171,13 @@ class ManageProductService
      * @return \Illuminate\Http\JsonResponse
      */
     public function deleteProduct($id){
-        $product = ProductModel::find($id);
+        $product = $this->productRepository->findProductById($id);
         if(empty($product)) {
             return response()->json(['success' => 'Product not found!']);
         }
 
         try{
-            ProductCategoryModel::where('product_id', $id)->delete();
+            $this->productRepository->deleteProduct($id);
             $product->delete();
         } catch (\Exception $exception) {
             return response()->json(['error' => $exception->getMessage()]);

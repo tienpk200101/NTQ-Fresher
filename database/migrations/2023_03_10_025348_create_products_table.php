@@ -30,7 +30,7 @@ return new class extends Migration
             //referProductId
             $table->string('tax', 100)->nullable();
             $table->string('ship', 100)->nullable();
-            $table->enum('is_attr', [0, 1])->default(0);
+            $table->tinyInteger('is_attr')->default(0);
             $table->timestamps();
         });
     }
