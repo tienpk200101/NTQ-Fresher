@@ -1,38 +1,46 @@
-$(document).ready(function (){
+$(document).ready(function () {
     start();
 
     function changeImage() {
         const file = this.files[0];
-        if (file){
+        if (file) {
             let reader = new FileReader();
-            reader.onload = function(event){
+            reader.onload = function (event) {
                 $('#product-img').attr('src', event.target.result);
             }
             reader.readAsDataURL(file);
         }
     }
 
-    function addProduct(e) {
+    function addOrUpdateProduct(e) {
+        e.preventDefault();
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
 
-        e.preventDefault();
         let formData = new FormData(this);
+        let action = $('input[name="formAction"]').val();
+        let url;
+
+        if (action === 'add') {
+            url = $('#createproduct-form').attr('action');
+        } else if (action === 'edit') {
+            url = $('#updateproduct-form').attr('action');
+        }
 
         $.ajax({
             type: "POST",
-            url: '/admin/add-product',
+            url: url,
             data: formData,
             contentType: false,
             processData: false,
-            beforeSend: function(){
+            beforeSend: function () {
                 $('#loader').removeClass('d-none')
             },
             success: function (response) {
-                document.getElementById('createproduct-form').reset();
                 $('#product-img').attr('src', '#')
                 $('#ckeditor-classic').html('');
                 Swal.fire(
@@ -48,8 +56,11 @@ $(document).ready(function (){
                     'error'
                 )
             },
-            complete: function(){
+            complete: function () {
                 $('#loader').addClass('d-none');
+                setTimeout(() => {
+                    window.location.href = '/admin/manage-product';
+                }, 2000);
             },
         });
     }
@@ -94,7 +105,8 @@ $(document).ready(function (){
     function start() {
         $('.delete-item-product').on('submit', deleteProduct);
 
-        $('#createproduct-form').on('submit', addProduct)
+        $('#createproduct-form').on('submit', addOrUpdateProduct);
+        $('#updateproduct-form').on('submit', addOrUpdateProduct);
 
         $('#product-image-input').on('change', changeImage);
     }

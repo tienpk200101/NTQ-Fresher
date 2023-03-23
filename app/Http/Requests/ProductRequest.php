@@ -31,7 +31,8 @@ class ProductRequest extends FormRequest
             'stock' => 'required|numeric',
             'discount' => 'nullable|numeric',
             'order' => 'nullable|numeric',
-            'image' => 'required|image|max:8192'
+            'image' => 'required|image|max:8192',
+            'is_attr' => 'required|in:0,1'
         ];
     }
 }
