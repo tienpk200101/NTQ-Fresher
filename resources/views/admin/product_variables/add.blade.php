@@ -51,7 +51,7 @@
                     </div>
 
                     <div class="clone">
-                        <div id="form-all" class="row item-product-variable">
+                        <div id="form-all" class="row item-product-variable" data-id="0">
                             <div class="col-lg-8">
                                 <div id="all-attr-variable" class="card">
                                     <div class="card-header">
@@ -164,10 +164,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn btn-danger">Remove</button>
+                                <button type="button" class="btn btn-danger">Remove</button>
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" name="product-id" value="{{ $product_id }}">
                 </form>
             </div>
         </div>
@@ -200,17 +201,18 @@
     <script src="{{ asset('assets/libs/dropzone/dropzone-min.js') }}"></script>
 
     <script src="{{ asset('assets/js/pages/ecommerce-product-create.init.js') }}"></script>
-
     <script>
-        // $(document).ready(function () {
             $('.add-variable').click(function () {
                 let amount_variant = $('input[name="amount-variant"]');
+                let idLastEl = parseInt($('input[type="file"]').last().attr('data-id')) + 1;
+                if(isNaN(idLastEl)) {
+                    idLastEl = 0;
+                }
 
-                let count = $('.item-product-variable').length;
-
-                for (let i = count; i < parseInt(amount_variant.val()) + count; i++) {
+                let length = idLastEl + parseInt(amount_variant.val());
+                for (let i = idLastEl; i < length; i++) {
                     let html = `
-                        <div id="form-all" class="row item-product-variable">
+                        <div id="form-all" class="row item-product-variable" data-id="${i}">
                             <div class="col-lg-8">
                                 <div id="all-attr-variable" class="card">
                                     <div class="card-header">
@@ -331,75 +333,6 @@
 
                 amount_variant.val('');
             });
-
-            $("body").on("click", ".btn-danger", function () {
-                $(this).parents(".item-product-variable").remove();
-            });
-
-            function changeImage(input) {
-                const id = $(input).data('id');
-                console.log($(input));
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-
-                    reader.onload = function (e) {
-                        $('#product-img-'+id).attr('src', e.target.result);
-                    }
-
-                    reader.readAsDataURL(input.files[0]);
-                }
-            }
-
-            $('#createproduct-form').submit(function (e) {
-                e.preventDefault();
-
-                let data = new FormData(this)
-
-                // $.each($('input[type="file"]'), function (i, inputFile) {
-                //     $.each($(inputFile)[0].files, function (j, file) {
-                //         data.append('images[]', file);
-                //     });
-                // });
-
-                let url = $(this).attr('action');
-
-                $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: data,
-                    contentType: false,
-                    processData: false,
-                    beforeSend: function () {
-                        $('#loader').removeClass('d-none')
-                    },
-                    success: function (response) {
-                        console.log(response);
-
-                        $('#product-img').attr('src', '#')
-                        $('#ckeditor-classic').html('');
-                        Swal.fire(
-                            'Successfully!',
-                            response.data,
-                            'success'
-                        )
-                    },
-                    error: function (error) {
-                        console.log(error);
-                        Swal.fire(
-                            'Oops...! Something went Wrong !',
-                            'You need to fill in all the information',
-                            'error'
-                        )
-                    },
-                    complete: function () {
-                        $('#loader').addClass('d-none');
-                        setTimeout(() => {
-                            window.location.href = '/admin/manage-product';
-                        }, 2000);
-                    },
-                });
-            });
-
-        // });
     </script>
+    <script src="{{ asset('/assets/js/admin/product-variable.js') }}"></script>
 @endsection

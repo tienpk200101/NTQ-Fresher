@@ -84,7 +84,7 @@ class ProductVariableService
 
             $data_post[$key] = $data_validate;
             $data_post[$key]['product_id'] = $id;
-            $data_post[$key]['sale_price'] = (int)$data_validate['regular_price'] * (100 - (int)$data_validate['discount']);
+            $data_post[$key]['sale_price'] = (int)$data_validate['regular_price'] * ((100 - (int)$data_validate['discount'])/100);
         }
 
         $image_keys = array_keys($_FILES);
@@ -112,7 +112,7 @@ class ProductVariableService
             }
         }
 
-        return response()->json(['data' => 'Creating Failed Variations']);
+        return response()->json(['data' => 'Creating Variations Success']);
     }
 
     public function showEditProductVariable($id) {
