@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Jobs\SendMail;
 use App\Models\User;
 use Carbon\Carbon;
 use GuzzleHttp\Psr7\Request;
@@ -39,6 +40,8 @@ class ForgotPasswordService
             $message->to($request->email);
             $message->subject('Reset Password');
         });
+//        $emailJob = new SendMail($token, $request->email);
+//        dispatch($emailJob);
 
         return back()->with('message', 'We have e-mailed your password reset link!');;
     }

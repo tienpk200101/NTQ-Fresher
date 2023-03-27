@@ -229,32 +229,5 @@
     <script src="{{ asset('../../../../unpkg.com/gridjs%406.0.6/plugins/selection/dist/selection.umd.js') }}"></script>
     <!-- ecommerce product list -->
     <script src="{{ asset('assets/js/pages/ecommerce-product-list.init.js') }}"></script>
-    <script>
-        $(document).ready(function(){
-
-            $('.remove-item-btn').click(removeTerm);
-
-            function removeTerm() {
-                let product_variable_id = $(this).data('id')
-                console.log();
-                if(confirm('Are you sure to delete this record')) {
-                    $.ajax({
-                        type:'POST',
-                        url: $(this).parent('.delete-form').attr('action'),
-                        data: {
-                            _token: $('meta[name="csrf-token"]').attr('content'),
-                            id: product_variable_id
-                        },
-                        success:function(response) {
-                            if(response.code == 1) {
-                                $('tr').remove('.item-'+product_variable_id)
-
-                                alert('Delete successful');
-                            }
-                        }
-                    })
-                }
-            }
-        });
-    </script>
+    <script src="{{ asset('assets/js/admin/product-variable.js') }}"></script>
 @endsection

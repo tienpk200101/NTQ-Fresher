@@ -10,6 +10,8 @@ use App\Models\ProductVariableModel;
 use App\Models\TermModel;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class ProductVariableService
 {
@@ -49,36 +51,68 @@ class ProductVariableService
         ]);
     }
 
-    public function handleAddProductVariable($id, $request) {
-        $data = [
-            'product_id' => $id,
-            'description' => $request->get('description', ''),
-            'stock' => $request->get('stock', 0),
-            'discount' => (int)$request->discount,
-            'regular_price' => (double)$request->get('regular_price', 0),
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ];
+    /**
+     * @param int $id
+     * @param $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function handleAddProductVariable(int $id, $request) {
+        $data = $request->only(['discount', 'regular_price', 'stock']);
+        $attribute = $request->only(['color', 'size']);
+        $product_variables = [];
 
-        $data['sale_price']  = ((int)$request->regular_price * (100 - (int)$request->discount ?? 0)) / 100;
-        $uploadImage = $this->uploadImage($request, 'image');
-        if($uploadImage) {
-            $data['image'] = $uploadImage;
-        }
-
-        $product_variable_id = ProductVariableModel::insertGetId($data);
-        $data_attr = [$request->get('color', ''), $request->get('size', '')];
-        foreach ($data_attr as $attr) {
-            if(!empty($attr)) {
-                AttributeVariableModel::create([
-                    'attr_id' => $attr,
-                    'product_variable_id' => $product_variable_id
-                ]);
+        foreach ($data as $key => $item) {
+            foreach ($item as $key_item => $value) {
+                $product_variables[$key_item][$key] = $value;
             }
         }
 
-        return redirect(route('admin.product_variable.index', $id))
-            ->with('success', 'Create product variable successfully!');
+        $data_post = [];
+        foreach ($product_variables as $key => $product_variable) {
+            $validated = Validator::make($product_variable, [
+                'regular_price' => 'required|numeric',
+                'discount' => 'numeric',
+                'stock' => 'numeric'
+            ]);
+
+            if($validated->fails()) {
+                return response()->json(['errors' => $validated->errors()->first()], 422);
+            }
+
+            $data_validate = $validated->validated();
+
+            $data_post[$key] = $data_validate;
+            $data_post[$key]['product_id'] = $id;
+            $data_post[$key]['sale_price'] = (int)$data_validate['regular_price'] * ((100 - (int)$data_validate['discount'])/100);
+        }
+
+        $image_keys = array_keys($_FILES);
+        foreach ($image_keys as $key => $name) {
+            $data_post[$key]['image'] = Cloudinary::upload($request->file($name)->getRealPath())->getSecurePath();
+        }
+
+        foreach ($data_post as $key => $data_store) {
+            try{
+                try {
+                    $product_variable_id = ProductVariableModel::firstOrCreate($data_store)->id;
+                } catch (\Exception $e) {
+                    return response()->json(['error' => "Variation #". ++$key ." already exists"], 422);
+                }
+
+                foreach ($attribute as $key_value => $value) {
+                    $id_term = TermModel::where('slug', $key_value)->first()->id;
+                    $id_attribute = AttributeModel::firstOrCreate(['term_id' => $id_term, 'value' => $value[$key], 'slug' => Str::slug($value[$key])])->id;
+
+                    AttributeVariableModel::create(['attr_id' => $id_attribute, 'product_variable_id' => $product_variable_id]);
+                }
+
+            } catch (\Exception $e) {
+                return response()->json(['error' => 'Create product variable failed'], 422);
+            }
+        }
+
+        return response()->json(['data' => 'Creating Variations Success']);
     }
 
     public function showEditProductVariable($id) {
