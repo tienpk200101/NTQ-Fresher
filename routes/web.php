@@ -14,11 +14,12 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\TermController;
 use App\Http\Controllers\Admin\ProductVariableController;
 use App\Http\Controllers\Admin\AttributeController;
+use App\Http\Controllers\ShoppingCartController;
 
 // Auth
 Route::get('login', [LoginController::class, 'showLogin'])->name('login');
 Route::post('login', [LoginController::class, 'handleLogin'])->name('login.post');
-Route::get('sign-out', [LoginController::class, 'logout'])->name('logout');
+Route::get('sign-out', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 Route::get('register', [RegisterController::class, 'showRegister'])->name('register');
 Route::post('register', [RegisterController::class, 'handleRegister'])->name('register.post');
 Route::get('forgot-password', [ForgotPasswordController::class, 'showForgotPassword'])->name('forgotpass');
@@ -33,12 +34,21 @@ Route::get('product-detail/{id?}', [ProductDetailController::class, 'showProduct
 Route::post('choose-var', [ProductDetailController::class, 'chooseProduct'])->name('choose.product');
 Route::get('get-product-variable', [ProductDetailController::class, 'getProductVariable'])->name('product.variable.show');
 
-Route::get('checkout', [CheckoutController::class, 'showCheckout'])->name('checkout.show');
-Route::post('validate-checkout', [CheckoutController::class, 'checkout'])->name('checkout.validate.post');
+Route::middleware(['auth'])->group(function (){
+    Route::get('checkout', [CheckoutController::class, 'showCheckout'])->name('checkout.show');
+    Route::post('validate-checkout', [CheckoutController::class, 'checkout'])->name('checkout.validate.post');
 
-Route::get('cart', [CartController::class, 'showCart'])->name('cart.show');
+    Route::get('cart', [CartController::class, 'showCart'])->name('cart.show');
 
-// Admin
+    Route::group(['controller' => ShoppingCartController::class], function () {
+        Route::get('add-to-cart/{id}', 'addToCart')->name('add.to.cart');
+        Route::post('remove-from-cart/{id}', 'removeProductFromCart')->name('remove.from.cart');
+    });
+
+});
+
+
+// Auth Admin
 Route::get('/admin/login', [AdminLoginController::class, 'showLoginForm'])->name('admin.login.show');
 Route::post('/admin/login', [AdminLoginController::class, 'login'])->name('admin.login.handle');
 
