@@ -5,16 +5,26 @@ namespace App\Services\Admin;
 use App\Models\Category;
 use App\Models\ProductModel;
 use App\Models\ProductCategoryModel;
+use App\Repositories\Admin\CategoryRepository;
+use App\Repositories\Admin\ProductCategoryRepository;
 use App\Repositories\Admin\ProductRepository;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
-class ManageProductService
+class ProductService
 {
+    protected $categoryRepository;
     protected $productRepository;
+    protected $productCategoryRepository;
 
-    public function __construct(ProductRepository $productRepository)
+    public function __construct(
+        CategoryRepository $categoryRepository,
+        ProductRepository $productRepository,
+        ProductCategoryRepository $productCategoryRepository
+    )
     {
         $this->productRepository = $productRepository;
+        $this->categoryRepository = $categoryRepository;
+        $this->productCategoryRepository = $productCategoryRepository;
     }
 
     /**
@@ -23,7 +33,7 @@ class ManageProductService
     public function showManageProduct() {
         return view('admin.products.index', [
             'title_head' => 'Manage Product',
-            'products' => ProductModel::all()
+            'products' => $this->productRepository->getAllProduct()
         ]);
     }
 
@@ -33,7 +43,7 @@ class ManageProductService
     public function showAddProduct() {
         return view('admin.products.add', [
             'title_head' => 'Add Product',
-            'categories' => Category::all()
+            'categories' => $this->categoryRepository->getAll()
         ]);
     }
 
@@ -44,7 +54,6 @@ class ManageProductService
     public function handleAddProduct($request) {
         $discount = $request->discount ?? 0;
         $sale_price = ($request->regular_price * (100 - $discount)) / 100;
-//        return response()->json(['data' => $request->all()]);
         $data_post = [
             'title' => $request->title,
             'description' => $request->description,
@@ -62,9 +71,9 @@ class ManageProductService
             $data_post['images'] = $imageUpload;
         }
 
-        $product = $this->productRepository->create($data_post);
+        $product = $this->productRepository->createProduct($data_post);
         if($product) {
-            ProductCategoryModel::create([
+            $this->productCategoryRepository->create([
                 'category_id' => $request->category_id,
                 'product_id' => $product->id
             ]);
@@ -113,7 +122,6 @@ class ManageProductService
 
         $product = $this->productRepository->findProductById($id);
         if(empty($product)) {
-//            return back()->with('error', 'Product not found');
             return response()->json(['data' => 'Product not found!'], 422);
         }
 
@@ -137,17 +145,13 @@ class ManageProductService
             $data_post['images'] = $image;
         }
 
-        $result = ProductModel::where('id', $id)->update($data_post);
-//        $result = $this->productRepository->updateProduct($id, $data_post);
+        $result = $this->productRepository->updateProduct($id, $data_post);
         if($result) {
             ProductCategoryModel::where('product_id', $id)->update(['category_id' => $request->category_id]);
-//            return back()->with('success', 'Update product success');
             return response()->json(['data' => 'Update product success']);
         }
 
-//        return back()->with('error', 'Update product failed');
         return response()->json(['data' => 'Update product failed'], 422);
-
     }
 
     /**
@@ -178,7 +182,7 @@ class ManageProductService
 
         try{
             $this->productRepository->deleteProduct($id);
-            $product->delete();
+            ProductCategoryModel::where('product_id', $id)->delete();
         } catch (\Exception $exception) {
             return response()->json(['error' => $exception->getMessage()]);
         }

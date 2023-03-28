@@ -3,12 +3,19 @@
 namespace App\Services\Admin;
 
 use App\Models\TermModel;
+use App\Repositories\Admin\TermRepository;
 use Illuminate\Support\Str;
 
 class TermService
 {
+    protected $termRepository;
+    public function __construct(TermRepository $termRepository)
+    {
+        $this->termRepository = $termRepository;
+    }
+
     public function showListTerm(){
-        $terms = TermModel::all();
+        $terms = $this->termRepository->getAll();
 
         return view('admin.terms.index', [
             'title_head' => 'Term',
@@ -31,7 +38,7 @@ class TermService
         $slug = Str::slug($title);
 
         try {
-            TermModel::create(['title' => $title, 'slug' => $slug]);
+            $this->termRepository->createTerm(['title' => $title, 'slug' => $slug]);
         } catch(\Exception $e) {
             return back()->with('error', 'Add term failed');
         }
@@ -40,7 +47,7 @@ class TermService
     }
 
     public function showEditTerm($id) {
-        $term = TermModel::find($id);
+        $term = $this->termRepository->findTermById($id);
         if(!empty($term)) {
             return view('admin.terms.edit', ['term' => $term]);
         }
@@ -52,7 +59,7 @@ class TermService
         $request->validate(['title' => 'required|min:3|max:255']);
 
         try {
-            TermModel::where('id', $id)->update(['title' => $request->title]);
+            $this->termRepository->updateTerm($id, ['title' => $request->title]);
         } catch(\Exception $e) {
             return back()->with('error', 'Update failed!');
         }
@@ -62,7 +69,7 @@ class TermService
 
     public function deleteTerm($id){
         try{
-            TermModel::find($id)->delete();
+            $this->termRepository->deleteTerm($id);
         } catch (\Exception $e) {
             return response()->json(['code' => 0]);
         }

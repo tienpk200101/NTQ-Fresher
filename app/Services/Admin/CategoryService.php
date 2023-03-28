@@ -4,7 +4,7 @@ namespace App\Services\Admin;
 
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
-use App\Repositories\CategoryRepository;
+use App\Repositories\Admin\CategoryRepository;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Support\Str;
 
