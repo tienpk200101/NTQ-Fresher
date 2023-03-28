@@ -4,20 +4,20 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
-use App\Services\Admin\ManageProductService;
+use App\Services\Admin\ProductService;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     /**
-     * @var ManageProductService
+     * @var ProductService
      */
     protected $manageProductService;
 
     /**
-     * @param ManageProductService $manageProductService
+     * @param ProductService $manageProductService
      */
-    public function __construct(ManageProductService $manageProductService)
+    public function __construct(ProductService $manageProductService)
     {
         $this->manageProductService = $manageProductService;
     }

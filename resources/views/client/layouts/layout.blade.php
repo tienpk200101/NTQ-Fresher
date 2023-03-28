@@ -19,6 +19,8 @@
     {{-- Jquery --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
+    <link href="{{ asset('assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css"/>
+
     <!-- Layout config Js -->
     <script src="{{ asset('assets/js/layout.js') }}"></script>
     <!-- Bootstrap Css -->
@@ -41,19 +43,19 @@
                 <div class="navbar-brand-box horizontal-logo">
                     <a href="{{ route('home') }}" class="logo logo-dark">
                             <span class="logo-sm">
-                                <img src="assets/images/logo-sm.png" alt="" height="22">
+                                <img src="{{ asset('assets/images/logo-sm.png') }}" alt="" height="22">
                             </span>
                         <span class="logo-lg">
-                                <img src="assets/images/logo-dark.png" alt="" height="17">
+                                <img src="{{ asset('assets/images/logo-dark.png') }}" alt="" height="17">
                             </span>
                     </a>
 
                     <a href="{{ route('home') }}" class="logo logo-light">
                             <span class="logo-sm">
-                                <img src="assets/images/logo-sm.png" alt="" height="22">
+                                <img src="{{ asset('assets/images/logo-sm.png') }}" alt="" height="22">
                             </span>
                         <span class="logo-lg">
-                                <img src="assets/images/logo-light.png" alt="" height="17">
+                                <img src="{{ asset('assets/images/logo-light.png') }}" alt="" height="17">
                             </span>
                     </a>
                 </div>
@@ -121,7 +123,7 @@
                                 <!-- item -->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item py-2">
                                     <div class="d-flex">
-                                        <img src="assets/images/users/avatar-2.jpg"
+                                        <img src="{{ asset('assets/images/users/avatar-2.jpg') }}"
                                              class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                         <div class="flex-1">
                                             <h6 class="m-0">Angela Bernier</h6>
@@ -132,7 +134,7 @@
                                 <!-- item -->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item py-2">
                                     <div class="d-flex">
-                                        <img src="assets/images/users/avatar-3.jpg"
+                                        <img src="{{ asset('assets/images/users/avatar-3.jpg') }}"
                                              class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                         <div class="flex-1">
                                             <h6 class="m-0">David Grasso</h6>
@@ -143,7 +145,7 @@
                                 <!-- item -->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item py-2">
                                     <div class="d-flex">
-                                        <img src="assets/images/users/avatar-5.jpg"
+                                        <img src="{{ asset('assets/images/users/avatar-5.jpg') }}"
                                              class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                         <div class="flex-1">
                                             <h6 class="m-0">Mike Bunch</h6>
@@ -358,135 +360,37 @@
                                         <a href="apps-ecommerce-products.html" class="btn btn-success w-md mb-3">Shop
                                             Now</a>
                                     </div>
-                                    <div class="d-block dropdown-item dropdown-item-cart text-wrap px-3 py-2">
-                                        <div class="d-flex align-items-center">
-                                            <img src="{{ asset('assets/images/products/img-1.png') }}"
-                                                 class="me-3 rounded-circle avatar-sm p-2 bg-light" alt="user-pic">
-                                            <div class="flex-1">
-                                                <h6 class="mt-0 mb-1 fs-14">
-                                                    <a href="apps-ecommerce-product-details.html"
-                                                       class="text-reset">Branded
-                                                        T-Shirts</a>
-                                                </h6>
-                                                <p class="mb-0 fs-12 text-muted">
-                                                    Quantity: <span>10 x $32</span>
-                                                </p>
+                                    @if(session('cart'))
+                                        @foreach(session('cart') as $id => $product)
+                                            <div class="d-block dropdown-item dropdown-item-cart text-wrap px-3 py-2 item-cart-product-{{ $id }}">
+                                                <div class="d-flex align-items-center">
+                                                    <img src="{{ $product['image'] }}"
+                                                         class="me-3 rounded-circle avatar-sm p-2 bg-light" alt="user-pic">
+                                                    <div class="flex-1">
+                                                        <h6 class="mt-0 mb-1 fs-14">
+                                                            <a href="{{ route('product-detail', $id) }}"
+                                                               class="text-reset">{{ $product['name'] }}</a>
+                                                        </h6>
+                                                        <p class="mb-0 fs-12 text-muted">
+                                                            Quantity: <span>{{ $product['quantity'] }} x ${{ $product['price'] }}</span>
+                                                        </p>
+                                                    </div>
+                                                    <div class="px-2">
+                                                        <h5 class="m-0 fw-normal">$<span class="cart-item-price">{{ $product['quantity'] * $product['price'] }}</span>
+                                                        </h5>
+                                                    </div>
+                                                    <div class="ps-2">
+                                                        <button type="button" data-id="{{ $id }}" class="btn btn-icon btn-sm btn-ghost-secondary remove-item-btn">
+                                                            <i class="ri-close-fill fs-16"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="px-2">
-                                                <h5 class="m-0 fw-normal">$<span class="cart-item-price">320</span>
-                                                </h5>
-                                            </div>
-                                            <div class="ps-2">
-                                                <button type="button"
-                                                        class="btn btn-icon btn-sm btn-ghost-secondary remove-item-btn"><i
-                                                        class="ri-close-fill fs-16"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="d-block dropdown-item dropdown-item-cart text-wrap px-3 py-2">
-                                        <div class="d-flex align-items-center">
-                                            <img src="{{ asset('assets/images/products/img-2.png') }}"
-                                                 class="me-3 rounded-circle avatar-sm p-2 bg-light" alt="user-pic">
-                                            <div class="flex-1">
-                                                <h6 class="mt-0 mb-1 fs-14">
-                                                    <a href="apps-ecommerce-product-details.html"
-                                                       class="text-reset">Bentwood Chair</a>
-                                                </h6>
-                                                <p class="mb-0 fs-12 text-muted">
-                                                    Quantity: <span>5 x $18</span>
-                                                </p>
-                                            </div>
-                                            <div class="px-2">
-                                                <h5 class="m-0 fw-normal">$<span class="cart-item-price">89</span>
-                                                </h5>
-                                            </div>
-                                            <div class="ps-2">
-                                                <button type="button"
-                                                        class="btn btn-icon btn-sm btn-ghost-secondary remove-item-btn"><i
-                                                        class="ri-close-fill fs-16"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="d-block dropdown-item dropdown-item-cart text-wrap px-3 py-2">
-                                        <div class="d-flex align-items-center">
-                                            <img src="{{ asset('assets/images/products/img-3.png') }}"
-                                                 class="me-3 rounded-circle avatar-sm p-2 bg-light" alt="user-pic">
-                                            <div class="flex-1">
-                                                <h6 class="mt-0 mb-1 fs-14">
-                                                    <a href="apps-ecommerce-product-details.html" class="text-reset">
-                                                        Borosil Paper Cup</a>
-                                                </h6>
-                                                <p class="mb-0 fs-12 text-muted">
-                                                    Quantity: <span>3 x $250</span>
-                                                </p>
-                                            </div>
-                                            <div class="px-2">
-                                                <h5 class="m-0 fw-normal">$<span class="cart-item-price">750</span>
-                                                </h5>
-                                            </div>
-                                            <div class="ps-2">
-                                                <button type="button"
-                                                        class="btn btn-icon btn-sm btn-ghost-secondary remove-item-btn"><i
-                                                        class="ri-close-fill fs-16"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="d-block dropdown-item dropdown-item-cart text-wrap px-3 py-2">
-                                        <div class="d-flex align-items-center">
-                                            <img src="{{ asset('assets/images/products/img-6.png') }}"
-                                                 class="me-3 rounded-circle avatar-sm p-2 bg-light" alt="user-pic">
-                                            <div class="flex-1">
-                                                <h6 class="mt-0 mb-1 fs-14">
-                                                    <a href="apps-ecommerce-product-details.html"
-                                                       class="text-reset">Gray
-                                                        Styled T-Shirt</a>
-                                                </h6>
-                                                <p class="mb-0 fs-12 text-muted">
-                                                    Quantity: <span>1 x $1250</span>
-                                                </p>
-                                            </div>
-                                            <div class="px-2">
-                                                <h5 class="m-0 fw-normal">$ <span class="cart-item-price">1250</span>
-                                                </h5>
-                                            </div>
-                                            <div class="ps-2">
-                                                <button type="button"
-                                                        class="btn btn-icon btn-sm btn-ghost-secondary remove-item-btn"><i
-                                                        class="ri-close-fill fs-16"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="d-block dropdown-item dropdown-item-cart text-wrap px-3 py-2">
-                                        <div class="d-flex align-items-center">
-                                            <img src="{{ asset('assets/images/products/img-5.png') }}"
-                                                 class="me-3 rounded-circle avatar-sm p-2 bg-light" alt="user-pic">
-                                            <div class="flex-1">
-                                                <h6 class="mt-0 mb-1 fs-14">
-                                                    <a href="apps-ecommerce-product-details.html"
-                                                       class="text-reset">Stillbird Helmet</a>
-                                                </h6>
-                                                <p class="mb-0 fs-12 text-muted">
-                                                    Quantity: <span>2 x $495</span>
-                                                </p>
-                                            </div>
-                                            <div class="px-2">
-                                                <h5 class="m-0 fw-normal">$<span class="cart-item-price">990</span>
-                                                </h5>
-                                            </div>
-                                            <div class="ps-2">
-                                                <button type="button"
-                                                        class="btn btn-icon btn-sm btn-ghost-secondary remove-item-btn"><i
-                                                        class="ri-close-fill fs-16"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
-                            <div class="p-3 border-bottom-0 border-start-0 border-end-0 border-dashed border"
+                            <div class="p-3 border-bottom-0 border-start-0 border-end-0 border-dashed border total-order-value"
                                  id="checkout-elem">
                                 <div class="d-flex justify-content-between align-items-center pb-3">
                                     <h5 class="m-0 text-muted">Total:</h5>
@@ -664,7 +568,7 @@
                                         <div
                                             class="text-reset notification-item d-block dropdown-item position-relative">
                                             <div class="d-flex">
-                                                <img src="assets/images/users/avatar-8.jpg"
+                                                <img src="{{ asset('assets/images/users/avatar-8.jpg') }}}"
                                                      class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                 <div class="flex-1">
                                                     <a href="#!" class="stretched-link">
@@ -703,7 +607,7 @@
                                     <div data-simplebar style="max-height: 300px;" class="pe-2">
                                         <div class="text-reset notification-item d-block dropdown-item">
                                             <div class="d-flex">
-                                                <img src="assets/images/users/avatar-3.jpg"
+                                                <img src="{{ asset('assets/images/users/avatar-3.jpg') }}"
                                                      class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                 <div class="flex-1">
                                                     <a href="#!" class="stretched-link">
@@ -729,7 +633,7 @@
 
                                         <div class="text-reset notification-item d-block dropdown-item">
                                             <div class="d-flex">
-                                                <img src="assets/images/users/avatar-2.jpg"
+                                                <img src="{{ asset('assets/images/users/avatar-2.jpg') }}"
                                                      class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                 <div class="flex-1">
                                                     <a href="#!" class="stretched-link">
@@ -757,7 +661,7 @@
 
                                         <div class="text-reset notification-item d-block dropdown-item">
                                             <div class="d-flex">
-                                                <img src="assets/images/users/avatar-6.jpg"
+                                                <img src="{{ asset('assets/images/users/avatar-6.jpg') }}"
                                                      class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                 <div class="flex-1">
                                                     <a href="#!" class="stretched-link">
@@ -785,7 +689,7 @@
 
                                         <div class="text-reset notification-item d-block dropdown-item">
                                             <div class="d-flex">
-                                                <img src="assets/images/users/avatar-8.jpg"
+                                                <img src="{{ asset('assets/images/users/avatar-8.jpg') }}"
                                                      class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                 <div class="flex-1">
                                                     <a href="#!" class="stretched-link">
@@ -1019,10 +923,14 @@
 <script src="{{ asset('assets/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
 <script src="{{ asset('assets/js/plugins.js') }}"></script>
 
-@yield('js')
+<!-- Sweet Alerts js -->
+<script src="{{ asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
 
+<!-- Sweet alert init js-->
+<script src="{{ asset('assets/js/pages/sweetalerts.init.js') }}"></script>
+@yield('js')
 <!-- App js -->
-<script src="{{ asset('assets/js/app.js') }}"></script>
+{{--<script src="{{ asset('assets/js/app.js') }}"></script>--}}
 
 
 </body>

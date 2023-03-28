@@ -8,6 +8,10 @@ use App\Models\ProductModel;
 use App\Models\ProductCategoryModel;
 use App\Models\ProductVariableModel;
 use App\Models\TermModel;
+use App\Repositories\Admin\AttribteVariableRepository;
+use App\Repositories\Admin\ProductRepository;
+use App\Repositories\Admin\ProductVariableRepository;
+use App\Repositories\Admin\TermRepository;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -15,8 +19,25 @@ use Illuminate\Support\Str;
 
 class ProductVariableService
 {
+    protected $termRepository;
+    protected $productRepository;
+    protected $productVariableRepository;
+    protected $attributeVariableRepository;
+    public function __construct(
+        AttribteVariableRepository $attributeVariableRepository,
+        ProductVariableRepository $productVariableRepository,
+        ProductRepository $productRepository,
+        TermRepository $termRepository)
+    {
+        $this->attributeVariableRepository = $attributeVariableRepository;
+        $this->productVariableRepository = $productVariableRepository;
+        $this->productRepository = $productRepository;
+        $this->termRepository = $termRepository;
+    }
+
     public function listProductVariable($id) {
-        $product = ProductModel::find($id);
+        $product = $this->productRepository->findProductById($id);
+
         $product_variables = ProductVariableModel::where('product_id', $id)->get();
         foreach ($product_variables as $product_variable) {
             $attr_variables = DB::table('attr_variables')
@@ -38,7 +59,7 @@ class ProductVariableService
     }
 
     public function showAddProductVariable($id) {
-        $terms = TermModel::all();
+        $terms = $this->termRepository->getAllTerm();
         $arr_term = [];
         foreach ($terms as $term) {
             $arr_term[$term->slug] = AttributeModel::where('term_id', $term->id)->get();
@@ -103,8 +124,8 @@ class ProductVariableService
                 foreach ($attribute as $key_value => $value) {
                     $id_term = TermModel::where('slug', $key_value)->first()->id;
                     $id_attribute = AttributeModel::firstOrCreate(['term_id' => $id_term, 'value' => $value[$key], 'slug' => Str::slug($value[$key])])->id;
-
-                    AttributeVariableModel::create(['attr_id' => $id_attribute, 'product_variable_id' => $product_variable_id]);
+                    $attrVariableData = ['attr_id' => $id_attribute, 'product_variable_id' => $product_variable_id];
+                    $this->attributeVariableRepository->createAttributeVariable($attrVariableData);
                 }
 
             } catch (\Exception $e) {
@@ -116,8 +137,8 @@ class ProductVariableService
     }
 
     public function showEditProductVariable($id) {
-        $product_variable = ProductVariableModel::find($id);
-        $terms = TermModel::all();
+        $product_variable = $this->productVariableRepository->findProductVariableById($id);
+        $terms = $this->termRepository->getAllTerm();
         $arr_term = [];
 
         $attr_variables = DB::table('attr_variables')
@@ -143,7 +164,7 @@ class ProductVariableService
 
     public function handleEditProductVariable($id, $request) {
         $attr_variables = AttributeVariableModel::where('product_variable_id', $id)->get();
-        $product_variable = ProductVariableModel::find($id);
+        $product_variable = $this->productVariableRepository->findProductVariableById($id);
         if(empty($product_variable)) {
             return back()->with('error', 'Product variable not found!');
         }
@@ -166,7 +187,7 @@ class ProductVariableService
         }
 
         try {
-            ProductVariableModel::where('id', $id)->update($data);
+            $this->productVariableRepository->updateProductVariable($id, $data);
             foreach ($attr_variables as $key => $item) {
                 $item->update(['attr_id' => $data_attr[$key]]);
             }
@@ -179,13 +200,13 @@ class ProductVariableService
     }
 
     public function deleteProductVariable($id) {
-        $productVariable = ProductVariableModel::find($id);
+        $productVariable = $this->productVariableRepository->findProductVariableById($id);
         if(empty($productVariable)) {
             return back()->with('error', 'Doesn\'t found this product variable!');
         }
 
         try {
-            $productVariable->delete();
+            $this->productVariableRepository->deleteProductVariable($id);
             $attr_variables = AttributeVariableModel::where('product_variable_id', $id)->get();
             try {
                 foreach ($attr_variables as $attr_variable) {

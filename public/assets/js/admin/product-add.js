@@ -47,7 +47,11 @@ $(document).ready(function () {
                     'Successfully!',
                     response.data,
                     'success'
-                )
+                );
+
+                setTimeout(() => {
+                    window.location.href = '/admin/manage-product';
+                }, 2000);
             },
             error: function (error) {
                 Swal.fire(
@@ -58,9 +62,6 @@ $(document).ready(function () {
             },
             complete: function () {
                 $('#loader').addClass('d-none');
-                setTimeout(() => {
-                    window.location.href = '/admin/manage-product';
-                }, 2000);
             },
         });
     }

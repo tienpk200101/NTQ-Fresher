@@ -3,7 +3,7 @@
 namespace App\Services\Admin;
 
 use App\Models\AttributeModel;
-use App\Repositories\AttributeRepository;
+use App\Repositories\Admin\AttributeRepository;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -12,21 +12,21 @@ class AttributeService
     /**
      * @var AttributeRepository
      */
-    protected $attributeRipository;
+    protected $attributeRepository;
 
     /**
      * @param AttributeRepository $attributeRepository
      */
     public function __construct(AttributeRepository $attributeRepository)
     {
-        $this->attributeRipository = $attributeRepository;
+        $this->attributeRepository = $attributeRepository;
     }
 
     /**
      * @return \App\Repositories\All
      */
     public function getAllAttributes() {
-        return $this->attributeRipository->getAll();
+        return $this->attributeRepository->getAllAttribute();
     }
 
     /**
@@ -45,7 +45,7 @@ class AttributeService
             'slug' => Str::slug($request->value),
         ];
 
-        return $this->attributeRipository->createAttribute($data);
+        return $this->attributeRepository->createAttribute($data);
     }
 
     /**
@@ -53,19 +53,19 @@ class AttributeService
      * @param $request
      * @return \App\Repositories\The|false
      */
-    public function updateAttribute($id, $request) {
+    public function updateAttribute(int $id, $request) {
         $request->validate([
             'value' => 'required|min:1|unique:attributes,value,' . $id
         ]);
 
-        $attribute = AttributeModel::find($id);
+        $attribute = $this->attributeRepository->findAttributeById($id);
         $data = [
             'value' => $request->value,
             'term_id' => $attribute->term_id,
             'slug' => Str::slug($request->value),
         ];
 
-        return $this->attributeRipository->updateAttribute($id, $data);
+        return $this->attributeRepository->updateAttribute($id, $data);
     }
 
     /**
@@ -73,7 +73,7 @@ class AttributeService
      * @return \App\Repositories\The
      */
     public function findAttribute($id) {
-        return $this->attributeRipository->findAttributeById($id);
+        return $this->attributeRepository->findAttributeById($id);
     }
 
     /**
@@ -81,6 +81,6 @@ class AttributeService
      * @return \App\Repositories\The|bool
      */
     public function deleteAttribute($id) {
-        return $this->attributeRipository->deleteAttribute($id);
+        return $this->attributeRepository->deleteAttribute($id);
     }
 }
