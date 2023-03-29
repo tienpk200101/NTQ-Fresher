@@ -57,7 +57,8 @@ class ShoppingCartController extends Controller
                 session()->put('cart', $cart);
             }
 
-            session()->flash('success', 'Product removed successfully');
+            return response()->json(['data' => $cart, 'id' => $request->id, 'message' => 'Product removed successfully']);
+//            session()->flash('success', 'Product removed successfully');
         }
     }
 

@@ -20,24 +20,27 @@ class LoginService
     }
 
     public function handleLogin(Request $request) {
+//        dd($request->all());
         $request->validate([
             'username' => 'required|max:255',
             'password' => 'required|max:255'
         ]);
 
         $credentials = $request->only('username', 'password');
-
-        if(Auth::guard('customer')->attempt($credentials)) {
+//        dd(auth()->guard('customer')->attempt(['username' => $request->username, 'password' => $request->password], $request->remember));
+        if(Auth::guard('customer')->attempt($credentials, $request->remember)) {
             return redirect()->intended();
         }
 
         return redirect(route('login'));
     }
 
-    public function logout() {
-        Session::flush();
-        Auth::logout();
+    public function logout(Request $request) {
+        Auth::guard()->logout();
 
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
         return Redirect('/');
     }
 }

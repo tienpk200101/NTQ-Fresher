@@ -34,7 +34,7 @@ Route::get('product-detail/{id?}', [ProductDetailController::class, 'showProduct
 Route::post('choose-var', [ProductDetailController::class, 'chooseProduct'])->name('choose.product');
 Route::get('get-product-variable', [ProductDetailController::class, 'getProductVariable'])->name('product.variable.show');
 
-Route::middleware(['auth'])->group(function (){
+Route::middleware(['auth:customer'])->group(function (){
     Route::get('checkout', [CheckoutController::class, 'showCheckout'])->name('checkout.show');
     Route::post('validate-checkout', [CheckoutController::class, 'checkout'])->name('checkout.validate.post');
 
@@ -53,7 +53,7 @@ Route::get('/admin/login', [AdminLoginController::class, 'showLoginForm'])->name
 Route::post('/admin/login', [AdminLoginController::class, 'login'])->name('admin.login.handle');
 
 //Route::group(['prefix' => 'admin', 'middleware' => ['can:isAdmin']], function(){
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], function(){
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth:web']], function(){
     Route::get('/admin/logout', [AdminLoginController::class, 'logout'])->name('logout.handle');
 
     Route::controller(ProductController::class)->group(function (){
