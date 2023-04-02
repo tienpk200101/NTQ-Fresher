@@ -2,14 +2,14 @@
 
 namespace App\Repositories\Admin;
 
-use App\Models\AttributeModel;
+use App\Models\Attribute;
 use App\Repositories\BaseRepository;
 
 class AttributeRepository extends BaseRepository
 {
 
     public function getModel() {
-        return AttributeModel::class;
+        return Attribute::class;
     }
 
     public function getAllAttribute()

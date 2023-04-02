@@ -2,15 +2,15 @@
 
 namespace App\Services;
 
-use App\Models\ProductModel;
-use App\Models\ProductVariableModel;
+use App\Models\Product;
+use App\Models\ProductVariable;
 use Illuminate\Support\Facades\DB;
 
 class HomeService
 {
     public function showHome() {
         $title = 'Home';
-        $products = ProductModel::all();
+        $products = Product::all();
 
         return view('client.list-product', [
             'products' => $products,

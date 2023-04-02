@@ -2,14 +2,14 @@
 
 namespace App\Repositories\Admin;
 
-use App\Models\AttributeVariableModel;
+use App\Models\AttributeVariable;
 use App\Repositories\BaseRepository;
 
 class AttribteVariableRepository extends BaseRepository {
 
     public function getModel()
     {
-        return AttributeVariableModel::class;
+        return AttributeVariable::class;
     }
 
     public function getAllAttributeVariable()

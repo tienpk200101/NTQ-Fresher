@@ -4,43 +4,28 @@ namespace App\Services;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class LoginService
 {
-    public function __construct()
-    {
-
-    }
-
-    public function show() {
-        return view('client.auth.login');
-    }
-
-    public function handleLogin(Request $request) {
-//        dd($request->all());
-        $request->validate([
-            'username' => 'required|max:255',
-            'password' => 'required|max:255'
-        ]);
-
+    public function handleLogin($request) {
         $credentials = $request->only('username', 'password');
-//        dd(auth()->guard('customer')->attempt(['username' => $request->username, 'password' => $request->password], $request->remember));
         if(Auth::guard('customer')->attempt($credentials, $request->remember)) {
-            return redirect()->intended();
+            $request->session()->regenerate();
+            return redirect()->intended(route('home'));
         }
 
-        return redirect(route('login'));
+        return redirect(route('login'))->with('error', 'Login fail!');
     }
 
-    public function logout(Request $request) {
-        Auth::guard()->logout();
+    public function logout($request) {
+        if(Auth::guard('customer')->check()) {
+            Auth::guard('customer')->logout();
+        }
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
-        return Redirect('/');
+        return redirect(route('home'));
     }
 }

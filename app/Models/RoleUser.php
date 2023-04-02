@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TermModel extends Model
+class RoleUser extends Model
 {
     use HasFactory;
 
-    protected $table = 'terms';
+    protected $table = 'role_users';
 
-    protected $fillable = ['title', 'slug'];
+    protected $fillable = ['user_id', 'role_id'];
 }

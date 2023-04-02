@@ -16,6 +16,7 @@ class CheckoutService
         ]);
     }
 
+
     public function validateCheckout($request)
     {
         if ($request->ajax()) {

@@ -3,13 +3,13 @@
 namespace App\Repositories\Admin;
 
 use App\Repositories\BaseRepository;
-use App\Models\ProductModel;
+use App\Models\Product;
 
 class ProductRepository extends BaseRepository {
 
     public function getModel()
     {
-        return ProductModel::class;
+        return Product::class;
     }
 
     public function getAllProduct()

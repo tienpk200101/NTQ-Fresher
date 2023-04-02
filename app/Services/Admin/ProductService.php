@@ -2,13 +2,16 @@
 
 namespace App\Services\Admin;
 
+use App\Jobs\UploadImageQueue;
 use App\Models\Category;
-use App\Models\ProductModel;
-use App\Models\ProductCategoryModel;
+use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Repositories\Admin\CategoryRepository;
 use App\Repositories\Admin\ProductCategoryRepository;
 use App\Repositories\Admin\ProductRepository;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 
 class ProductService
 {
@@ -31,6 +34,11 @@ class ProductService
      * @return \Illuminate\Contracts\View\View
      */
     public function showManageProduct() {
+
+//        $user = auth()->guard('web')->user();
+//        foreach ($user->roles as $role) {
+//            $user->hasAccess([$role->slug]);
+//        }
         return view('admin.products.index', [
             'title_head' => 'Manage Product',
             'products' => $this->productRepository->getAllProduct()
@@ -91,7 +99,7 @@ class ProductService
      */
     public function showEditProduct($request, $id) {
         $product = $this->productRepository->findProductById($id);
-        $category_id = ProductCategoryModel::where('product_id', $id)->first()->category_id;
+        $category_id = ProductCategory::where('product_id', $id)->first()->category_id;
 
         if(empty($product)) {
             return back()->with('error', 'Product not found');
@@ -147,7 +155,7 @@ class ProductService
 
         $result = $this->productRepository->updateProduct($id, $data_post);
         if($result) {
-            ProductCategoryModel::where('product_id', $id)->update(['category_id' => $request->category_id]);
+            ProductCategory::where('product_id', $id)->update(['category_id' => $request->category_id]);
             return response()->json(['data' => 'Update product success']);
         }
 
@@ -176,13 +184,21 @@ class ProductService
      */
     public function deleteProduct($id){
         $product = $this->productRepository->findProductById($id);
+        $user = auth()->user();
+        $result = $user->can('delete', $product);
+        return response()->json(['result' => $result]);
+        if(Gate::allows('delete', [$user, $product])) {
+            return response()->json(['result' => 'true']);
+        } else {
+            return response()->json(['result' => 'false']);
+        }
         if(empty($product)) {
             return response()->json(['success' => 'Product not found!']);
         }
 
         try{
             $this->productRepository->deleteProduct($id);
-            ProductCategoryModel::where('product_id', $id)->delete();
+            ProductCategory::where('product_id', $id)->delete();
         } catch (\Exception $exception) {
             return response()->json(['error' => $exception->getMessage()]);
         }

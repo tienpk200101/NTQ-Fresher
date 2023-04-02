@@ -90,6 +90,7 @@ $(document).ready(function () {
                         _token: $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function (response) {
+                        console.log(response);
                         $('tr').remove('.item-' + product_id);
                         $('.count-product').html(--count_product);
                         Swal.fire(

@@ -16,10 +16,10 @@ use App\Http\Controllers\Admin\ProductVariableController;
 use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\ShoppingCartController;
 
-// Auth
+// Auth normal
 Route::get('login', [LoginController::class, 'showLogin'])->name('login');
 Route::post('login', [LoginController::class, 'handleLogin'])->name('login.post');
-Route::get('sign-out', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
+Route::get('sign-out', [LoginController::class, 'logout'])->name('logout');
 Route::get('register', [RegisterController::class, 'showRegister'])->name('register');
 Route::post('register', [RegisterController::class, 'handleRegister'])->name('register.post');
 Route::get('forgot-password', [ForgotPasswordController::class, 'showForgotPassword'])->name('forgotpass');
@@ -27,6 +27,11 @@ Route::post('forgot-password', [ForgotPasswordController::class, 'handleForgotPa
 Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPassword'])->name('reset.password.show');
 Route::post('reset-password', [ForgotPasswordController::class, 'handleResetPassword'])->name('reset.password.post');
 
+//Login facebook
+Route::group(['controller' => \App\Http\Controllers\Auth\FacebookController::class], function() {
+    Route::get('auth/facebook', 'redirectToFacebook')->name('login.facebook');
+    Route::get('auth/facebook/callback', 'handleFacebookCallback');
+});
 // Home
 Route::get('/', [HomeController::class, 'showHome'])->name('home');
 

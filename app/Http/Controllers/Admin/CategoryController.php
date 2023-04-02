@@ -17,7 +17,13 @@ class CategoryController extends Controller
         $this->category_service = $category_service;
     }
 
-    public function listCategory() {
+    /**
+     * It gets all the categories from the database and returns a view with the categories.
+     * 
+     * @return A view.
+     */
+    public function listCategory()
+    {
         $categories = $this->category_service->getAllCategory();
 
         return view('admin.categories.index', [
@@ -26,7 +32,13 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function showAddCategory(){
+    /**
+     * It returns a view with a title and a list of categories.
+     * 
+     * @return The view is being returned.
+     */
+    public function showAddCategory()
+    {
         $categories = $this->category_service->getAllCategory();
 
         return view('admin.categories.add', [
@@ -35,7 +47,17 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function handleAddCategory(CategoryRequest $request){
+    /**
+     * This function will handle the request from the form, then it will call the handleAddCategory
+     * function in the CategoryService class to add the category to the database, then it will redirect
+     * to the list category page with a success message.
+     * 
+     * @param CategoryRequest request The request object.
+     * 
+     * @return The return value of the last statement in the try block.
+     */
+    public function handleAddCategory(CategoryRequest $request)
+    {
         try {
             $this->category_service->handleAddCategory($request);
         } catch (\Exception $e) {
@@ -46,7 +68,8 @@ class CategoryController extends Controller
             ->with('success', 'Create category success!');
     }
 
-    public function showEditCategory($id){
+    public function showEditCategory($id)
+    {
         $category = $this->category_service->findCategory($id);
         $categories = $this->category_service->getAllCategory();
 
@@ -57,7 +80,8 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function handleEditCategory($id, CategoryRequest $request) {
+    public function handleEditCategory($id, CategoryRequest $request)
+    {
         try {
             $this->category_service->handleEditCategory($id, $request);
         } catch (\Exception $e) {
@@ -67,10 +91,11 @@ class CategoryController extends Controller
         return back()->with('success', 'Create category success!');
     }
 
-    public function deleteCategory($id, Request $request){
+    public function deleteCategory($id, Request $request)
+    {
         try {
             $this->category_service->deleteCategory($id);
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             return back()->with('error', 'Can\'t delete this row');
         }
 

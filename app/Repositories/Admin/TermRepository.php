@@ -2,14 +2,14 @@
 
 namespace App\Repositories\Admin;
 
-use App\Models\TermModel;
+use App\Models\Term;
 use App\Repositories\BaseRepository;
 
 class TermRepository extends BaseRepository {
 
     public function getModel()
     {
-        return TermModel::class;
+        return Term::class;
     }
 
     public function getAllTerm()

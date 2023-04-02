@@ -68,7 +68,7 @@
                                         <div class="tab-content">
                                             <div class="tab-pane active" id="addproduct-general-info" role="tabpanel">
                                                 <div class="row">
-                                                    @foreach(\App\Models\TermModel::all() as $term)
+                                                    @foreach(\App\Models\Term::all() as $term)
                                                         <div class="col-lg-4 col-sm-6">
                                                             <div class="mb-4">
                                                                 <label class="form-label" for="stocks-input">{{ $term->title }}</label>
@@ -229,7 +229,7 @@
                                         <div class="tab-content">
                                             <div class="tab-pane active" id="addproduct-general-info" role="tabpanel">
                                                 <div class="row">
-                                                                    @foreach(\App\Models\TermModel::all() as $term)
+                                                                    @foreach(\App\Models\Term::all() as $term)
                                     <div class="col-lg-4 col-sm-6">
                                         <div class="mb-4">
                                             <label class="form-label" for="stocks-input">{{ $term->title }}</label>

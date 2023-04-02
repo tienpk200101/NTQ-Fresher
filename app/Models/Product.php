@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProductModel extends Model
+class Product extends Model
 {
     use HasFactory;
 
@@ -40,6 +40,6 @@ class ProductModel extends Model
     protected $hidden = [];
 
     public function getProductVariable() {
-        return $this->hasMany(ProductVariableModel::class, 'product_id');
+        return $this->hasMany(ProductVariable::class, 'product_id');
     }
 }

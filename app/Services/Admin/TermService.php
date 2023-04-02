@@ -2,7 +2,7 @@
 
 namespace App\Services\Admin;
 
-use App\Models\TermModel;
+use App\Models\Term;
 use App\Repositories\Admin\TermRepository;
 use Illuminate\Support\Str;
 

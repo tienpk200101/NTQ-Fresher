@@ -2,13 +2,13 @@
 
 namespace App\Repositories\Admin;
 
-use App\Models\ProductCategoryModel;
+use App\Models\ProductCategory;
 use App\Repositories\BaseRepository;
 
 class ProductCategoryRepository extends BaseRepository {
     public function getModel()
     {
-        return ProductCategoryModel::class;
+        return ProductCategory::class;
     }
 
     public function getAllProductCategory()

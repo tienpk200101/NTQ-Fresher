@@ -2,7 +2,7 @@
 
 namespace App\Services\Admin;
 
-use App\Models\AttributeModel;
+use App\Models\Attribute;
 use App\Repositories\Admin\AttributeRepository;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;

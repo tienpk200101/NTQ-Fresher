@@ -2,14 +2,14 @@
 
 namespace App\Repositories\Admin;
 
-use App\Models\ProductVariableModel;
+use App\Models\ProductVariable;
 use App\Repositories\BaseRepository;
 
 class ProductVariableRepository extends BaseRepository {
 
     public function getModel()
     {
-        return ProductVariableModel::class;
+        return ProductVariable::class;
     }
 
     public function createProductVariable($attributes = [])

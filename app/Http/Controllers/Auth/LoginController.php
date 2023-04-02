@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AuthRequest;
 use App\Services\LoginService;
 use Illuminate\Http\Request;
 
@@ -16,14 +17,14 @@ class LoginController extends Controller
     }
 
     public function showLogin() {
-        return $this->loginService->show();
+        return view('client.auth.login');
     }
 
-    public function handleLogin(Request $request) {
+    public function handleLogin(AuthRequest $request) {
         return $this->loginService->handleLogin($request);
     }
 
-    public function logout() {
-        return $this->loginService->logout();
+    public function logout(Request $request) {
+        return $this->loginService->logout($request);
     }
 }

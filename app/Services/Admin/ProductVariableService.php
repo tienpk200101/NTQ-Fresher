@@ -2,12 +2,12 @@
 
 namespace App\Services\Admin;
 
-use App\Models\AttributeModel;
-use App\Models\AttributeVariableModel;
-use App\Models\ProductModel;
-use App\Models\ProductCategoryModel;
-use App\Models\ProductVariableModel;
-use App\Models\TermModel;
+use App\Models\Attribute;
+use App\Models\AttributeVariable;
+use App\Models\Product;
+use App\Models\ProductCategory;
+use App\Models\ProductVariable;
+use App\Models\Term;
 use App\Repositories\Admin\AttribteVariableRepository;
 use App\Repositories\Admin\ProductRepository;
 use App\Repositories\Admin\ProductVariableRepository;
@@ -38,7 +38,7 @@ class ProductVariableService
     public function listProductVariable($id) {
         $product = $this->productRepository->findProductById($id);
 
-        $product_variables = ProductVariableModel::where('product_id', $id)->get();
+        $product_variables = ProductVariable::where('product_id', $id)->get();
         foreach ($product_variables as $product_variable) {
             $attr_variables = DB::table('attr_variables')
                 ->join('attributes', 'attr_variables.attr_id', '=', 'attributes.id')
@@ -62,7 +62,7 @@ class ProductVariableService
         $terms = $this->termRepository->getAllTerm();
         $arr_term = [];
         foreach ($terms as $term) {
-            $arr_term[$term->slug] = AttributeModel::where('term_id', $term->id)->get();
+            $arr_term[$term->slug] = Attribute::where('term_id', $term->id)->get();
         }
 
         return view('admin.product_variables.add', [
@@ -116,14 +116,14 @@ class ProductVariableService
         foreach ($data_post as $key => $data_store) {
             try{
                 try {
-                    $product_variable_id = ProductVariableModel::firstOrCreate($data_store)->id;
+                    $product_variable_id = ProductVariable::firstOrCreate($data_store)->id;
                 } catch (\Exception $e) {
                     return response()->json(['error' => "Variation #". ++$key ." already exists"], 422);
                 }
 
                 foreach ($attribute as $key_value => $value) {
-                    $id_term = TermModel::where('slug', $key_value)->first()->id;
-                    $id_attribute = AttributeModel::firstOrCreate(['term_id' => $id_term, 'value' => $value[$key], 'slug' => Str::slug($value[$key])])->id;
+                    $id_term = Term::where('slug', $key_value)->first()->id;
+                    $id_attribute = Attribute::firstOrCreate(['term_id' => $id_term, 'value' => $value[$key], 'slug' => Str::slug($value[$key])])->id;
                     $attrVariableData = ['attr_id' => $id_attribute, 'product_variable_id' => $product_variable_id];
                     $this->attributeVariableRepository->createAttributeVariable($attrVariableData);
                 }
@@ -148,7 +148,7 @@ class ProductVariableService
             ->get();
 
         foreach ($terms as $term) {
-            $arr_term[$term->slug] = AttributeModel::where('term_id', $term->id)->get();
+            $arr_term[$term->slug] = Attribute::where('term_id', $term->id)->get();
         }
 
         foreach ($attr_variables as $attr_variable) {
@@ -163,7 +163,7 @@ class ProductVariableService
     }
 
     public function handleEditProductVariable($id, $request) {
-        $attr_variables = AttributeVariableModel::where('product_variable_id', $id)->get();
+        $attr_variables = AttributeVariable::where('product_variable_id', $id)->get();
         $product_variable = $this->productVariableRepository->findProductVariableById($id);
         if(empty($product_variable)) {
             return back()->with('error', 'Product variable not found!');
@@ -207,7 +207,7 @@ class ProductVariableService
 
         try {
             $this->productVariableRepository->deleteProductVariable($id);
-            $attr_variables = AttributeVariableModel::where('product_variable_id', $id)->get();
+            $attr_variables = AttributeVariable::where('product_variable_id', $id)->get();
             try {
                 foreach ($attr_variables as $attr_variable) {
                     $attr_variable->delete();

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\AttributeModel;
-use App\Models\TermModel;
+use App\Models\Attribute;
+use App\Models\Term;
 use App\Services\Admin\AttributeService;
 use Illuminate\Http\Request;
 
@@ -28,8 +28,8 @@ class AttributeController extends Controller
      */
     public function listAttribute($id)
     {
-        $attributes = AttributeModel::where('term_id', $id)->get();
-        $terms = TermModel::all();
+        $attributes = Attribute::where('term_id', $id)->get();
+        $terms = Term::all();
 
         return view('admin.attributes.index', [
             'title_head' => 'Attribute',
@@ -58,7 +58,7 @@ class AttributeController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function findAttribute($id) {
-        $attribute = AttributeModel::find($id);
+        $attribute = Attribute::find($id);
 
         return response()->json(['code' => 1, 'data' => $attribute]);
     }
@@ -71,7 +71,7 @@ class AttributeController extends Controller
     public function showEditAttribute($slug, $id)
     {
         $attribute = $this->attributeService->findAttribute($id);
-        $term_id = TermModel::where('slug', $slug)->first()->id;
+        $term_id = Term::where('slug', $slug)->first()->id;
 
         return view('admin.attributes.edit', [
             'head_title' => 'Edit Attribute',

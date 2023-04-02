@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProductModel;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,7 +14,7 @@ class ShoppingCartController extends Controller
      */
     public function addToCart($id): \Illuminate\Http\JsonResponse
     {
-        $product = ProductModel::findOrFail($id);
+        $product = Product::findOrFail($id);
         $cart = session()->get('cart', []);
 
         if(isset($cart[$id])) {

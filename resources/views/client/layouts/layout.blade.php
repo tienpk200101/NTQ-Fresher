@@ -751,11 +751,11 @@
                         <button type="button" class="btn" id="page-header-user-dropdown"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="d-flex align-items-center">
-                                    <img class="rounded-circle header-profile-user" src="{{ asset('assets/images/users/avatar-1.jpg') }}"
+                                    <img class="rounded-circle header-profile-user" src="{{ Auth::guard('customer')->user()->avatar ?? asset('assets/images/users/avatar-1.jpg') }}"
                                          alt="Header Avatar">
                                     <span class="text-start ms-xl-2">
                                         <span
-                                            class="d-none d-xl-inline-block ms-1 fw-semibold user-name-text">{{ Auth::guard('customer')->user()->username }}</span>
+                                            class="d-none d-xl-inline-block ms-1 fw-semibold user-name-text">{{ Auth::guard('customer')->user()->full_name ?? Auth::guard('customer')->user()->username }}</span>
                                         <span
                                             class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text">Founder</span>
                                     </span>
@@ -768,7 +768,7 @@
                         @guest('customer')
 
                         @else
-                            <h6 class="dropdown-header">Welcome {{ Auth::guard('customer')->user()->username }}!</h6>
+                            <h6 class="dropdown-header">Welcome {{ Auth::guard('customer')->user()->full_name ?? Auth::guard('customer')->user()->username }}!</h6>
                             <a class="dropdown-item" href="#"><i
                                     class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
                                     class="align-middle">Profile</span></a>

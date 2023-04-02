@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use App\Models\ProductModel;
-use App\Models\ProductVariableModel;
+use App\Models\Product;
+use App\Models\ProductVariable;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
@@ -15,13 +15,13 @@ class ProductDetailService
      */
     public function showProductDetail($id)
     {
-        $product = ProductModel::find($id);
+        $product = Product::find($id);
         $images = [];
         $colors = [];
         $sizes = [];
 
         // Lấy ra tất cả các biến thể của sản phẩm.
-        $product_variables = ProductVariableModel::where('product_id', $id)->get();
+        $product_variables = ProductVariable::where('product_id', $id)->get();
 
         if(count($product_variables) == 0) {
             $images[] = $product->images;

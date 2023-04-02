@@ -19,12 +19,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $user = UserConst::DEMO_ACCOUNT;
-        $user['password'] = Hash::make($user['password']);
-        Admin::insert([
-            'name' => 'tienpkadmin',
-            'email' => 'tienpk@gmail.com',
-            'password' => Hash::make('12345678')
-        ]);
+//        $user = UserConst::DEMO_ACCOUNT;
+//        $user['password'] = Hash::make($user['password']);
+//        Admin::insert([
+//            'name' => 'tienpkadmin',
+//            'email' => 'tienpk@gmail.com',
+//            'password' => Hash::make('12345678')
+//        ]);
+        $this->call(RoleSeeder::class);
+        $this->call(RoleUserSeeder::class);
+
     }
 }

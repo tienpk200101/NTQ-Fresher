@@ -97,9 +97,9 @@
                                             <h5 class="text-primary">Welcome Back !</h5>
                                             <p class="text-muted">Sign in to continue to Velzon.</p>
                                         </div>
-                                        @if (Session::has('message'))
-                                            <div class="alert alert-success" role="alert">
-                                                {{ Session::get('message') }}
+                                        @if (Session::has('error'))
+                                            <div class="alert alert-danger text-center" role="alert">
+                                                {{ Session::get('error') }}
                                             </div>
                                         @endif
                                         <div class="mt-4">
@@ -154,9 +154,13 @@
                                                     </div>
 
                                                     <div>
-                                                        <button type="button"
-                                                            class="btn btn-primary btn-icon waves-effect waves-light"><i
-                                                                class="ri-facebook-fill fs-16"></i></button>
+
+                                                        <button type="button" class="btn btn-primary btn-icon waves-effect waves-light">
+                                                            <a href="{{ route('login.facebook') }}">
+                                                                <i
+                                                                    class="ri-facebook-fill fs-16"></i>
+                                                            </a>
+                                                        </button>
                                                         <button type="button"
                                                             class="btn btn-danger btn-icon waves-effect waves-light"><i
                                                                 class="ri-google-fill fs-16"></i></button>

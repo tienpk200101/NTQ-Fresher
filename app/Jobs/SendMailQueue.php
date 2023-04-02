@@ -8,9 +8,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
-class SendMail implements ShouldQueue
+class SendMailQueue implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -35,8 +36,6 @@ class SendMail implements ShouldQueue
      */
     public function handle()
     {
-//        $email = new \App\Mail\SendMail();
-//        Mail::to('phungkhactien2001@gmail.com')->send($email);
         Mail::send('email.forgetPassword', ['token' => $this->token], function($message){
             $message->to($this->email);
             $message->subject('Reset Password');
