@@ -339,10 +339,10 @@
                                             <a href="{{ route('product-detail', $product->id) }}">
 
                                                 <div class="product-img">
-                                                    <img src="{{ $product->images }}" class="img-fluid d-block">
+                                                    <img src="{{ $product->images }}" style="height: 200px !important;" class="img-fluid d-block" alt="">
                                                 </div>
-                                                <div class="product-title">
-                                                    <h5 class="" title="{{ $product->title }}">{{ \Illuminate\Support\Str::limit($product->title, 60) }}</h5>
+                                                <div class="product-title text-center">
+                                                    <h5 class="" title="{{ $product->title }}">{{ \Illuminate\Support\Str::limit($product->title, 20) }}</h5>
                                                 </div>
                                                 <div class="row text-center">
                                                     <h4 class="text-danger">${{ $product->sale_price }}</h4>
