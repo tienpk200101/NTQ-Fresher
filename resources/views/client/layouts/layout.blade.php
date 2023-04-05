@@ -331,8 +331,11 @@
                                 id="page-header-cart-dropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside"
                                 aria-haspopup="true" aria-expanded="false">
                             <i class='bx bx-shopping-bag fs-22'></i>
-                            <span
-                                class="position-absolute topbar-badge cartitem-badge fs-10 translate-middle badge rounded-pill bg-info">5</span>
+                            <span class="position-absolute topbar-badge cartitem-badge fs-10 translate-middle badge rounded-pill bg-info">
+                                @if(session('cart'))
+                                    {{ count(session('cart')) }}
+                                @endif
+                            </span>
                         </button>
                         <div class="dropdown-menu dropdown-menu-xl dropdown-menu-end p-0 dropdown-menu-cart"
                              aria-labelledby="page-header-cart-dropdown">
@@ -343,7 +346,11 @@
                                     </div>
                                     <div class="col-auto">
                                         <span class="badge badge-soft-secondary fs-13"><span
-                                                class="cartitem-badge">7</span>
+                                                class="cartitem-badge">
+                                                @if(session('cart'))
+                                                    {{ count(session('cart')) }}
+                                                @endif
+                                            </span>
                                             items</span>
                                     </div>
                                 </div>
@@ -359,6 +366,9 @@
                                         <h5 class="mb-3">Your Cart is Empty!</h5>
                                         <a href="apps-ecommerce-products.html" class="btn btn-success w-md mb-3">Shop
                                             Now</a>
+                                    </div>
+                                    <div id="product-cart">
+
                                     </div>
                                     @if(session('cart'))
                                         @foreach(session('cart') as $id => $product)
@@ -376,11 +386,13 @@
                                                         </p>
                                                     </div>
                                                     <div class="px-2">
-                                                        <h5 class="m-0 fw-normal">$<span class="cart-item-price">{{ $product['quantity'] * $product['price'] }}</span>
+                                                        <h5 class="m-0 fw-normal">$<span
+                                                                class="cart-item-price">{{ $product['quantity'] * $product['price'] }}</span>
                                                         </h5>
                                                     </div>
                                                     <div class="ps-2">
-                                                        <button type="button" data-id="{{ $id }}" class="btn btn-icon btn-sm btn-ghost-secondary remove-item-btn">
+                                                        <button type="button" data-id="{{ $id }}"
+                                                                class="btn btn-icon btn-sm btn-ghost-secondary remove-item-btn">
                                                             <i class="ri-close-fill fs-16"></i>
                                                         </button>
                                                     </div>
@@ -395,11 +407,14 @@
                                 <div class="d-flex justify-content-between align-items-center pb-3">
                                     <h5 class="m-0 text-muted">Total:</h5>
                                     <div class="px-2">
-                                        <h5 class="m-0" id="cart-item-total">$1258.58</h5>
+                                        <h5 class="m-0" id="cart-item-total"></h5>
                                     </div>
                                 </div>
 
-                                <a href="{{ route('checkout.show') }}" class="btn btn-success text-center w-100">
+                                <a href="{{ route('cart.show') }}" class="btn btn-primary text-center w-100">
+                                    Shopping Cart
+                                </a>
+                                <a href="{{ route('checkout.show') }}" class="btn btn-success text-center w-100 mt-2">
                                     Checkout
                                 </a>
                             </div>
@@ -751,7 +766,8 @@
                         <button type="button" class="btn" id="page-header-user-dropdown"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="d-flex align-items-center">
-                                    <img class="rounded-circle header-profile-user" src="{{ Auth::guard('customer')->user()->avatar ?? asset('assets/images/users/avatar-1.jpg') }}"
+                                    <img class="rounded-circle header-profile-user"
+                                         src="{{ Auth::guard('customer')->user()->avatar ?? asset('assets/images/users/avatar-1.jpg') }}"
                                          alt="Header Avatar">
                                     <span class="text-start ms-xl-2">
                                         <span
@@ -768,7 +784,8 @@
                         @guest('customer')
 
                         @else
-                            <h6 class="dropdown-header">Welcome {{ Auth::guard('customer')->user()->full_name ?? Auth::guard('customer')->user()->username }}!</h6>
+                            <h6 class="dropdown-header">Welcome {{ Auth::guard('customer')->user()->full_name ?? Auth::guard('customer')->user()->username }}
+                                !</h6>
                             <a class="dropdown-item" href="#"><i
                                     class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
                                     class="align-middle">Profile</span></a>
@@ -931,7 +948,6 @@
 @yield('js')
 <!-- App js -->
 {{--<script src="{{ asset('assets/js/app.js') }}"></script>--}}
-
 
 </body>
 
