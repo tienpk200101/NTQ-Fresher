@@ -7,16 +7,6 @@ use Illuminate\Validation\Validator;
 
 class CheckoutService
 {
-    public function showCheckout()
-    {
-        $title_page = 'Checkout';
-
-        return view('client.checkout', [
-            'title_head' => $title_page
-        ]);
-    }
-
-
     public function validateCheckout($request)
     {
         if ($request->ajax()) {

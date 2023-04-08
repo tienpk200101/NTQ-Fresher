@@ -3,11 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Services\CartService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ShoppingCartController extends Controller
 {
+    protected $cartService;
+
+    public function __construct(CartService $cartService)
+    {
+        $this->cartService = $cartService;
+    }
+
+    public function index() {
+        $carts = $this->cartService->showCart();
+
+        return view('client_2.cart', [
+            'title_head' => 'Shopping Cart',
+            'cart' => $carts
+        ]);
+    }
+
     /**
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
@@ -57,6 +74,22 @@ class ShoppingCartController extends Controller
             }
 
             return response()->json(['data' => $cart, 'id' => $request->id, 'message' => 'Product removed successfully']);
+        }
+    }
+
+    /**
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
+    public function getTotalPrice() {
+        if(session()->has('cart')) {
+            $products = session()->get('cart');
+            $sub_total = 0;
+            foreach ($products as $key => $item) {
+                $sub_total += $item['price'] * $item['quantity'];
+            }
+
+            return response()->json(['sub_total' =>  $sub_total, 'total_product' => count($products)]);
         }
     }
 }

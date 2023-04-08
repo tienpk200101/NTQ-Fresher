@@ -1,14 +1,16 @@
 $(document).ready(function () {
-
     start();
 
     function start() {
         let count_cart = $('.dropdown-item.dropdown-item-cart').length;
-
+        getTotalPrice();
         showOrder(count_cart);
         showEmptyCart(count_cart);
         $('.add-to-cart').on('click', addProductInCart);
         $('.remove-item-btn').on('click', removeProductFromCart);
+
+        $('.btn-plus').on('click', changeQuantityProduct);
+        $('.btn-minus').on('click', changeQuantityProduct);
     }
 
     function showOrder(count_cart) {
@@ -78,10 +80,11 @@ $(document).ready(function () {
                 $('.cartitem-badge').html(total_products);
                 $('#cart-item-total').html(total_price)
 
-                window.location.reload(true);
+                alert(total_products);
+                // window.location.reload(true);
             },
             error: function (response) {
-
+                window.location.href('/login');
             }
 
         })
@@ -118,12 +121,15 @@ $(document).ready(function () {
                         );
                         $('.item-cart-product-' + product_id).remove();
                         $('.product-'+product_id).remove();
+
                         let count_cart = $('.dropdown-item.dropdown-item-cart').length;
                         if (count_cart === 0) {
                             $('.empty-cart').show();
                             $('.total-order-value').hide();
                         }
+
                         $('.cartitem-badge').html(count_cart);
+                        orderSummary();
                     }, error: function (response) {
                         console.log(response.responseText)
                         Swal.fire(
@@ -146,66 +152,63 @@ $(document).ready(function () {
         }
     }
 
-    function orderSummary(total) {
+    function orderSummary(total = 0) {
         document.querySelectorAll('.product-line-price').forEach(function (e) {
             total += parseFloat(e.innerHTML);
         });
 
         let cart_subtotal = $('#cart-subtotal').text(total.toFixed(2));
-        let cart_discount = $('#cart-discount').text((total * 0.15).toFixed(2));
+        // let cart_discount = $('#cart-discount').text((total * 0.15).toFixed(2));
         let cart_tax = $('#cart-tax').text((total * 0.125).toFixed(2));
-        let total_finally = parseFloat(cart_subtotal.text()) + parseFloat(cart_discount.text()) + parseFloat(cart_tax.text());
-
+        let cart_shipping = $('#cart-shipping').text();
+        let total_finally = parseFloat(cart_subtotal.text()) + parseFloat(cart_shipping) + parseFloat(cart_tax.text());
         $('#cart-total').text(total_finally.toFixed(2));
         total = 0;
     }
 
-    $('.input-step').find('.plus').click(function (e) {
-        let productElement = $(this).parent().parent().parent().parent().parent();
-        let quantity = parseInt($(this).parent().find('.product-quantity').val()) + 1;
+    function changeQuantityProduct() {
+        let productElement = $(this).parent().parent().parent().parent();
+        let quantity = parseInt(productElement.find('.product-quantity').val());
         let productId = $(this).data('id');
         let data = {
             id: productId,
             quantity: quantity
         };
+
         changeQuantity(data)
 
         let price = parseFloat(productElement.find('.product-price').text());
         let total = 0;
-
-        $(this).parent().find('.product-quantity').get(0).value++;
-        productElement.find('.product-line-price').text(($(this).parent().find('.product-quantity').val() * price).toFixed(2));
-
+        // $(this).parent().find('.product-quantity').get(0).value++;
+        productElement.find('.product-line-price').text((quantity * price).toFixed(2));
         orderSummary(total);
-    });
-
-    $('.input-step').find('.minus').click(function (e) {
-        let productElement = $(this).parent().parent().parent().parent().parent();
-        let quantity = parseInt($(this).parent().find('.product-quantity').val()) - 1;
-        let productId = $(this).data('id');
-        let data = {
-            id: productId,
-            quantity: quantity
-        };
-        changeQuantity(data)
-
-        let price = parseFloat(productElement.find('.product-price').text());
-        let total = 0;
-
-        $(this).parent().find('.product-quantity').get(0).value--;
-        productElement.find('.product-line-price').text(($(this).parent().find('.product-quantity').val() * price).toFixed(2));
-
-        orderSummary(total);
-    });
+    }
 
     function changeQuantity(data) {
         $.ajax({
             type:"GET",
             url:"/change-quantity",
             data:data,
-            success:function (response){
-                console.log(response.data)
-            }
+            success:function (response){}
         });
+    }
+
+    function getTotalPrice() {
+        fetch('get-total-price')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (response) {
+                let sub_total = response.sub_total;
+                let tax = (sub_total * 12.5) / 100;
+                let shipping = 10;
+                let total = sub_total + tax + shipping;
+
+                $('#cart-subtotal').text(sub_total);
+                $('#cart-shipping').text(shipping);
+                $('#cart-tax').text(tax);
+                $('#cart-total').text(total);
+                $('#cartitem-badge').text(response.total_product)
+            })
     }
 });

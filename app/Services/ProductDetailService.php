@@ -42,11 +42,11 @@ class ProductDetailService
 
             $images[] = $product_variable->image;
             $colors[] = $product_variable->color;
-            $sizes[] = $product_variable->size;
+            $sizes[] = strtoupper($product_variable->size);
         }
         Cache::put('products', $product_variables, 30 * 60);
 
-        return view('client.product-detail', [
+        return view('client_2.detail', [
             'product' => $product,
             'images' => $images,
             'colors' => array_unique($colors),

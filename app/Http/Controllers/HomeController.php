@@ -16,7 +16,12 @@ class HomeController extends Controller
         $this->homeService = $homeService;
     }
 
-    public function showHome() {
-        return $this->homeService->showHome();
+    public function index() {
+        $products = $this->homeService->showHome();
+
+        return view('client_2.index', [
+            'products' => $products,
+            'title_head' => 'Home'
+        ]);
     }
 }

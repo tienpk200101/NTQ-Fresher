@@ -15,8 +15,12 @@ class CheckoutController extends Controller
         $this->checkoutService = $checkoutService;
     }
 
-    public function showCheckout() {
-        return $this->checkoutService->showCheckout();
+    public function index() {
+        $title_page = 'Checkout';
+
+        return view('client_2.checkout', [
+            'title_head' => $title_page
+        ]);
     }
 
     public function checkout(CheckoutRequest $request) {

@@ -131,25 +131,25 @@
                                             <tbody>
                                                 <tr>
                                                     <td>Sub Total :</td>
-                                                    <td class="text-end" >$ <span id="cart-subtotal">359.96</span></td>
+                                                    <td class="text-end" >$ <span id="cart-subtotal">{{ $cart['sub_total'] }}</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Discount <span class="text-muted">(VELZON15)</span> : </td>
-                                                    <td class="text-end">- $ <span id="cart-discount">53.99</span></td>
+                                                    <td class="text-end">- $ <span id="cart-discount">0</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Shipping Charge :</td>
-                                                    <td class="text-end" id="cart-shipping">$ 65.00</td>
+                                                    <td class="text-end" id="cart-shipping">$ {{ $cart['shipping_charge'] }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Estimated Tax (12.5%) : </td>
-                                                    <td class="text-end">$ <span id="cart-tax">44.99</span></td>
+                                                    <td class="text-end">$ <span id="cart-tax">{{ $cart['estimate_tax'] }}</span></td>
                                                 </tr>
                                                 <tr class="table-active">
                                                     <th>Total (USD) :</th>
                                                     <td class="text-end">$
                                                         <span class="fw-semibold" id="cart-total">
-                                                            415.96
+                                                            {{ $cart['total'] }}
                                                         </span>
                                                     </td>
                                                 </tr>

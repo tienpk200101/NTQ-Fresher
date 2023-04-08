@@ -491,48 +491,22 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div class="avatar-md bg-light rounded p-1">
-                                                        <img src="assets/images/products/img-8.png" alt=""
-                                                            class="img-fluid d-block">
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14"><a href="apps-ecommerce-product-details.html"
-                                                            class="text-dark">Sweatshirt for Men (Pink)</a></h5>
-                                                    <p class="text-muted mb-0">$ 119.99 x 2</p>
-                                                </td>
-                                                <td class="text-end">$ 239.98</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="avatar-md bg-light rounded p-1">
-                                                        <img src="assets/images/products/img-7.png" alt=""
-                                                            class="img-fluid d-block">
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14"><a href="apps-ecommerce-product-details.html"
-                                                            class="text-dark">Noise Evolve Smartwatch</a></h5>
-                                                    <p class="text-muted mb-0">$ 94.99 x 1</p>
-                                                </td>
-                                                <td class="text-end">$ 94.99</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="avatar-md bg-light rounded p-1">
-                                                        <img src="assets/images/products/img-3.png" alt=""
-                                                            class="img-fluid d-block">
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14"><a href="apps-ecommerce-product-details.html"
-                                                            class="text-dark">350 ml Glass Grocery Container</a></h5>
-                                                    <p class="text-muted mb-0">$ 24.99 x 1</p>
-                                                </td>
-                                                <td class="text-end">$ 24.99</td>
-                                            </tr>
+                                            @foreach(session()->get('cart') as $product)
+                                                <tr>
+                                                    <td>
+                                                        <div class="avatar-md bg-light rounded p-1">
+                                                            <img src="{{ $product['image'] }}" alt=""
+                                                                 class="img-fluid d-block">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="fs-14"><a href="apps-ecommerce-product-details.html"
+                                                                             class="text-dark">{{ $product['name'] }}</a></h5>
+                                                        <p class="text-muted mb-0">$ {{ $product['price'] }} x {{ $product['quantity'] }}</p>
+                                                    </td>
+                                                    <td class="text-end">$ {{ $product['price'] * $product['quantity'] }}</td>
+                                                </tr>
+                                            @endforeach
                                             <tr>
                                                 <td class="fw-semibold" colspan="2">Sub Total :</td>
                                                 <td class="fw-semibold text-end">$ 359.96</td>
