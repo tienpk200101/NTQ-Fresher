@@ -488,7 +488,7 @@
                                         <div
                                             class="text-reset notification-item d-block dropdown-item position-relative">
                                             <div class="d-flex">
-                                                <img src="assets/images/users/avatar-8.jpg"
+                                                <img src="{{ asset('assets/images/users/avatar-8.jpg') }}"
                                                      class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                 <div class="flex-1">
                                                     <a href="#!" class="stretched-link">
@@ -527,7 +527,7 @@
                                     <div data-simplebar style="max-height: 300px;" class="pe-2">
                                         <div class="text-reset notification-item d-block dropdown-item">
                                             <div class="d-flex">
-                                                <img src="assets/images/users/avatar-3.jpg"
+                                                <img src="{{ asset('assets/images/users/avatar-3.jpg') }}"
                                                      class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                 <div class="flex-1">
                                                     <a href="#!" class="stretched-link">
@@ -782,21 +782,15 @@
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse"
                        role="button" aria-expanded="false" aria-controls="sidebarDashboards">
-                        <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Dashboards</span>
+                        <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Products</span>
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarDashboards">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{ route('admin.product.show') }}" class="nav-link" data-key="t-analytics">Manage Product</a>
+                                <a href="{{ route('admin.product.show') }}" class="nav-link" data-key="t-analytics">List Product</a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('admin.product_add.show') }}" class="nav-link" data-key="t-crm"> Add Product </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('admin.order.show') }}" class="nav-link" data-key="t-ecommerce"> Manage Order </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('admin.order_detail.show') }}" class="nav-link" data-key="t-crypto"> Order Detail </a>
                             </li>
                         </ul>
                     </div>
@@ -822,7 +816,7 @@
                     <a href="#sidebarProjects" class="nav-link" data-bs-toggle="collapse"
                        role="button" aria-expanded="false" aria-controls="sidebarProjects"
                        data-key="t-projects">
-                        Terms
+                        <i class="ri-apps-2-line"></i>Terms
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarProjects">
                         <ul class="nav nav-sm flex-column">
@@ -834,6 +828,57 @@
                             <li class="nav-item">
                                 <a href="{{ route('admin.add_term.show') }}" class="nav-link"
                                    data-key="t-overview"> Add Term </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#sidebarOrders" class="nav-link" data-bs-toggle="collapse"
+                       role="button" aria-expanded="false" aria-controls="sidebarProjects"
+                       data-key="t-projects">
+                        <i class="ri-apps-2-line"></i> Orders
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarOrders">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('admin.order.show') }}" class="nav-link" data-key="t-ecommerce"> List Order </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.order_detail.show') }}" class="nav-link" data-key="t-crypto"> Order Detail </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#sidebarUsers" class="nav-link" data-bs-toggle="collapse"
+                       role="button" aria-expanded="false" aria-controls="sidebarProjects"
+                       data-key="t-projects">
+                        <i class="ri-apps-2-line"></i> Users
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarUsers">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('admin.order.show') }}" class="nav-link" data-key="t-ecommerce"> List User </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#sidebarEmployees" class="nav-link" data-bs-toggle="collapse"
+                       role="button" aria-expanded="false" aria-controls="sidebarProjects"
+                       data-key="t-projects">
+                        <i class="ri-apps-2-line"></i> Employees
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarEmployees">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('admin.order.show') }}" class="nav-link" data-key="t-ecommerce"> List Employee </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.order.show') }}" class="nav-link" data-key="t-ecommerce"> Add Employee </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.order.show') }}" class="nav-link" data-key="t-ecommerce"> Decentralization Employee </a>
                             </li>
                         </ul>
                     </div>

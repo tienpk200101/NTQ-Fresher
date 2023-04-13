@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('customer_id')->nullable();
-            $table->text('description')->nullable();
-            $table->integer('tracking_id')->nullable();
+            $table->text('address')->nullable();
+            $table->string('tracking_id', 50)->nullable();
             $table->integer('carrier')->nullable();
             $table->string('voucher', 100)->nullable();
             $table->float('sub_total', 8, 2)->nullable();

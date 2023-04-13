@@ -79,9 +79,6 @@ $(document).ready(function () {
                 $('.total-order-value').show();
                 $('.cartitem-badge').html(total_products);
                 $('#cart-item-total').html(total_price)
-
-                alert(total_products);
-                // window.location.reload(true);
             },
             error: function (response) {
                 window.location.href('/login');

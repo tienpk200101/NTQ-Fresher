@@ -23,7 +23,18 @@ class CheckoutController extends Controller
         ]);
     }
 
-    public function checkout(CheckoutRequest $request) {
-        return $this->checkoutService->validateCheckout($request);
+    public function storeOrder(CheckoutRequest $request) {
+        $data = $request->all();
+
+        try {
+            $this->checkoutService->order($data);
+        } catch (\Exception $exception) {
+            return back()->with('error',  $exception->getMessage());
+        }
+
+        session()->forget('cart');
+
+//        dd(session()->get('cart'));
+        return back()->with('success', 'Đặt đơn hàng thành công');
     }
 }

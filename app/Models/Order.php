@@ -14,7 +14,8 @@ class Order extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['customer_name', 'product', 'total', 'payment_id', 'status'];
+    protected $fillable = ['customer_id', 'address', 'tracking_id', 'carrier', 'voucher',
+        'sub_total', 'total', 'payment_method', 'tax', 'delivery_date', 'status'];
 
     /**
      * The attributes that should be hidden for serialization.
